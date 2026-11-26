@@ -477,7 +477,7 @@ input[type=range].r6::-moz-range-thumb{width:24px;height:24px;border:0;border-ra
           <div class="cellr"><span>Opérateur</span><span class="v">Carrier 14.0</span></div>
           <div class="cellr"><span>Modèle</span><span class="v">MD297F/A</span></div>
         </div>
-        <div class="gfoot" id="buildTag">iPhone 5 Cam · version 25</div>
+        <div class="gfoot" id="buildTag">iPhone 5 Cam · version 26</div>
         <div style="height:30px"></div>
       </div>
       <div class="scroll" id="setStub" hidden></div>
@@ -861,7 +861,10 @@ function fitPhone() {
   const H = Math.round(innerHeight);
   stableH = H; $('phone').style.setProperty('--kb', '0px'); d.style.top = '0px';
   d.style.height = H + 'px';
-  const top = parseFloat(ps.paddingTop) || 0, bot = parseFloat(ps.paddingBottom) || 0;
+  let top = parseFloat(ps.paddingTop) || 0; const bot = parseFloat(ps.paddingBottom) || 0;
+  // au lancement depuis l'écran d'accueil, iOS donne parfois 0 avant d'avoir posé sa barre : on prend la hauteur connue
+  if (!top && (navigator.standalone || matchMedia('(display-mode: standalone)').matches) && screen.height >= 812) top = +(store.get('safeTop', 0)) || 47;
+  else if (top) store.set('safeTop', top);
   let s = W / 320;
   // la barre d'état de l'iPhone remplace celle de l'émulateur : on glisse la nôtre dessous
   const native = top > 0;
@@ -887,7 +890,7 @@ function kbFit() {
 }
 document.addEventListener('focusin', () => { if (typing()) setTimeout(kbFit, 50); });
 document.addEventListener('focusout', () => setTimeout(() => { if (!typing()) { fitPhone(); scrollTo(0, 0); } }, 80));
-fitPhone(); addEventListener('resize', fitPhone);
+fitPhone(); addEventListener('resize', fitPhone); addEventListener('load', fitPhone); addEventListener('pageshow', fitPhone); document.addEventListener('visibilitychange', () => { if (!document.hidden) setTimeout(fitPhone, 60); }); [120, 400, 1200, 2500].forEach(t => setTimeout(() => { if (!typing()) fitPhone(); }, t));
 if (window.visualViewport) { visualViewport.addEventListener('resize', () => typing() ? kbFit() : fitPhone()); visualViewport.addEventListener('scroll', () => typing() && kbFit()); } addEventListener('orientationchange', () => setTimeout(fitPhone, 300));
 
 // ---- icônes de l'accueil (disposition iOS 6 de l'iPhone 5) ----
