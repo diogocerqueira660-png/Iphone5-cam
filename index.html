@@ -20,7 +20,7 @@
 html,body{height:100%;background:var(--bezel);color:#fff}
 body{font-family:var(--f);font-size:15px;-webkit-font-smoothing:antialiased;-webkit-user-select:none;user-select:none;overflow:hidden}
 button{font-family:inherit}
-.device{position:fixed;left:0;top:0;width:100%;height:100%;background:#000;overflow:hidden}
+.device{position:fixed;left:0;top:0;width:100%;height:100%;background:var(--chin);overflow:hidden}
 html{background:var(--chin)!important}
 html,body{touch-action:manipulation;-webkit-text-size-adjust:100%}
 .vf,#viewer .stage{touch-action:none}
@@ -33,7 +33,7 @@ html,body{touch-action:manipulation;-webkit-text-size-adjust:100%}
 .nativebar .status{background:#000!important}.nativebar .status>*{visibility:hidden}
 .phone{position:absolute;left:0;top:0;width:320px;display:flex;flex-direction:column;zoom:var(--s,1)}
 .screen{position:relative;width:320px;height:var(--sh,568px);flex:none;overflow:hidden;background:var(--screen)}
-.chin{height:var(--ch,70px);flex:none;display:flex;justify-content:center;padding-top:9px;box-sizing:border-box;background:var(--chin)}
+.chin{height:var(--ch,70px);flex:none;display:flex;justify-content:center;padding-top:5px;box-sizing:border-box;background:var(--chin)}
 #safeProbe{position:fixed;left:0;top:0;width:0;height:0;visibility:hidden;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px) 0}
 .home{width:52px;height:52px;border-radius:50%;border:0;padding:0;cursor:pointer;background:radial-gradient(circle at 50% 40%,#1d1e21,#050506 70%);box-shadow:inset 0 1px 2px rgba(255,255,255,.08),inset 0 -1px 1px rgba(0,0,0,.6),0 0 0 2px #1b1c1f;display:grid;place-items:center}
 .home i{width:16px;height:16px;border:1.5px solid #6b6f76;border-radius:4px}
@@ -125,7 +125,7 @@ html,body{touch-action:manipulation;-webkit-text-size-adjust:100%}
 .smsbg{background:#dbe2ed;min-height:100%;padding:8px 0 60px}
 .smsbg .ts{text-align:center;color:#7a8597;font-size:12px;font-weight:700;margin:8px 0}
 .composer{position:absolute;left:0;right:0;bottom:0;height:40px;background:linear-gradient(#e4e8ee,#c2c9d3);border-top:1px solid #9aa3ad;display:flex;align-items:center;gap:6px;padding:0 6px;z-index:3}
-.composer input{flex:1;height:26px;border-radius:13px;border:1px solid #9aa3ad;padding:0 10px;font-size:15px;background:#fff}
+.composer input{flex:1;height:26px;border-radius:13px;border:1px solid #9aa3ad;padding:0 10px;font-size:16px;background:#fff;color:#000;-webkit-text-fill-color:#000;caret-color:#2a6fd6;outline:none}
 .composer button{height:28px;padding:0 10px;border-radius:5px;border:1px solid #2f5a99;background:linear-gradient(#7fb0ef,#3b78d4);color:#fff;font-weight:700}
 .calhead{background:linear-gradient(#f1f2f4,#c9ccd2);border-bottom:1px solid #9a9da3;text-align:center;font-weight:700;font-size:20px;color:#2b2f37;padding:8px 0 2px;text-shadow:0 1px 0 #fff}
 .calhead .wd{display:grid;grid-template-columns:repeat(7,1fr);font-size:10px;margin-top:4px;color:#3a3e46}
@@ -243,7 +243,10 @@ html,body{touch-action:manipulation;-webkit-text-size-adjust:100%}
 .npb{background:none;border:0;cursor:pointer;padding:4px;filter:drop-shadow(0 -1px 0 rgba(0,0,0,.8))}
 .vol6{width:260px;-webkit-appearance:none;appearance:none;height:7px;border-radius:4px;background:linear-gradient(90deg,#4aa0ff var(--p,50%),#d8d8d8 var(--p,50%));box-shadow:inset 0 1px 2px rgba(0,0,0,.6)}
 .vol6::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:linear-gradient(#fdfdfd,#bfc2c6);box-shadow:0 1px 3px rgba(0,0,0,.6)}
-.gen-body.withcomp{bottom:40px}
+.gen-body.withcomp{bottom:calc(40px + var(--kb,0px))}
+.composer{bottom:var(--kb,0px)}
+:root{color-scheme:light}
+#gen input,#gen textarea,#gen [contenteditable],.maps6 input{color:#000;-webkit-text-fill-color:#000}
 .composer{position:absolute}
 /* barres iOS 6 */
 .nav{position:absolute;inset:20px 0 auto;height:44px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 6px;background:linear-gradient(var(--nav-1),var(--nav-2));border-bottom:1px solid var(--nav-line);box-shadow:inset 0 1px 0 rgba(255,255,255,.5);z-index:5}
@@ -445,7 +448,7 @@ input[type=range].r6::-moz-range-thumb{width:24px;height:24px;border:0;border-ra
           <div class="cellr"><span>Opérateur</span><span class="v">Carrier 14.0</span></div>
           <div class="cellr"><span>Modèle</span><span class="v">MD297F/A</span></div>
         </div>
-        <div class="gfoot" id="buildTag">iPhone 5 Cam · version 22</div>
+        <div class="gfoot" id="buildTag">iPhone 5 Cam · version 23</div>
         <div style="height:30px"></div>
       </div>
       <div class="scroll" id="setStub" hidden></div>
@@ -821,7 +824,10 @@ function fitPhone() {
   const d = $('device'), ps = getComputedStyle($('safeProbe'));
   const W = innerWidth;
   // hauteur réellement visible (iOS réserve parfois le bas de l'écran à la barre d'accueil)
-  const H = Math.round((window.visualViewport && visualViewport.height) || innerHeight);
+  // clavier ouvert : on ne refait pas la mise en page (sinon tout l'écran rétrécit), on remonte juste la zone de saisie
+  if (typing()) return kbFit();
+  const H = Math.round(innerHeight);
+  stableH = H; $('phone').style.setProperty('--kb', '0px'); d.style.top = '0px';
   d.style.height = H + 'px';
   const top = parseFloat(ps.paddingTop) || 0, bot = parseFloat(ps.paddingBottom) || 0;
   let s = W / 320;
@@ -830,14 +836,27 @@ function fitPhone() {
   // on commence SOUS la barre d'état de l'iPhone : notre barre noire de 20 pt couvre la zone floutée par iOS
   const topOff = native ? top : 0;
   if ((H - topOff - 62 * s - bot) / s < 500) s = Math.max(.3, (H - topOff - bot) / (568 + 62));
+  // le bouton home colle à l'écran : la mentonnière fait juste sa hauteur (bouton 52 + 5 + 5)
   SCALE = s;
-  const ch = 62 + bot / s, sh = Math.max(400, (H - topOff) / s - ch);
+  const ch = 60 + Math.max(0, bot / s - 8), sh = Math.max(400, (H - topOff) / s - ch);
   const ph = $('phone');
   ph.style.setProperty('--s', s); ph.style.setProperty('--sh', sh + 'px'); ph.style.setProperty('--ch', ch + 'px');
   ph.style.left = Math.max(0, (W - 320 * s) / 2) / s + 'px'; ph.style.top = topOff / s + 'px';
   $('screen').classList.toggle('nativebar', native);
 }
-fitPhone(); addEventListener('resize', fitPhone); window.visualViewport && visualViewport.addEventListener('resize', fitPhone); addEventListener('orientationchange', () => setTimeout(fitPhone, 300));
+let stableH = 0;
+function typing() { const a = document.activeElement; return !!(a && (a.tagName === 'TEXTAREA' || (a.tagName === 'INPUT' && !/^(range|checkbox|radio|button|file)$/.test(a.type)) || a.isContentEditable)); }
+function kbFit() {
+  const vv = window.visualViewport; if (!vv) return;
+  $('device').style.top = vv.offsetTop + 'px';
+  const d = $('device').getBoundingClientRect(), sc = $('screen').getBoundingClientRect();
+  const kb = Math.max(0, (sc.bottom - d.top - vv.height) / SCALE);
+  $('phone').style.setProperty('--kb', kb + 'px');
+}
+document.addEventListener('focusin', () => { if (typing()) setTimeout(kbFit, 50); });
+document.addEventListener('focusout', () => setTimeout(() => { if (!typing()) { fitPhone(); scrollTo(0, 0); } }, 80));
+fitPhone(); addEventListener('resize', fitPhone);
+if (window.visualViewport) { visualViewport.addEventListener('resize', () => typing() ? kbFit() : fitPhone()); visualViewport.addEventListener('scroll', () => typing() && kbFit()); } addEventListener('orientationchange', () => setTimeout(fitPhone, 300));
 
 // ---- icônes de l'accueil (disposition iOS 6 de l'iPhone 5) ----
 const G = (a, b) => 'linear-gradient(' + a + ',' + b + ')';
@@ -1537,16 +1556,47 @@ const REPLIES = {
   'Papa': ['Ok', 'Bien reçu', 'On en parle ce soir', 'Pas de souci'],
   'Carrier': ['Ce numéro ne peut pas recevoir de réponse.']
 };
+// réponses selon ce qu'on écrit : on cherche l'intention du message, puis on adapte au contact
+const PERSO = {
+  'Maman': {fam: true, tic: ['mon chéri', '❤️', 'bisous']},
+  'Papa': {fam: true, tic: ['', '👍', '']},
+  'Lucas': {pote: true, tic: ['frère', 'mdr', 'gros']},
+  'Inès': {tic: ['😊', 'hihi', '😅']},
+  'Thomas': {pote: true, tic: ['', 'ptdr', 'mec']}
+};
+const INTENTS = [
+  [/(je t'?aime|jtm|t'?es (la|le) meilleur|love)/, {fam: ['Moi aussi je t’aime ❤️', 'Oh c’est mignon, moi aussi ❤️'], pote: ['Mdr moi aussi frérot', 'Arrête tu vas me faire pleurer 😂'], _: ['Ohh 🥰', 'Moi aussi 😊']}],
+  [/(bonne nuit|dodo|je vais dormir|je dors)/, {fam: ['Bonne nuit, dors bien ❤️', 'Bonne nuit, pas trop tard sur le téléphone !'], _: ['Bonne nuit 😴', 'Dors bien !', 'Bonne nuit, à demain']}],
+  [/(bonjour|^salut|^slt|^cc\b|coucou|^yo\b|wesh|^hey|^hello|^re\b|^bjr)/, {fam: ['Coucou ! Ça va ?', 'Bonjour mon grand, ça va ?'], pote: ['Wesh ! Bien ou quoi ?', 'Yo ! Ça dit quoi ?'], _: ['Coucou 😊 ça va ?', 'Salut ! Ça va ?']}],
+  [/(ça va|ca va|cv|comment tu vas|la forme|bien ou quoi|ça dit quoi)\s*\??/, {_: ['Oui ça va et toi ?', 'Tranquille, et toi ?', 'Ça va bien, merci ! Et toi ?', 'Bof un peu fatigué, et toi ?']}],
+  [/^(oui|ouais|ouai|grave|yes|ok|d'?accord|dac|ça marche|carrément|vas-?y)\b/, {fam: ['Très bien 👍', 'Parfait, à tout à l’heure'], _: ['Cool 😄', 'Parfait !', 'Ok ça marche', 'Top']}],
+  [/^(non|nan|pas vraiment|bof|jamais)\b/, {_: ['Ah bon ? Pourquoi ?', 'Ah dommage', 'Ok tant pis', 'Sérieux ? 😅']}],
+  [/(mdr|ptdr|lol|haha|hihi|😂|🤣|xd)/, {_: ['Mdrr 😂', 'Hahaha', 'Ptdr t’es bête', '😂😂']}],
+  [/(merci|thx|thanks)/, {_: ['De rien !', 'Avec plaisir 😊', 'Pas de quoi']}],
+  [/(désolé|desole|pardon|dsl)/, {fam: ['C’est pas grave mon chéri', 'Ce n’est rien, fais attention la prochaine fois'], _: ['T’inquiète c’est rien', 'Pas grave 😉']}],
+  [/(faim|manger|mange|resto|dîner|diner|déj|pizza|mcdo|kebab|grec)/, {fam: ['Il y a des pâtes dans le frigo', 'On mange à 20h, ne grignote pas !'], _: ['Grave j’ai trop faim aussi', 'Mcdo ce soir ? 🍔', 'Miam, tu manges quoi ?']}],
+  [/(cours|école|ecole|collège|college|lycée|lycee|devoirs|exos|contrôle|controle|exam|brevet|bac|prof)/, {fam: ['Tu as fini tes devoirs ?', 'Travaille bien, c’est important'], _: ['Ah les cours… tu as fini les exos ?', 'Le contrôle était trop dur 😩', 'On révise ensemble ?']}],
+  [/(on se voit|on se capte|tu viens|viens|sortir|soirée|soiree|ce soir|demain|week-?end|ciné|cine|foot|parc)/, {fam: ['Tu rentres à quelle heure ?', 'D’accord mais pas après 22h'], _: ['Grave ! À quelle heure ?', 'Ok je suis chaud', 'Je peux pas ce soir, demain ?', 'Vas-y, on se rejoint où ?']}],
+  [/(t'?es où|tu es où|ou es tu|où es-tu|ou t'?es)/, {fam: ['À la maison, et toi ?', 'Au travail, je rentre vers 19h'], _: ['Chez moi, et toi ?', 'En ville, pourquoi ?', 'Dans le bus 🚌']}],
+  [/(tu fais quoi|tfq|tu fais koi|quoi de neuf|qu'?est-ce que tu fais)/, {fam: ['Je prépare le dîner. Et toi ?', 'Je travaille, tu as besoin de quelque chose ?'], _: ['Rien je m’ennuie, et toi ?', 'Je joue à la console 🎮', 'Je regarde une série', 'Je suis en cours là']}],
+  [/(photo|vidéo|video|insta|snap|iphone)/, {_: ['Envoie la photo !', 'Elle rend trop bien ta photo 😍', 'Trop stylé l’effet iPhone 5']}],
+  [/(fatigué|fatigue|crevé|creve|malade|triste|pas bien|nul|déprime|deprime)/, {fam: ['Oh mon chéri, repose-toi. Tu veux que je t’appelle ?', 'Prends soin de toi, on en parle ce soir'], _: ['Oh mince, ça va aller ?', 'Courage 💪', 'Repose-toi bien']}],
+  [/(bravo|trop bien|génial|genial|stylé|style|incroyable|magnifique|j'ai réussi|j'ai eu)/, {fam: ['Bravo, je suis fière de toi ❤️', 'Super !'], _: ['Trop bien !! 🎉', 'Bien joué 👏', 'Stylé !']}],
+  [/(argent|thunes|sous|€|euros?)/, {fam: ['On en reparle ce soir', 'Encore ? 😅'], _: ['Je suis à sec moi aussi 😭', 'Combien ?']}],
+  [/(heure|quand)\b/, {_: ['Vers 18h ?', 'Je sais pas encore, je te dis', 'Dans une heure à peu près']}],
+  [/(pourquoi)/, {_: ['Comme ça 😅', 'Je t’expliquerai', 'Bonne question']}],
+  [/\?\s*$/, {_: ['Oui', 'Non pas vraiment', 'Je sais pas, et toi ?', 'Peut-être 😏', 'Bien sûr', 'Bah oui']}]
+];
+const lastRep = {};
 function pickReply(n, txt) {
-  const t = txt.toLowerCase();
   if (n === 'Carrier') return REPLIES.Carrier[0];
-  if (/^(salut|slt|cc|coucou|yo|wesh|bonjour|hey)/.test(t)) return ['Salut ! Ça va ?', 'Coucou 😊', 'Yo, bien ou quoi ?'][Math.floor(Math.random() * 3)];
-  if (/(ça va|ca va|cv)\s*\??$/.test(t)) return ['Oui ça va et toi ?', 'Tranquille et toi ?', 'Bien bien'][Math.floor(Math.random() * 3)];
-  if (/merci/.test(t)) return ['De rien !', 'Avec plaisir', 'Pas de quoi'][Math.floor(Math.random() * 3)];
-  if (/(bonne nuit|dodo)/.test(t)) return 'Bonne nuit 😴';
-  if (/\?\s*$/.test(t)) return ['Oui', 'Non pas vraiment', 'Je sais pas, et toi ?', 'Peut-être 😏', 'Bien sûr'][Math.floor(Math.random() * 5)];
-  const pool = REPLIES[n] || ['Ok', 'D\u2019accord'];
-  return pool[Math.floor(Math.random() * pool.length)];
+  const t = txt.toLowerCase().normalize('NFC').trim(), p = PERSO[n] || {};
+  let pool = null;
+  for (const [re, r] of INTENTS) if (re.test(t)) { pool = (p.fam && r.fam) || (p.pote && r.pote) || r._ || r.fam; break; }
+  if (!pool) pool = (REPLIES[n] || ['Ok', 'D’accord']).concat(['Ah ouais ?', 'Ok 👍', 'Ah d’accord', 'Raconte !']);
+  const opts = pool.filter(x => x !== lastRep[n]); let r = opts[Math.floor(Math.random() * opts.length)] || pool[0];
+  if (p.tic && Math.random() < .3) { const tc = p.tic[Math.floor(Math.random() * p.tic.length)]; if (tc && !r.includes(tc)) r = r.replace(/[ !.]*$/, m => ' ' + tc + m.trimStart()); }
+  lastRep[n] = r; return r;
 }
 function loadConvs() { const saved = store6('convs', null); if (saved) saved.forEach(s => { const c = CONVS.find(x => x.n === s.n); if (c) { c.m = s.m; c.t = s.t; } }); }
 const saveConvs = () => save6('convs', CONVS.map(c => ({n: c.n, m: c.m, t: c.t})));
