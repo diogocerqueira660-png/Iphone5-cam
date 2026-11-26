@@ -434,7 +434,7 @@ input[type=range].r6::-moz-range-thumb{width:24px;height:24px;border:0;border-ra
           <div class="cellr"><span>Opérateur</span><span class="v">Carrier 14.0</span></div>
           <div class="cellr"><span>Modèle</span><span class="v">MD297F/A</span></div>
         </div>
-        <div class="gfoot" id="buildTag">iPhone 5 Cam · version 19</div>
+        <div class="gfoot" id="buildTag">iPhone 5 Cam · version 20</div>
         <div style="height:30px"></div>
       </div>
       <div class="scroll" id="setStub" hidden></div>
@@ -994,7 +994,7 @@ let flashMode = settings.flash ? 'on' : 'off'; // on | auto | off
 const FLASH_TXT = {on: 'Oui', auto: 'Auto', off: 'Non'};
 function paintFlash() { $('flashTxt').textContent = FLASH_TXT[flashMode]; }
 paintFlash();
-$('flashBtn').onclick = () => { flashMode = flashMode === 'on' ? 'auto' : flashMode === 'auto' ? 'off' : 'on'; paintFlash(); refreshPreview(); };
+$('flashBtn').onclick = () => { flashMode = flashMode === 'on' ? 'auto' : flashMode === 'auto' ? 'off' : 'on'; paintFlash(); refreshPreview(); if (liveRec && torchOK()) torch(flashMode === 'on'); };
 const flashValue = () => flashMode === 'on' ? 1 : flashMode === 'auto' ? ((F && F.L || .3) < .25 ? 1 : 0) : 0;
 $('optBtn').onclick = () => { $('sheet').hidden = !$('sheet').hidden; };
 let videoMode = false;
@@ -1072,7 +1072,7 @@ async function camEnter(fromTap) {
 }
 function liveLoop() {
   cancelAnimationFrame(liveRaf);
-  const loop = () => { if (!live) return; const v = live.v; if (v.readyState >= 2) draw(v, {k: strength(), t: performance.now() / 1000, shake: videoMode && settings.shake, trail: true, flash: flashValue() * .6}); liveRaf = requestAnimationFrame(loop); };
+  const loop = () => { if (!live) return; const v = live.v; if (v.readyState >= 2) draw(v, {k: strength(), t: performance.now() / 1000, shake: videoMode && settings.shake, trail: true, flash: flashValue() * (torchOn ? .2 : .6)}); liveRaf = requestAnimationFrame(loop); };
   loop();
 }
 let liveRec = null;
@@ -1125,8 +1125,10 @@ async function liveRecord() {
   $('rec').hidden = false; $('shutter').classList.add('vid', 'recording');
   const timer = setInterval(() => { const s = Math.floor((performance.now() - t0) / 1000); $('recTime').textContent = pad(Math.floor(s / 60)) + ':' + pad(s % 60); if (!thumb && s >= 1) thumb = makeThumb(); }, 250);
   const done = new Promise(res => { rec.onstop = res; });
+  const realT = flashMode === 'on' && torchOK() && await torch(true); if (!realT && flashMode === 'on') torchNote();
   liveRec = rec; rec.start(1000);
   await done; liveRec = null; clearInterval(timer);
+  if (realT) torch(false);
   try { mic && mic.getTracks().forEach(t => t.stop()); actx && actx.close(); } catch (e) {}
   try { wake && wake.release(); } catch (e) {}
   $('rec').hidden = true; $('shutter').classList.remove('recording'); if (!videoMode) $('shutter').classList.remove('vid');
@@ -1137,7 +1139,7 @@ async function liveRecord() {
   renderGallery(); toast('Vidéo ajoutée à Photos');
   if (live) { const s2 = videoSize(live.v); setup(Math.round(s2.W * .66 / 2) * 2, Math.round(s2.H * .66 / 2) * 2, live.v.videoWidth, live.v.videoHeight); }
 }
-function camLeave() { if (live) { cancelAnimationFrame(liveRaf); live.stream.getTracks().forEach(t => t.stop()); live = null; showCanvas(false); } $('sheet').hidden = true; }
+function camLeave() { torchOn = false; if (live) { cancelAnimationFrame(liveRaf); live.stream.getTracks().forEach(t => t.stop()); live = null; showCanvas(false); } $('sheet').hidden = true; }
 
 // ---- déclencheur ----
 $('shutter').onclick = () => {
@@ -1149,11 +1151,24 @@ $('shutter').onclick = () => {
 };
 for (const id of ['capPhoto', 'capVideo', 'importInput']) $(id).addEventListener('change', e => { const f = e.target.files && e.target.files[0]; e.target.value = ''; if (f) handleFile(f); });
 
+// ---- vrai flash (lampe) de l'iPhone, si le navigateur le permet ----
+function torchTrack() { return live && live.stream && live.stream.getVideoTracks()[0]; }
+function torchOK() { const t = torchTrack(); try { return !!(t && t.getCapabilities && t.getCapabilities().torch); } catch (e) { return false; } }
+let torchOn = false;
+async function torch(on) { const t = torchTrack(); if (!t) return false; try { await t.applyConstraints({advanced: [{torch: !!on}]}); torchOn = !!on; return true; } catch (e) { try { await t.applyConstraints({torch: !!on}); torchOn = !!on; return true; } catch (e2) { return false; } } }
+let torchWarned = false;
+function torchNote() { if (!torchWarned && flashValue() && live && !torchOK()) { torchWarned = true; toast('Le vrai flash n\u2019est pas accessible ici : flash simulé.'); } }
 async function liveShot() {
-  busy = true; iris();
-  const v = live.v; const ps = photoSource(v);
+  busy = true;
+  const v = live.v;
+  const real = flashValue() && torchOK() && await torch(true);
+  if (real) await new Promise(r => setTimeout(r, 450)); else torchNote();
+  iris();
+  const ps = photoSource(v);
   cancelAnimationFrame(liveRaf);
-  setup(ps.W, ps.H, ps.W, ps.H); draw(ps.src, {k: strength(), t: Math.random() * 100, flash: 0}); draw(ps.src, {k: strength(), t: Math.random() * 100, flash: flashValue()});
+  const fl = real ? flashValue() * .35 : flashValue();
+  setup(ps.W, ps.H, ps.W, ps.H); draw(ps.src, {k: strength(), t: Math.random() * 100, flash: 0}); draw(ps.src, {k: strength(), t: Math.random() * 100, flash: fl});
+  if (real) torch(false);
   await finishPhoto(new Date());
   const {W, H} = videoSize(v); setup(Math.round(W * .66 / 2) * 2, Math.round(H * .66 / 2) * 2, v.videoWidth, v.videoHeight);
   busy = false; liveLoop();
