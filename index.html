@@ -21,6 +21,15 @@ html,body{height:100%;background:var(--bezel);color:#fff}
 body{font-family:var(--f);font-size:15px;-webkit-font-smoothing:antialiased;-webkit-user-select:none;user-select:none;overflow:hidden}
 button{font-family:inherit}
 .device{position:fixed;left:0;top:0;width:100%;height:100%;background:#000;overflow:hidden}
+html{background:var(--chin)!important}
+html,body{touch-action:manipulation;-webkit-text-size-adjust:100%}
+.vf,#viewer .stage{touch-action:none}
+.zoom6{position:absolute;left:24px;right:24px;bottom:12px;height:22px;display:flex;align-items:center;gap:8px;opacity:0;transition:opacity .4s;pointer-events:none;color:#fff;font:700 17px/1 var(--f);text-shadow:0 1px 1px rgba(0,0,0,.7)}
+.zoom6.on{opacity:1}
+.zoom6 .zt{flex:1;height:6px;border-radius:3px;background:linear-gradient(#2b2b2b,#5a5a5a);box-shadow:inset 0 1px 2px rgba(0,0,0,.8),0 1px 0 rgba(255,255,255,.25);position:relative}
+.zoom6 .zk{position:absolute;top:50%;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;background:radial-gradient(circle at 50% 35%,#fff,#c9cbce 70%,#9ea1a5);box-shadow:0 1px 3px rgba(0,0,0,.7)}
+#viewer .stage{overflow:hidden}
+#viewer .stage img{transform-origin:0 0;will-change:transform}
 .nativebar .status{background:#000!important}.nativebar .status>*{visibility:hidden}
 .phone{position:absolute;left:0;top:0;width:320px;display:flex;flex-direction:column;zoom:var(--s,1)}
 .screen{position:relative;width:320px;height:var(--sh,568px);flex:none;overflow:hidden;background:var(--screen)}
@@ -359,6 +368,7 @@ input[type=range].r6::-moz-range-thumb{width:24px;height:24px;border:0;border-ra
         <div class="hint" id="vfHint"><b>Appuie sur le déclencheur</b>La caméra de ton iPhone s'ouvre. Ta photo revient ici avec le rendu iPhone 5 et va dans Photos.</div>
         <canvas id="out" hidden></canvas>
         <div class="gridlines" id="gridlines" hidden></div>
+        <div class="zoom6" id="zoom6"><span>−</span><div class="zt"><i class="zk" id="zoomK"></i></div><span>+</span></div>
       </div>
       <div class="iris" id="iris" style="--r:150%"></div>
       <div class="rec" id="rec" hidden><i></i><span id="recTime">00:00</span></div>
@@ -434,7 +444,7 @@ input[type=range].r6::-moz-range-thumb{width:24px;height:24px;border:0;border-ra
           <div class="cellr"><span>Opérateur</span><span class="v">Carrier 14.0</span></div>
           <div class="cellr"><span>Modèle</span><span class="v">MD297F/A</span></div>
         </div>
-        <div class="gfoot" id="buildTag">iPhone 5 Cam · version 20</div>
+        <div class="gfoot" id="buildTag">iPhone 5 Cam · version 21</div>
         <div style="height:30px"></div>
       </div>
       <div class="scroll" id="setStub" hidden></div>
@@ -808,17 +818,16 @@ applyWall();
 let SCALE = 1;
 function fitPhone() {
   const d = $('device'), ps = getComputedStyle($('safeProbe'));
-  const standalone = navigator.standalone === true || (window.matchMedia && matchMedia('(display-mode: standalone)').matches);
-  const portrait = innerHeight >= innerWidth;
   const W = innerWidth;
-  // en app plein écran, iOS donne parfois une hauteur trop courte : on prend la vraie hauteur de l'écran
-  const H = standalone && portrait ? Math.max(innerHeight, screen.height) : innerHeight;
+  // hauteur réellement visible (iOS réserve parfois le bas de l'écran à la barre d'accueil)
+  const H = Math.round((window.visualViewport && visualViewport.height) || innerHeight);
   d.style.height = H + 'px';
   const top = parseFloat(ps.paddingTop) || 0, bot = parseFloat(ps.paddingBottom) || 0;
   let s = W / 320;
   // la barre d'état de l'iPhone remplace celle de l'émulateur : on glisse la nôtre dessous
   const native = top > 0;
-  const topOff = native ? Math.max(0, top - 20 * s) : 0;
+  // on commence SOUS la barre d'état de l'iPhone : notre barre noire de 20 pt couvre la zone floutée par iOS
+  const topOff = native ? top : 0;
   if ((H - topOff - 62 * s - bot) / s < 500) s = Math.max(.3, (H - topOff - bot) / (568 + 62));
   SCALE = s;
   const ch = 62 + bot / s, sh = Math.max(400, (H - topOff) / s - ch);
@@ -827,7 +836,7 @@ function fitPhone() {
   ph.style.left = Math.max(0, (W - 320 * s) / 2) / s + 'px'; ph.style.top = topOff / s + 'px';
   $('screen').classList.toggle('nativebar', native);
 }
-fitPhone(); addEventListener('resize', fitPhone); addEventListener('orientationchange', () => setTimeout(fitPhone, 300));
+fitPhone(); addEventListener('resize', fitPhone); window.visualViewport && visualViewport.addEventListener('resize', fitPhone); addEventListener('orientationchange', () => setTimeout(fitPhone, 300));
 
 // ---- icônes de l'accueil (disposition iOS 6 de l'iPhone 5) ----
 const G = (a, b) => 'linear-gradient(' + a + ',' + b + ')';
@@ -955,7 +964,7 @@ function openViewer(i) {
   const st = $('vStage'); st.textContent = '';
   const el = document.createElement(it.kind === 'video' ? 'video' : 'img'); el.src = vUrl;
   if (it.kind === 'video') { el.controls = true; el.playsInline = true; } else el.alt = '';
-  st.appendChild(el);
+  st.appendChild(el); vz = {s: 1, x: 0, y: 0};
   $('vTitle').textContent = (i + 1) + ' sur ' + items.length;
   const d = new Date(it.date); $('vDate').textContent = d.toLocaleDateString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'}) + ' · ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
   $(current).classList.remove('open'); current = 'viewer'; $('viewer').classList.add('open'); $('statusbar').classList.add('solid');
@@ -1072,7 +1081,7 @@ async function camEnter(fromTap) {
 }
 function liveLoop() {
   cancelAnimationFrame(liveRaf);
-  const loop = () => { if (!live) return; const v = live.v; if (v.readyState >= 2) draw(v, {k: strength(), t: performance.now() / 1000, shake: videoMode && settings.shake, trail: true, flash: flashValue() * (torchOn ? .2 : .6)}); liveRaf = requestAnimationFrame(loop); };
+  const loop = () => { if (!live) return; const v = live.v; if (v.readyState >= 2) draw(zsrc(v), {k: strength(), t: performance.now() / 1000, shake: videoMode && settings.shake, trail: true, flash: flashValue() * (torchOn ? .2 : .6)}); liveRaf = requestAnimationFrame(loop); };
   loop();
 }
 let liveRec = null;
@@ -1139,7 +1148,62 @@ async function liveRecord() {
   renderGallery(); toast('Vidéo ajoutée à Photos');
   if (live) { const s2 = videoSize(live.v); setup(Math.round(s2.W * .66 / 2) * 2, Math.round(s2.H * .66 / 2) * 2, live.v.videoWidth, live.v.videoHeight); }
 }
-function camLeave() { torchOn = false; if (live) { cancelAnimationFrame(liveRaf); live.stream.getTracks().forEach(t => t.stop()); live = null; showCanvas(false); } $('sheet').hidden = true; }
+function camLeave() { torchOn = false; setZoom(1); if (live) { cancelAnimationFrame(liveRaf); live.stream.getTracks().forEach(t => t.stop()); live = null; showCanvas(false); } $('sheet').hidden = true; }
+
+// ---- zoom au pincement (appareil photo), comme iOS 6 : 1x à 5x ----
+let camZoom = 1, zcv = null, zcx = null, zHide = 0, hwZoom = null;
+function zoomCaps() { const t = torchTrack(); try { const c = t && t.getCapabilities && t.getCapabilities(); return c && c.zoom && c.zoom.max > c.zoom.min ? c.zoom : null; } catch (e) { return null; } }
+function setZoom(z) {
+  camZoom = Math.max(1, Math.min(5, z));
+  $('zoomK').style.left = ((camZoom - 1) / 4 * 100) + '%';
+  hwZoom = live ? zoomCaps() : null;
+  if (hwZoom) { const t = torchTrack(), m = hwZoom.min || 1, val = Math.min(hwZoom.max, m * camZoom); t.applyConstraints({advanced: [{zoom: val}]}).catch(() => { hwZoom = null; }); }
+}
+function zsrc(v) {
+  if (camZoom <= 1.001 || hwZoom) return v;
+  const w = v.videoWidth, h = v.videoHeight; if (!w) return v;
+  if (!zcv || zcv.width !== w || zcv.height !== h) { zcv = document.createElement('canvas'); zcv.width = w; zcv.height = h; zcx = zcv.getContext('2d'); }
+  const cw = w / camZoom, chh = h / camZoom; zcx.drawImage(v, (w - cw) / 2, (h - chh) / 2, cw, chh, 0, 0, w, h);
+  return zcv;
+}
+function pinch(el, on) {
+  const pts = new Map(); let d0 = 0, st = null;
+  const dist = () => { const a = [...pts.values()]; return a.length < 2 ? 0 : Math.hypot(a[0].x - a[1].x, a[0].y - a[1].y); };
+  const mid = () => { const a = [...pts.values()]; return a.length < 2 ? a[0] : {x: (a[0].x + a[1].x) / 2, y: (a[0].y + a[1].y) / 2}; };
+  el.addEventListener('pointerdown', e => { pts.set(e.pointerId, {x: e.clientX, y: e.clientY}); d0 = dist(); st = on.start && on.start(mid(), pts.size); });
+  el.addEventListener('pointermove', e => { if (!pts.has(e.pointerId)) return; pts.set(e.pointerId, {x: e.clientX, y: e.clientY}); if (pts.size >= 2 && d0) on.move(dist() / d0, mid(), st); else if (pts.size === 1 && on.pan) on.pan(mid(), st); });
+  const up = e => { if (!pts.delete(e.pointerId)) return; d0 = dist(); st = pts.size && on.start ? on.start(mid(), pts.size) : st; if (!pts.size && on.end) on.end(); };
+  el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up);
+}
+pinch($('vf'), {
+  start: () => ({z: camZoom}),
+  move: (r, m, st) => { if (!live) return; setZoom(st.z * r); $('zoom6').classList.add('on'); clearTimeout(zHide); },
+  end: () => { clearTimeout(zHide); zHide = setTimeout(() => $('zoom6').classList.remove('on'), 2500); }
+});
+
+// ---- zoom dans Photos : pincer, glisser, double tap ----
+let vz = {s: 1, x: 0, y: 0}, vLastTap = 0;
+function vApply() { const im = $('vStage').querySelector('img'); if (im) im.style.transform = vz.s === 1 ? '' : 'translate(' + vz.x + 'px,' + vz.y + 'px) scale(' + vz.s + ')'; }
+function vClamp() {
+  const im = $('vStage').querySelector('img'); if (!im) return;
+  vz.s = Math.max(1, Math.min(4, vz.s)); if (vz.s === 1) { vz.x = vz.y = 0; return; }
+  const w = im.offsetWidth, h = im.offsetHeight;
+  vz.x = Math.min(0, Math.max(w - w * vz.s, vz.x)); vz.y = Math.min(0, Math.max(h - h * vz.s, vz.y));
+}
+const vImg = () => $('vStage').querySelector('img');
+pinch($('vStage'), {
+  start: (m) => { const im = vImg(); if (!im) return null; const r = im.getBoundingClientRect(); const L = r.left - vz.x * SCALE, T = r.top - vz.y * SCALE;
+    return {s: vz.s, x: vz.x, y: vz.y, m, L, T, lx: ((m.x - L) / SCALE - vz.x) / vz.s, ly: ((m.y - T) / SCALE - vz.y) / vz.s}; },
+  move: (r, m, st) => { if (!st) return; const s2 = Math.max(1, Math.min(4, st.s * r));
+    vz.s = s2; vz.x = (m.x - st.L) / SCALE - st.lx * s2; vz.y = (m.y - st.T) / SCALE - st.ly * s2; vClamp(); vApply(); },
+  pan: (m, st) => { if (!st || vz.s === 1) return; vz.x = st.x + (m.x - st.m.x) / SCALE; vz.y = st.y + (m.y - st.m.y) / SCALE; vClamp(); vApply(); },
+  end: () => { const now = Date.now(); const im = vImg(); if (im && now - vLastTap < 300) { vz = vz.s > 1 ? {s: 1, x: 0, y: 0} : {s: 2.5, x: -im.offsetWidth * .75, y: -im.offsetHeight * .75}; vClamp(); vApply(); vLastTap = 0; } else vLastTap = now; }
+});
+
+// ---- empêcher le zoom de toute la page (iOS ignore user-scalable=no) ----
+for (const ev of ['gesturestart', 'gesturechange', 'gestureend']) document.addEventListener(ev, e => e.preventDefault(), {passive: false});
+document.addEventListener('touchmove', e => { if (e.touches.length > 1 || (e.scale && e.scale !== 1)) e.preventDefault(); }, {passive: false});
+document.addEventListener('dblclick', e => e.preventDefault(), {passive: false});
 
 // ---- déclencheur ----
 $('shutter').onclick = () => {
@@ -1164,7 +1228,7 @@ async function liveShot() {
   const real = flashValue() && torchOK() && await torch(true);
   if (real) await new Promise(r => setTimeout(r, 450)); else torchNote();
   iris();
-  const ps = photoSource(v);
+  const ps = photoSource(zsrc(v));
   cancelAnimationFrame(liveRaf);
   const fl = real ? flashValue() * .35 : flashValue();
   setup(ps.W, ps.H, ps.W, ps.H); draw(ps.src, {k: strength(), t: Math.random() * 100, flash: 0}); draw(ps.src, {k: strength(), t: Math.random() * 100, flash: fl});
