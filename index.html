@@ -183,6 +183,58 @@ button{font-family:inherit}
 .si svg{position:absolute;inset:0;width:100%;height:100%}
 .si::after{content:"";position:absolute;left:-30%;right:-30%;top:-58%;height:100%;border-radius:0 0 50% 50%;background:rgba(255,255,255,.28)}
 .cellr .lab{display:flex;align-items:center;gap:10px;flex:1}
+/* Plans */
+.maps6{position:absolute;inset:0;overflow:hidden}
+.mapcv{position:absolute;inset:0;background:#ebe6d7}
+.mapbar{position:absolute;left:0;right:0;top:0;z-index:500;background:linear-gradient(#b0bccd,#6d84a2);border-bottom:1px solid #2d3642;padding:7px 6px;display:flex;gap:6px;align-items:center}
+.mapbar .mapdir{height:30px;width:40px;display:grid;place-items:center;padding:0}
+.mapbar input{flex:1;min-width:0;height:30px;border-radius:15px;border:1px solid #555f6d;padding:0 12px;font-size:14px;background:#fff;-webkit-appearance:none}
+.maptb{z-index:500}.mapstat{color:#fff;font-size:13px;font-weight:700;text-shadow:0 -1px 0 rgba(0,0,0,.4);flex:1;text-align:center}
+.navban{position:absolute;left:0;right:0;top:0;z-index:600;display:flex;gap:10px;align-items:center;padding:10px 12px;background:linear-gradient(#3f9a3a,#1e6a1b);border-bottom:2px solid #0f3f0d;color:#fff;text-shadow:0 -1px 0 rgba(0,0,0,.4);box-shadow:0 3px 8px rgba(0,0,0,.4)}
+.navban .tx b{display:block;font-size:26px}.navban .tx span{font-size:16px;font-weight:700}
+.routeinfo{position:absolute;left:0;right:0;top:45px;z-index:550;display:flex;align-items:center;gap:8px;padding:8px 10px;background:linear-gradient(rgba(60,70,90,.92),rgba(25,30,40,.92));color:#fff}
+.routeinfo b{font-size:18px;display:block}.routeinfo small{font-size:12px;color:#cfd6e0}
+.go6{background:linear-gradient(#7fd66e,#2f9a1f)!important;height:32px;padding:0 16px}
+.mapres{position:absolute;left:0;right:0;top:45px;max-height:60%;overflow:auto;z-index:560;box-shadow:0 4px 10px rgba(0,0,0,.4)}
+.medot{width:20px!important;height:20px!important;border-radius:50%;background:radial-gradient(circle at 40% 35%,#8ec5ff,#1a6ee0 60%);border:3px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.5);box-sizing:border-box}
+.pin6{background:none}
+.pin6::before{content:"";position:absolute;left:3px;top:0;width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff9a8f,#d8322c 60%,#8f1510);box-shadow:0 1px 2px rgba(0,0,0,.5)}
+.pin6::after{content:"";position:absolute;left:10px;top:15px;width:2px;height:23px;background:linear-gradient(#ddd,#777)}
+.pop6 .leaflet-popup-content-wrapper{background:linear-gradient(rgba(70,70,74,.95),rgba(20,20,22,.95));color:#fff;border-radius:8px;border:1px solid rgba(255,255,255,.4);box-shadow:0 3px 10px rgba(0,0,0,.5)}
+.pop6 .leaflet-popup-tip{background:rgba(20,20,22,.95)}
+.pop6 .leaflet-popup-content{margin:6px 8px}
+.call6{display:flex;align-items:center;gap:8px;font-family:var(--f)}
+.call6 b{display:block;font-size:15px}.call6 small{font-size:11px;color:#ccc}
+.carbtn{width:34px;height:34px;border-radius:6px;border:1px solid #0b2f6b;background:linear-gradient(#5b93ea,#2560d0);display:grid;place-items:center;cursor:pointer;flex:none}
+.leaflet-container{font-family:var(--f)}
+/* Messages : bulle « en train d'écrire » */
+.bub.typing{width:44px;color:#777;letter-spacing:2px}
+/* Musique iOS 6 */
+.mrow{padding:0 10px 0 0!important;min-height:44px;gap:8px!important}
+.mrow .mart{width:44px;height:44px;flex:none;background:#ddd center/cover;border-right:1px solid #e0e0e0}
+.mrow .grow{padding:4px 0;font-size:16px}.mrow small{-webkit-line-clamp:1!important}
+.mrow .r{color:#888!important;align-self:center!important;margin:0!important}
+.mrow.shuf .grow{text-align:center;color:#2a62c4}
+.ahead{display:flex;gap:10px;padding:10px;background:linear-gradient(#f4f4f4,#d9d9d9);border-bottom:1px solid #bbb}
+.ahead .mart{width:96px;height:96px;background:#ccc center/cover;box-shadow:0 2px 4px rgba(0,0,0,.4)}
+.ahead b{display:block;font-size:15px}.ahead small{color:#666}
+#genRight.np{}
+.npw{position:absolute;inset:0;background:#000;color:#fff;display:flex;flex-direction:column}
+.nptop{height:48px;flex:none;display:grid;grid-template-columns:76px 1fr 76px;align-items:center;padding:0 6px;background:linear-gradient(rgba(60,60,62,.95),rgba(10,10,10,.95));border-bottom:1px solid #000}
+.nptop .nb{background:linear-gradient(#5e5f63,#26272a);justify-self:start}
+.npmeta{text-align:center;font-size:11px;line-height:1.25;color:#b9b9b9;overflow:hidden}
+.npmeta b{display:block;color:#fff;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.npmeta div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.npart{flex:1;min-height:0;background:#111 center/cover no-repeat;background-image:linear-gradient(#222,#000)}
+.npprog{display:flex;align-items:center;gap:8px;padding:6px 10px;background:rgba(0,0,0,.85);font-size:12px;font-weight:700;color:#ccc}
+.npprog input{flex:1}
+.npbot{flex:none;height:118px;background:linear-gradient(#3a3b3e,#111 45%,#000);border-top:1px solid #555;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+.npctl{display:flex;gap:44px;align-items:center}
+.npb{background:none;border:0;cursor:pointer;padding:4px;filter:drop-shadow(0 -1px 0 rgba(0,0,0,.8))}
+.vol6{width:260px;-webkit-appearance:none;appearance:none;height:7px;border-radius:4px;background:linear-gradient(90deg,#4aa0ff var(--p,50%),#d8d8d8 var(--p,50%));box-shadow:inset 0 1px 2px rgba(0,0,0,.6)}
+.vol6::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:linear-gradient(#fdfdfd,#bfc2c6);box-shadow:0 1px 3px rgba(0,0,0,.6)}
+.gen-body.withcomp{bottom:40px}
+.composer{position:absolute}
 /* barres iOS 6 */
 .nav{position:absolute;inset:20px 0 auto;height:44px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 6px;background:linear-gradient(var(--nav-1),var(--nav-2));border-bottom:1px solid var(--nav-line);box-shadow:inset 0 1px 0 rgba(255,255,255,.5);z-index:5}
 .nav.dark{background:linear-gradient(rgba(60,60,62,.85),rgba(10,10,10,.85));border-bottom-color:#000}
@@ -382,7 +434,7 @@ input[type=range].r6::-moz-range-thumb{width:24px;height:24px;border:0;border-ra
           <div class="cellr"><span>Opérateur</span><span class="v">Carrier 14.0</span></div>
           <div class="cellr"><span>Modèle</span><span class="v">MD297F/A</span></div>
         </div>
-        <div class="gfoot" id="buildTag">iPhone 5 Cam · version 18</div>
+        <div class="gfoot" id="buildTag">iPhone 5 Cam · version 19</div>
         <div style="height:30px"></div>
       </div>
       <div class="scroll" id="setStub" hidden></div>
@@ -782,18 +834,18 @@ const G = (a, b) => 'linear-gradient(' + a + ',' + b + ')';
 const ICONS = {
   messages: {l: 'Messages', bg: G('#8fe57d', '#1d9d1f'), svg: '<path d="M28.5 13c-10 0-17.5 6.2-17.5 13.8 0 4.4 2.5 8.3 6.5 10.8-.4 2.6-1.7 5-3.6 6.6 3.6-.2 6.8-1.6 9-3.6 1.8.5 3.7.7 5.6.7 10 0 17.5-6.2 17.5-14.4S38.5 13 28.5 13z" fill="#fff"/>'},
   cal: {l: 'Calendrier', bg: '#fff', svg: '<rect width="57" height="17" fill="#d8322c"/><text id="calDay" x="28.5" y="13" text-anchor="middle" font-size="10" font-weight="700" fill="#fff" font-family="Helvetica">jeudi</text><text id="calNum" x="28.5" y="48" text-anchor="middle" font-size="31" font-weight="700" fill="#222" font-family="Helvetica">26</text>'},
-  photos: {l: 'Photos', cls: 't-photos', open: 'photos'},
+  photos: {l: 'Photos', bg: 'linear-gradient(#5aa9ec,#bfe2fb)', svg: '<rect y="40" width="57" height="17" fill="#5f9e3a"/><ellipse cx="28.5" cy="15" rx="4.2" ry="9" fill="#f6c21c" stroke="#d99a0b" stroke-width=".6" transform="rotate(0 28.5 28.5)"/><ellipse cx="28.5" cy="15" rx="4.2" ry="9" fill="#f6c21c" stroke="#d99a0b" stroke-width=".6" transform="rotate(30 28.5 28.5)"/><ellipse cx="28.5" cy="15" rx="4.2" ry="9" fill="#f6c21c" stroke="#d99a0b" stroke-width=".6" transform="rotate(60 28.5 28.5)"/><ellipse cx="28.5" cy="15" rx="4.2" ry="9" fill="#f6c21c" stroke="#d99a0b" stroke-width=".6" transform="rotate(90 28.5 28.5)"/><ellipse cx="28.5" cy="15" rx="4.2" ry="9" fill="#f6c21c" stroke="#d99a0b" stroke-width=".6" transform="rotate(120 28.5 28.5)"/><ellipse cx="28.5" cy="15" rx="4.2" ry="9" fill="#f6c21c" stroke="#d99a0b" stroke-width=".6" transform="rotate(150 28.5 28.5)"/><ellipse cx="28.5" cy="15" rx="4.2" ry="9" fill="#f6c21c" stroke="#d99a0b" stroke-width=".6" transform="rotate(180 28.5 28.5)"/><ellipse cx="28.5" cy="15" rx="4.2" ry="9" fill="#f6c21c" stroke="#d99a0b" stroke-width=".6" transform="rotate(210 28.5 28.5)"/><ellipse cx="28.5" cy="15" rx="4.2" ry="9" fill="#f6c21c" stroke="#d99a0b" stroke-width=".6" transform="rotate(240 28.5 28.5)"/><ellipse cx="28.5" cy="15" rx="4.2" ry="9" fill="#f6c21c" stroke="#d99a0b" stroke-width=".6" transform="rotate(270 28.5 28.5)"/><ellipse cx="28.5" cy="15" rx="4.2" ry="9" fill="#f6c21c" stroke="#d99a0b" stroke-width=".6" transform="rotate(300 28.5 28.5)"/><ellipse cx="28.5" cy="15" rx="4.2" ry="9" fill="#f6c21c" stroke="#d99a0b" stroke-width=".6" transform="rotate(330 28.5 28.5)"/><circle cx="28.5" cy="28.5" r="8" fill="#6b3b12"/><circle cx="28.5" cy="28.5" r="5.5" fill="#4a260a"/>', open: 'photos'},
   cam: {l: 'Appareil photo', cls: 't-cam', b: true, open: 'cam'},
-  meteo: {l: 'Météo', bg: G('#5fb3ff', '#1c63d0'), svg: '<circle cx="22" cy="22" r="9" fill="#ffd23c"/><path d="M18 42h22a7 7 0 0 0 0-14 9 9 0 0 0-17-2 7 7 0 0 0-5 16z" fill="#fff"/>'},
+  meteo: {l: 'Météo', bg: G('#62b8ff', '#1a5fc8'), svg: '<circle cx="20" cy="20" r="10" fill="#ffd23c"/><circle cx="20" cy="20" r="10" fill="none" stroke="#f0a800" stroke-width="1"/><path d="M20 44h24a7 7 0 0 0 0-14 9 9 0 0 0-17-2 7 7 0 0 0-7 16z" fill="#fff"/><text x="34" y="20" font-family="Helvetica" font-weight="700" font-size="13" fill="#fff" text-anchor="middle">23°</text>'},
   horloge: {l: 'Horloge', bg: '#111', svg: '<circle cx="28.5" cy="28.5" r="22" fill="#fff"/><g stroke="#111" stroke-width="1.4"><path d="M28.5 9v3M28.5 45v3M9 28.5h3M45 28.5h3"/></g><path id="clkH" d="M28.5 28.5V17" stroke="#111" stroke-width="3" stroke-linecap="round"/><path id="clkM" d="M28.5 28.5L38 34" stroke="#111" stroke-width="2" stroke-linecap="round"/><circle cx="28.5" cy="28.5" r="2" fill="#d8322c"/>'},
-  plans: {l: 'Plans', bg: '#e9e3d1', svg: '<path d="M-2 40L59 8" stroke="#fff" stroke-width="7"/><path d="M-2 40L59 8" stroke="#f2c94c" stroke-width="3"/><path d="M14 -2L30 59" stroke="#fff" stroke-width="5"/><path d="M40 12c-5 0-8 4-8 8 0 6 8 14 8 14s8-8 8-14c0-4-3-8-8-8z" fill="#e0392d"/><circle cx="40" cy="20" r="3" fill="#fff"/>'},
+  plans: {l: 'Plans', bg: '#e9e3d1', svg: '<path d="M-2 40L59 8" stroke="#fff" stroke-width="7"/><path d="M-2 40L59 8" stroke="#f2c94c" stroke-width="3"/><path d="M14 -2L30 59" stroke="#fff" stroke-width="5"/><path d="M40 12c-5 0-8 4-8 8 0 6 8 14 8 14s8-8 8-14c0-4-3-8-8-8z" fill="#e0392d"/><circle cx="40" cy="20" r="3" fill="#fff"/><path d="M-2 52L59 32" stroke="#fff" stroke-width="4"/><path d="M8 27h12l-1 9a5 5 0 0 1-5 4 5 5 0 0 1-5-4z" fill="#2f5fb3" stroke="#fff" stroke-width="1.4"/><text x="14" y="36" font-family="Helvetica" font-weight="700" font-size="7" fill="#fff" text-anchor="middle">280</text>'},
   videos: {l: 'Vidéos', bg: G('#3a3a3c', '#0c0c0d'), svg: '<rect x="11" y="23" width="35" height="20" rx="2" fill="#fff"/><path d="M11 16l34-6 1 7-34 6z" fill="#fff"/><path d="M17 15l6 6M27 13l6 6M37 11l6 6" stroke="#222" stroke-width="2.5"/>'},
   notes: {l: 'Notes', bg: '#fff7a8', flat: false, svg: '<rect width="57" height="14" fill="#7a4b28"/><path d="M0 14h57" stroke="#4c2d16" stroke-width="2"/><g stroke="#c9b97a" stroke-width="1"><path d="M6 24h45M6 32h45M6 40h45M6 48h45"/></g><path d="M12 14v43" stroke="#e7a3a3" stroke-width="1"/>'},
   rappels: {l: 'Rappels', bg: '#fff', svg: '<g stroke="#ccc"><path d="M8 14h45M8 28h45M8 42h45"/></g><circle cx="12" cy="20" r="3.5" fill="none" stroke="#f0a02b" stroke-width="1.6"/><circle cx="12" cy="34" r="3.5" fill="none" stroke="#3a8ee6" stroke-width="1.6"/><circle cx="12" cy="48" r="3.5" fill="none" stroke="#d8322c" stroke-width="1.6"/><g stroke="#999" stroke-width="1.6"><path d="M20 20h26M20 34h22M20 48h24"/></g>'},
   bourse: {l: 'Bourse', bg: G('#3a3a3c', '#050505'), svg: '<g stroke="#444"><path d="M0 19h57M0 29h57M0 39h57"/></g><path d="M4 42l10-8 8 4 10-14 8 6 13-16" fill="none" stroke="#fff" stroke-width="2.4"/><path d="M4 42l10-8 8 4 10-14 8 6 13-16V57H4z" fill="rgba(255,255,255,.15)"/>'},
   gc: {l: 'Game Center', bg: G('#ffffff', '#d9dde3'), svg: '<circle cx="20" cy="22" r="11" fill="#e9447a" opacity=".85"/><circle cx="37" cy="19" r="9" fill="#7a5ce6" opacity=".85"/><circle cx="35" cy="37" r="12" fill="#34b8e8" opacity=".85"/><circle cx="17" cy="40" r="8" fill="#f6c443" opacity=".9"/>'},
   kiosque: {l: 'Kiosque', bg: G('#b07943', '#6a4220'), svg: '<rect x="6" y="25" width="45" height="3" fill="#3f260f"/><rect x="6" y="46" width="45" height="3" fill="#3f260f"/><rect x="12" y="10" width="11" height="15" fill="#e8e8e8"/><rect x="26" y="12" width="10" height="13" fill="#d8322c"/><rect x="38" y="9" width="9" height="16" fill="#3a8ee6"/><rect x="15" y="32" width="12" height="14" fill="#f6c443"/><rect x="31" y="31" width="11" height="15" fill="#fff"/>'},
-  itunes: {l: 'iTunes Store', bg: G('#c86cf0', '#6a1fb3'), svg: '<path d="M24 14l18-4v26" fill="none" stroke="#fff" stroke-width="3.5"/><path d="M24 14v26" stroke="#fff" stroke-width="3.5"/><ellipse cx="19" cy="41" rx="6" ry="5" fill="#fff"/><ellipse cx="37" cy="37" rx="6" ry="5" fill="#fff"/>'},
+  itunes: {l: 'iTunes Store', bg: G('#c86cf0', '#6a1fb3'), svg: '<circle cx="28.5" cy="28.5" r="21" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M24 14l18-4v26" fill="none" stroke="#fff" stroke-width="3.5"/><path d="M24 14v26" stroke="#fff" stroke-width="3.5"/><ellipse cx="19" cy="41" rx="6" ry="5" fill="#fff"/><ellipse cx="37" cy="37" rx="6" ry="5" fill="#fff"/>'},
   appstore: {l: 'App Store', bg: G('#4fb2f5', '#0d62cf'), svg: '<circle cx="28.5" cy="28.5" r="20" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M21 38l8-21M36 38l-8-21M18 32h21" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>'},
   passbook: {l: 'Passbook', bg: G('#3d4b5c', '#151b23'), svg: '<rect x="10" y="12" width="37" height="12" rx="2" fill="#3fc0e8"/><rect x="10" y="22" width="37" height="12" rx="2" fill="#f6c443"/><rect x="10" y="32" width="37" height="14" rx="2" fill="#69d06a"/><path d="M10 39h37" stroke="rgba(0,0,0,.25)" stroke-dasharray="2 2"/>'},
   settings: {l: 'Réglages', cls: 't-set', b: true, open: 'settings'},
@@ -1374,6 +1426,7 @@ function genChrome(title, opts) {
   $('genNav').hidden = !!opts.noNav;
   $('genBody').classList.toggle('full', !!opts.noNav);
   $('gen').className = 'view app open' + (opts.cls ? ' ' + opts.cls : '');
+  $('gen').querySelectorAll(':scope > .composer').forEach(x => x.remove()); $('genBody').classList.remove('withcomp');
 }
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
 function body(...kids) { const b = $('genBody'); b.replaceChildren(...kids); b.scrollTop = 0; return b; }
@@ -1396,6 +1449,28 @@ const CONVS = [
   {n: 'Papa', t: 'Dimanche', m: [['them', 'N’oublie pas de charger ton téléphone'], ['me', 'Oui oui']]},
   {n: 'Carrier', t: '21/10/14', m: [['them', 'Votre forfait a été renouvelé. Bonne journée !']]}
 ];
+const REPLIES = {
+  'Maman': ['D\u2019accord mon chéri', 'Tu as mangé ?', 'Rentre pas trop tard', 'Ok bisous ❤️', 'Appelle-moi quand tu peux', 'Tu as pensé à ranger ta chambre ?'],
+  'Lucas': ['Mdr', 'Grave', 'T\u2019es où là ?', 'Vas-y on se capte tout à l\u2019heure', 'Ah ouais ?', 'Trop stylé', 'Jsp frère'],
+  'Inès': ['Hahaha', 'Ok ça marche !', 'Tu fais quoi ce week-end ?', 'Trop mignon 😊', 'Oui je sais 😅'],
+  'Thomas': ['Pareil', 'T\u2019as fait les exos ?', 'On révise ensemble demain ?', 'Ouais ouais', 'Je sais pas trop'],
+  'Papa': ['Ok', 'Bien reçu', 'On en parle ce soir', 'Pas de souci'],
+  'Carrier': ['Ce numéro ne peut pas recevoir de réponse.']
+};
+function pickReply(n, txt) {
+  const t = txt.toLowerCase();
+  if (n === 'Carrier') return REPLIES.Carrier[0];
+  if (/^(salut|slt|cc|coucou|yo|wesh|bonjour|hey)/.test(t)) return ['Salut ! Ça va ?', 'Coucou 😊', 'Yo, bien ou quoi ?'][Math.floor(Math.random() * 3)];
+  if (/(ça va|ca va|cv)\s*\??$/.test(t)) return ['Oui ça va et toi ?', 'Tranquille et toi ?', 'Bien bien'][Math.floor(Math.random() * 3)];
+  if (/merci/.test(t)) return ['De rien !', 'Avec plaisir', 'Pas de quoi'][Math.floor(Math.random() * 3)];
+  if (/(bonne nuit|dodo)/.test(t)) return 'Bonne nuit 😴';
+  if (/\?\s*$/.test(t)) return ['Oui', 'Non pas vraiment', 'Je sais pas, et toi ?', 'Peut-être 😏', 'Bien sûr'][Math.floor(Math.random() * 5)];
+  const pool = REPLIES[n] || ['Ok', 'D\u2019accord'];
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+function loadConvs() { const saved = store6('convs', null); if (saved) saved.forEach(s => { const c = CONVS.find(x => x.n === s.n); if (c) { c.m = s.m; c.t = s.t; } }); }
+const saveConvs = () => save6('convs', CONVS.map(c => ({n: c.n, m: c.m, t: c.t})));
+loadConvs();
 function msgList() {
   genChrome('Messages', {back: null, right: 'Modifier'});
   const l = el('div', 'plist');
@@ -1412,9 +1487,21 @@ function msgConv(c) {
   c.m.forEach(([who, txt]) => w.appendChild(el('div', 'bub ' + who, txt)));
   const comp = el('div', 'composer'); const inp = document.createElement('input'); inp.placeholder = 'Message texte'; inp.setAttribute('aria-label', 'Message');
   const send = el('button', '', 'Envoyer'); send.type = 'button';
-  send.onclick = () => { const v = inp.value.trim(); if (!v) return; c.m.push(['me', v]); w.appendChild(el('div', 'bub me', v)); inp.value = ''; w.parentElement.scrollTop = 1e6; };
+  const scroll = () => { const b = $('genBody'); b.scrollTop = 1e6; };
+  send.onclick = () => {
+    const v = inp.value.trim(); if (!v) return;
+    c.m.push(['me', v]); c.t = 'Maintenant'; w.appendChild(el('div', 'bub me', v)); inp.value = ''; saveConvs(); scroll();
+    try { beep(1300, 1700); } catch (e) {}
+    const delay = 1200 + Math.random() * 2500;
+    setTimeout(() => {
+      if (!w.isConnected) { c.m.push(['them', pickReply(c.n, v)]); saveConvs(); return; }
+      const ty = el('div', 'bub them typing', '•••'); w.appendChild(ty); scroll();
+      setTimeout(() => { ty.remove(); const r = pickReply(c.n, v); c.m.push(['them', r]); saveConvs(); w.appendChild(el('div', 'bub them', r)); scroll(); try { beep(1500, 1900); } catch (e) {} }, 900 + Math.random() * 1200);
+    }, delay);
+  };
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') send.onclick(); });
   comp.append(inp, send);
-  const b = body(w); b.appendChild(comp); b.scrollTop = 1e6;
+  const b = body(w); $('gen').appendChild(comp); b.classList.add('withcomp'); b.scrollTop = 1e6;
 }
 // --- Calendrier ---
 function calApp() {
@@ -1437,19 +1524,60 @@ function calApp() {
 // --- Météo ---
 const WX = {sun: '<circle cx="12" cy="12" r="6" fill="#ffd23c"/>', cloud: '<path d="M6 18h12a4 4 0 0 0 0-8 6 6 0 0 0-11-1 4.5 4.5 0 0 0-1 9z" fill="#fff"/>', part: '<circle cx="9" cy="9" r="5" fill="#ffd23c"/><path d="M7 19h11a3.5 3.5 0 0 0 0-7 5 5 0 0 0-9.5-1A4 4 0 0 0 7 19z" fill="#fff"/>', rain: '<path d="M6 14h12a4 4 0 0 0 0-8 6 6 0 0 0-11-1 4.5 4.5 0 0 0-1 9z" fill="#ddd"/><path d="M8 17l-1 3M12 17l-1 3M16 17l-1 3" stroke="#7fc4ff" stroke-width="2"/>'};
 const wxIcon = (k, s) => { const sp = el('span'); sp.innerHTML = '<svg viewBox="0 0 24 24" width="' + (s || 24) + '" height="' + (s || 24) + '">' + WX[k] + '</svg>'; return sp; };
-function meteoApp() {
+const WMO = c => c === 0 || c === 1 ? 'sun' : c === 2 ? 'part' : c === 3 || c === 45 || c === 48 ? 'cloud' : (c >= 51 && c <= 67) || (c >= 80 && c <= 82) || c >= 95 ? 'rain' : (c >= 71 && c <= 77) || c === 85 || c === 86 ? 'snow' : 'cloud';
+WX.snow = '<path d="M6 14h12a4 4 0 0 0 0-8 6 6 0 0 0-11-1 4.5 4.5 0 0 0-1 9z" fill="#ddd"/><g fill="#fff"><circle cx="8" cy="19" r="1.5"/><circle cx="12" cy="21" r="1.5"/><circle cx="16" cy="19" r="1.5"/></g>';
+WX.moon = '<path d="M15 4a8 8 0 1 0 5 13A7 7 0 0 1 15 4z" fill="#f4f1c9"/>';
+const WTXT = c => c === 0 ? 'Ensoleillé' : c <= 2 ? 'Éclaircies' : c === 3 ? 'Couvert' : c === 45 || c === 48 ? 'Brouillard' : c <= 57 ? 'Bruine' : c <= 67 ? 'Pluie' : c <= 77 ? 'Neige' : c <= 82 ? 'Averses' : c <= 86 ? 'Averses de neige' : 'Orage';
+function getPos(maxAge) {
+  return new Promise(res => {
+    if (!navigator.geolocation) return res(null);
+    navigator.geolocation.getCurrentPosition(p => res([p.coords.latitude, p.coords.longitude]), () => res(null), {maximumAge: maxAge || 600000, timeout: 10000});
+  });
+}
+async function meteoApp() {
   genChrome('Météo', {noNav: true});
-  const n = new Date(), mo = n.getMonth(), winter = mo < 2 || mo > 9, base = winter ? 7 : mo < 5 || mo > 8 ? 14 : 23;
-  const card = el('div', 'wxcard');
-  const top = el('div', 'wxtop'); const left = el('div'); left.append(el('b', '', 'Paris'), el('div', '', 'Max. ' + (base + 3) + '°  Min. ' + (base - 4) + '°')); top.append(left, el('div', 'deg', base + '°'));
-  const hrs = el('div', 'wxhrs'); const kinds = ['part', 'cloud', 'cloud', 'rain', 'cloud', 'part'];
-  for (let i = 0; i < 6; i++) { const c = el('div'); c.append(el('div', '', i ? String((n.getHours() + i) % 24) : 'Maint.'), wxIcon(kinds[i], 22), el('div', '', (base - Math.round(i / 2)) + '°')); hrs.appendChild(c); }
+  const w = el('div', 'wx'); const card = el('div', 'wxcard'); card.append(el('div', '', 'Chargement de la météo…')); w.appendChild(card); body(w);
+  const cached = store.get('wx.cache', null);
+  let pos = await getPos(); if (!pos) pos = store.get('map.last', null) || [48.8566, 2.3522];
+  let city = store.get('wx.city', null);
+  try {
+    const u = 'https://api.open-meteo.com/v1/forecast?latitude=' + pos[0].toFixed(3) + '&longitude=' + pos[1].toFixed(3) +
+      '&current=temperature_2m,weather_code,is_day,wind_speed_10m,relative_humidity_2m&hourly=temperature_2m,weather_code,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=7&models=meteofrance_seamless';
+    const d = await (await fetch(u)).json();
+    if (!d.current) throw new Error('no data');
+    store.set('wx.cache', {d, pos, t: Date.now()});
+    if (!city || !city.pos || hav(city.pos, pos) > 3000) {
+      try { const r = await (await fetch('https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=10&accept-language=fr&lat=' + pos[0] + '&lon=' + pos[1])).json(); const a = r.address || {}; city = {name: a.city || a.town || a.village || a.municipality || r.name || 'Ma position', pos}; store.set('wx.city', city); } catch (e) { city = {name: 'Ma position', pos}; }
+    }
+    if (current === 'gen' && $('genBody').contains(w)) drawWx(w, d, city.name, Date.now());
+  } catch (e) {
+    if (cached) drawWx(w, cached.d, (city && city.name) || 'Ma position', cached.t, true);
+    else { card.replaceChildren(el('div', '', 'Météo indisponible. Vérifie ta connexion.')); }
+  }
+}
+function drawWx(w, d, name, t, old) {
+  const c = d.current, card = el('div', 'wxcard');
+  const top = el('div', 'wxtop'); const left = el('div');
+  left.append(el('b', '', name), el('div', '', WTXT(c.weather_code)), el('div', '', 'Max. ' + Math.round(d.daily.temperature_2m_max[0]) + '°  Min. ' + Math.round(d.daily.temperature_2m_min[0]) + '°'));
+  top.append(left, el('div', 'deg', Math.round(c.temperature_2m) + '°'));
+  const hrs = el('div', 'wxhrs');
+  const nowIdx = Math.max(0, d.hourly.time.findIndex(x => x >= c.time.slice(0, 13)));
+  for (let i = 0; i < 6; i++) {
+    const k = nowIdx + i, cell = el('div'), code = d.hourly.weather_code[k], day = d.hourly.is_day[k];
+    cell.append(el('div', '', i ? d.hourly.time[k].slice(11, 13) : 'Maint.'), wxIcon(WMO(code) === 'sun' && !day ? 'moon' : WMO(code), 22), el('div', '', Math.round(d.hourly.temperature_2m[k]) + '°'));
+    hrs.appendChild(cell);
+  }
   card.append(top, hrs);
-  const dn = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'], dk = ['rain', 'part', 'sun', 'cloud', 'part', 'sun'];
-  for (let i = 1; i <= 6; i++) { const r = el('div', 'wxday'); r.append(el('span', '', dn[(n.getDay() + i) % 7]), wxIcon(dk[i - 1], 20), el('span', '', (base + (i % 3) + 1) + '°  ' + (base - 5 + (i % 2)) + '°')); card.appendChild(r); }
-  const w = el('div', 'wx'); w.appendChild(card);
-  const foot = el('div', '', 'Mis à jour : ' + pad(n.getHours()) + ':' + pad(n.getMinutes())); foot.style.cssText = 'text-align:center;color:#8aa;font-size:12px;margin-top:10px';
-  w.appendChild(foot); body(w);
+  const dn = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
+  for (let i = 1; i < d.daily.time.length; i++) {
+    const r = el('div', 'wxday'), dt = new Date(d.daily.time[i] + 'T12:00');
+    r.append(el('span', '', dn[dt.getDay()]), wxIcon(WMO(d.daily.weather_code[i]), 20), el('span', '', Math.round(d.daily.temperature_2m_max[i]) + '°  ' + Math.round(d.daily.temperature_2m_min[i]) + '°'));
+    card.appendChild(r);
+  }
+  const extra = el('div', 'wxday'); extra.append(el('span', '', 'Vent ' + Math.round(c.wind_speed_10m) + ' km/h'), el('span', '', ''), el('span', '', 'Hum. ' + c.relative_humidity_2m + ' %')); card.appendChild(extra);
+  const tt = new Date(t), foot = el('div', '', (old ? 'Hors ligne · ' : '') + 'Mis à jour : ' + pad(tt.getHours()) + ':' + pad(tt.getMinutes()) + ' · Météo-France via Open-Meteo');
+  foot.style.cssText = 'text-align:center;color:#8aa;font-size:12px;margin-top:10px';
+  w.replaceChildren(card, foot);
 }
 // --- Horloge ---
 function clockFace(date, size) {
@@ -1496,17 +1624,6 @@ function clockApp(tab) {
     const btns = el('div', 'btns'); const go = el('button', 'go', 'Démarrer'); go.onclick = () => alert6('Minuteur', 'Le minuteur n’est pas disponible dans cet iPhone.'); btns.appendChild(go); w.appendChild(btns);
     const l = el('div', 'laps'); const d = el('div'); d.append(el('span', '', 'Quand le minuteur se termine'), el('span', '', 'Marimba ›')); l.appendChild(d); w.appendChild(l); body(w);
   }
-}
-// --- Plans ---
-function mapsApp() {
-  genChrome('Plans', {noNav: true});
-  const w = el('div'); w.style.cssText = 'position:relative;height:100%;min-height:500px';
-  const bar = el('div', 'safbar'); const s = document.createElement('input'); s.placeholder = 'Rechercher ou saisir une adresse'; s.setAttribute('aria-label', 'Rechercher'); s.style.flex = '1'; s.style.borderRadius = '15px'; bar.appendChild(s);
-  const map = el('div', 'mapbg');
-  map.innerHTML = '<svg viewBox="0 0 320 500" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"><rect width="320" height="500" fill="#ebe6d7"/><path d="M0 0h90v120H0zM230 300h90v200h-90z" fill="#cfe3b4"/><path d="M180 0q40 120-30 250t60 250" stroke="#a7c8ea" stroke-width="26" fill="none"/><g stroke="#fff" stroke-width="9" fill="none"><path d="M0 170h320M0 330h320M60 0v500M250 0v500M0 60l320 120"/></g><g stroke="#f2c94c" stroke-width="5" fill="none"><path d="M0 240l320-80"/></g><g fill="#7a7a7a" font-family="Helvetica" font-size="10" font-weight="700"><text x="70" y="165">Rue de Rivoli</text><text x="190" y="325">Bd Saint-Germain</text><text x="20" y="60">Jardin</text></g><circle cx="160" cy="250" r="9" fill="#2f8fe8" stroke="#fff" stroke-width="3"/></svg>';
-  const tb = el('div', 'toolbar6'); const loc = el('button', 'nb', '➤'); loc.type = 'button'; const curl = el('button', 'nb', '⟲'); curl.type = 'button'; tb.append(loc, el('span', '', ''), curl);
-  bar.style.cssText += ';position:relative;z-index:2';
-  w.append(map, bar, tb); body(w);
 }
 // --- Vidéos ---
 function videosApp() { genChrome('Vidéos'); body(Object.assign(el('div', 'empty6', 'Aucune vidéo'), {})); $('genBody').firstChild.appendChild(el('small', '', 'Vous pouvez télécharger des films, séries et clips vidéo depuis l’iTunes Store.')); }
@@ -1620,19 +1737,376 @@ function safariApp() {
   const tb = el('div', 'toolbar6'); ['◀', '▶', '⇪', 'Signets', '⧉'].forEach(t => { const b = el('button', 'nb', t); b.type = 'button'; tb.appendChild(b); });
   const w = el('div'); w.style.cssText = 'position:relative;min-height:100%'; w.append(bar, page, tb); body(w);
 }
-// --- Musique ---
-function musicApp(tab) {
-  tab = tab || 2;
-  const tabs = [['list', 'Listes'], ['person', 'Artistes'], ['note', 'Morceaux'], ['disc', 'Albums'], ['more', 'Autre']];
-  genTabs(tabs, tab, i => musicApp(i));
-  genChrome(tabs[tab][1], {right: 'Store', onRight: () => storeApp('iTunes Store')});
-  const e = el('div', 'empty6', 'Aucun morceau'); e.appendChild(el('small', '', 'Vous pouvez télécharger de la musique et des podcasts depuis l’iTunes Store.')); body(e);
-}
 const APPS = {
   messages: msgList, cal: calApp, meteo: meteoApp, horloge: () => clockApp(0), plans: mapsApp, videos: videosApp, notes: notesList, rappels: remindApp,
   bourse: stocksApp, gc: gcApp, kiosque: kioskApp, itunes: () => storeApp('iTunes Store'), appstore: () => storeApp('App Store'), passbook: passApp,
-  tel: () => phoneApp(3), mail: mailApp, safari: safariApp, musique: () => musicApp(2)
+  tel: () => phoneApp(3), mail: mailApp, safari: safariApp, musique: () => musicApp()
 };
+
+// ================= Plans : vrai GPS (OpenStreetMap + OSRM) =================
+const MAP = {L: null, map: null, me: null, meAcc: null, pin: null, route: null, routeLine: null, steps: [], watch: null, nav: false, follow: true, pos: null, spoken: {}, dest: null, recalcAt: 0};
+function loadLeaflet() {
+  if (window.L) return Promise.resolve(window.L);
+  if (MAP.loading) return MAP.loading;
+  const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'leaflet.css'; document.head.appendChild(css);
+  const tryScript = src => new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = () => res(window.L); s.onerror = rej; document.head.appendChild(s); });
+  MAP.loading = tryScript('leaflet.js').catch(() => { const c2 = document.createElement('link'); c2.rel = 'stylesheet'; c2.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css'; document.head.appendChild(c2); return tryScript('https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js'); });
+  MAP.loading.catch(() => { MAP.loading = null; });
+  return MAP.loading;
+}
+const fmtDist = m => m >= 1000 ? (m / 1000).toFixed(m >= 10000 ? 0 : 1).replace('.', ',') + ' km' : (m >= 100 ? Math.round(m / 10) * 10 : Math.round(m)) + ' m';
+const fmtDur2 = s => s >= 3600 ? Math.floor(s / 3600) + ' h ' + pad(Math.round(s % 3600 / 60)) : Math.max(1, Math.round(s / 60)) + ' min';
+function hav(a, b) { const R = 6371000, toR = x => x * Math.PI / 180, dLa = toR(b[0] - a[0]), dLo = toR(b[1] - a[1]); const h = Math.sin(dLa / 2) ** 2 + Math.cos(toR(a[0])) * Math.cos(toR(b[0])) * Math.sin(dLo / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(h)); }
+function distToLine(p, pts) { let best = Infinity; for (let i = 0; i < pts.length; i += Math.max(1, Math.floor(pts.length / 400))) best = Math.min(best, hav(p, pts[i])); return best; }
+// consignes en français à partir des manœuvres OSRM
+function instr(st) {
+  const m = st.maneuver || {}, mod = m.modifier || '', road = st.name ? (st.ref && !st.name.includes(st.ref) ? st.name + ' (' + st.ref + ')' : st.name) : (st.ref || '');
+  const dir = {left: 'à gauche', right: 'à droite', 'slight left': 'légèrement à gauche', 'slight right': 'légèrement à droite', 'sharp left': 'franchement à gauche', 'sharp right': 'franchement à droite', straight: 'tout droit', uturn: 'demi-tour'}[mod] || '';
+  const sur = road ? ' sur ' + road : '';
+  switch (m.type) {
+    case 'depart': return 'Partez' + (road ? ' sur ' + road : '');
+    case 'arrive': return 'Vous êtes arrivé à destination';
+    case 'roundabout': case 'rotary': return 'Au rond-point, prenez la ' + (m.exit ? m.exit + (m.exit === 1 ? 're' : 'e') + ' sortie' : 'sortie') + sur;
+    case 'merge': return 'Rejoignez' + (road ? ' ' + road : ' la voie');
+    case 'on ramp': return 'Prenez la bretelle' + (dir && mod !== 'straight' ? ' ' + dir : '') + sur;
+    case 'off ramp': return 'Prenez la sortie' + (dir && mod !== 'straight' ? ' ' + dir : '') + sur;
+    case 'fork': return 'À l’embranchement, restez ' + (mod.includes('left') ? 'à gauche' : 'à droite') + sur;
+    case 'end of road': return 'Au bout de la route, tournez ' + dir + sur;
+    case 'continue': case 'new name': return mod === 'straight' || !dir ? 'Continuez' + sur : 'Continuez ' + dir + sur;
+    default: return mod === 'uturn' ? 'Faites demi-tour' + sur : mod === 'straight' ? 'Continuez tout droit' + sur : 'Tournez ' + dir + sur;
+  }
+}
+function arrowSvg(st) {
+  const m = (st && st.maneuver) || {}, mod = m.modifier || 'straight';
+  const rot = {straight: 0, 'slight right': 35, right: 90, 'sharp right': 135, uturn: 180, 'sharp left': -135, left: -90, 'slight left': -35}[mod] || 0;
+  if (m.type === 'arrive') return '<svg viewBox="0 0 40 40" width="40" height="40"><path d="M20 4c-6 0-10 4-10 10 0 8 10 20 10 20s10-12 10-20c0-6-4-10-10-10z" fill="#fff"/><circle cx="20" cy="14" r="4" fill="#2d7d2a"/></svg>';
+  return '<svg viewBox="0 0 40 40" width="40" height="40"><g transform="rotate(' + rot + ' 20 24)"><path d="M20 36V12" stroke="#fff" stroke-width="6" stroke-linecap="round"/><path d="M10 18l10-12 10 12z" fill="#fff"/></g></svg>';
+}
+let ttsFr = null;
+function say(t) {
+  try {
+    if (!window.speechSynthesis) return;
+    if (!ttsFr) ttsFr = (speechSynthesis.getVoices() || []).find(v => /^fr/i.test(v.lang)) || null;
+    const u = new SpeechSynthesisUtterance(t); u.lang = 'fr-FR'; if (ttsFr) u.voice = ttsFr; u.rate = 1;
+    speechSynthesis.cancel(); speechSynthesis.speak(u);
+  } catch (e) {}
+}
+async function mapsApp() {
+  genChrome('Plans', {noNav: true});
+  const w = el('div', 'maps6');
+  const bar = el('div', 'mapbar');
+  const routeBtn = el('button', 'nb mapdir', ''); routeBtn.type = 'button'; routeBtn.setAttribute('aria-label', 'Itinéraire');
+  routeBtn.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 20v-7a4 4 0 0 1 4-4h9" fill="none" stroke="#fff" stroke-width="2.6"/><path d="M14 4l6 5-6 5z" fill="#fff"/></svg>';
+  const q = document.createElement('input'); q.type = 'search'; q.placeholder = 'Rechercher ou saisir une adresse'; q.setAttribute('aria-label', 'Rechercher une adresse'); q.enterKeyHint = 'search';
+  bar.append(routeBtn, q);
+  const mapEl = el('div', 'mapcv'); mapEl.id = 'mapCanvas';
+  const banner = el('div', 'navban'); banner.hidden = true;
+  const info = el('div', 'routeinfo'); info.hidden = true;
+  const results = el('div', 'mapres plist'); results.hidden = true;
+  const tb = el('div', 'toolbar6 maptb');
+  const locB = el('button', 'nb', ''); locB.type = 'button'; locB.setAttribute('aria-label', 'Ma position'); locB.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16"><path d="M21 3L3 11l8 2 2 8z" fill="#fff"/></svg>';
+  const endB = el('button', 'nb', 'Fin'); endB.type = 'button'; endB.hidden = true;
+  const status = el('span', 'mapstat', '');
+  tb.append(locB, status, endB);
+  w.append(mapEl, bar, banner, info, results, tb);
+  body(w);
+  status.textContent = 'Chargement de la carte…';
+  let L;
+  try { L = await loadLeaflet(); } catch (e) { status.textContent = 'Carte indisponible (pas de connexion)'; return; }
+  if (current !== 'gen') return;
+  MAP.L = L;
+  if (MAP.map) { try { MAP.map.remove(); } catch (e) {} }
+  const start = MAP.pos || store.get('map.last', [48.8566, 2.3522]);
+  const map = L.map(mapEl, {zoomControl: false, attributionControl: true}).setView(start, MAP.pos ? 16 : 13);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19, attribution: '© OpenStreetMap'}).addTo(map);
+  map.attributionControl.setPrefix(false);
+  MAP.map = map; MAP.me = null; MAP.pin = null; MAP.routeLine = null;
+  status.textContent = '';
+  map.on('dragstart', () => { MAP.follow = false; });
+  const meIcon = L.divIcon({className: 'medot', iconSize: [20, 20]});
+  const setMe = (lat, lon, acc) => {
+    MAP.pos = [lat, lon]; store.set('map.last', MAP.pos);
+    if (!MAP.me) { MAP.me = L.marker(MAP.pos, {icon: meIcon, interactive: false}).addTo(map); MAP.meAcc = L.circle(MAP.pos, {radius: acc || 30, color: '#2f8fe8', weight: 1, fillOpacity: .12}).addTo(map); }
+    else { MAP.me.setLatLng(MAP.pos); MAP.meAcc.setLatLng(MAP.pos).setRadius(acc || 30); }
+    if (MAP.follow) map.setView(MAP.pos, Math.max(map.getZoom(), MAP.nav ? 17 : 15), {animate: true});
+    if (MAP.nav) navTick();
+  };
+  const startWatch = () => {
+    if (!navigator.geolocation) { status.textContent = 'Position indisponible'; return; }
+    if (MAP.watch != null) navigator.geolocation.clearWatch(MAP.watch);
+    MAP.watch = navigator.geolocation.watchPosition(p => { if (current === 'gen') setMe(p.coords.latitude, p.coords.longitude, p.coords.accuracy); },
+      err => { status.textContent = err.code === 1 ? 'Localisation refusée' : 'Position introuvable'; }, {enableHighAccuracy: true, maximumAge: 2000, timeout: 20000});
+  };
+  locB.onclick = () => { MAP.follow = true; if (MAP.pos) map.setView(MAP.pos, Math.max(map.getZoom(), 16)); startWatch(); };
+  startWatch();
+  // recherche (Nominatim)
+  const search = async () => {
+    const v = q.value.trim(); if (!v) return; q.blur();
+    status.textContent = 'Recherche…'; results.hidden = true;
+    try {
+      const c = map.getCenter(), vb = [c.lng - .5, c.lat + .5, c.lng + .5, c.lat - .5].join(',');
+      const r = await fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&limit=6&accept-language=fr&viewbox=' + vb + '&q=' + encodeURIComponent(v));
+      const list = await r.json(); status.textContent = '';
+      if (!list.length) { alert6('Aucun résultat', 'Aucun lieu trouvé pour « ' + v + ' ».'); return; }
+      if (list.length === 1) return showPlace(list[0]);
+      results.replaceChildren(...list.map(it => { const row = el('div', 'row'); const g = el('div', 'grow'); const parts = it.display_name.split(','); g.append(parts[0], el('small', '', parts.slice(1, 4).join(',').trim())); row.appendChild(g); row.onclick = () => { results.hidden = true; showPlace(it); }; return row; }));
+      results.hidden = false;
+    } catch (e) { status.textContent = ''; alert6('Plans', 'La recherche n’a pas abouti. Vérifie ta connexion.'); }
+  };
+  q.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); search(); } });
+  const pinIcon = L.divIcon({className: 'pin6', iconSize: [22, 40], iconAnchor: [11, 38]});
+  function showPlace(it) {
+    const ll = [parseFloat(it.lat), parseFloat(it.lon)], name = (it.name || it.display_name.split(',')[0]);
+    MAP.dest = {ll, name};
+    if (MAP.pin) MAP.pin.remove();
+    MAP.pin = L.marker(ll, {icon: pinIcon}).addTo(map);
+    const pop = el('div', 'call6'); const t = el('div', 'ct'); t.append(el('b', '', name), el('small', '', it.display_name.split(',').slice(1, 3).join(',').trim()));
+    const car = el('button', 'carbtn', ''); car.type = 'button'; car.setAttribute('aria-label', 'Itinéraire'); car.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 11l2-5h10l2 5v6h-2v2h-2v-2H9v2H7v-2H5z" fill="#fff"/></svg>';
+    car.onclick = () => routeTo(ll, name);
+    pop.append(car, t);
+    MAP.pin.bindPopup(pop, {closeButton: false, className: 'pop6', offset: [0, -30]}).openPopup();
+    MAP.follow = false; map.setView(ll, 16);
+  }
+  routeBtn.onclick = () => { if (MAP.dest) routeTo(MAP.dest.ll, MAP.dest.name); else { q.focus(); alert6('Itinéraire', 'Cherche d’abord une adresse, puis touche la voiture.'); } };
+  // itinéraire (OSRM)
+  async function routeTo(ll, name, silent) {
+    if (!MAP.pos) { alert6('Position introuvable', 'Autorise la localisation pour calculer un itinéraire.'); startWatch(); return; }
+    if (!silent) status.textContent = 'Calcul de l’itinéraire…';
+    try {
+      const u = 'https://router.project-osrm.org/route/v1/driving/' + MAP.pos[1] + ',' + MAP.pos[0] + ';' + ll[1] + ',' + ll[0] + '?overview=full&geometries=geojson&steps=true';
+      const r = await (await fetch(u)).json();
+      if (!r.routes || !r.routes.length) throw new Error('no route');
+      const rt = r.routes[0]; MAP.route = rt; MAP.dest = {ll, name};
+      MAP.pts = rt.geometry.coordinates.map(c => [c[1], c[0]]);
+      MAP.steps = rt.legs[0].steps; MAP.stepIdx = 1; MAP.spoken = {};
+      if (MAP.routeLine) MAP.routeLine.remove();
+      MAP.routeLine = L.layerGroup([L.polyline(MAP.pts, {color: '#1d4fb0', weight: 10, opacity: .55}), L.polyline(MAP.pts, {color: '#5aa8ff', weight: 6, opacity: .95})]).addTo(map);
+      status.textContent = '';
+      if (silent) return;
+      if (MAP.pin) MAP.pin.closePopup();
+      map.fitBounds(L.latLngBounds(MAP.pts), {padding: [40, 40]});
+      info.replaceChildren();
+      const txt = el('div', 'grow'); txt.append(el('b', '', fmtDur2(rt.duration)), el('small', '', fmtDist(rt.distance) + ' · ' + name));
+      const go = el('button', 'nb go6', 'Départ'); go.type = 'button'; go.onclick = startNav;
+      info.append(txt, go); info.hidden = false;
+    } catch (e) { status.textContent = ''; if (!silent) alert6('Itinéraire', 'Impossible de calculer l’itinéraire. Vérifie ta connexion.'); }
+  }
+  function startNav() {
+    MAP.nav = true; MAP.follow = true; info.hidden = true; banner.hidden = false; endB.hidden = false; bar.hidden = true;
+    try { navigator.wakeLock && navigator.wakeLock.request('screen').then(l => { MAP.wl = l; }).catch(() => {}); } catch (e) {}
+    say(instr(MAP.steps[0]) + '. ' + (MAP.steps[1] ? 'Puis ' + instr(MAP.steps[1]).toLowerCase() : ''));
+    navTick();
+  }
+  function stopNav() {
+    MAP.nav = false; banner.hidden = true; endB.hidden = true; bar.hidden = false; info.hidden = true;
+    if (MAP.routeLine) { MAP.routeLine.remove(); MAP.routeLine = null; }
+    try { MAP.wl && MAP.wl.release(); } catch (e) {}
+    try { speechSynthesis.cancel(); } catch (e) {}
+  }
+  endB.onclick = stopNav;
+  window.navTick = function navTick() {
+    if (!MAP.nav || !MAP.pos || !MAP.steps.length) return;
+    // étape suivante = première manœuvre devant nous
+    let i = Math.max(1, MAP.stepIdx || 1);
+    while (i < MAP.steps.length - 1 && hav(MAP.pos, [MAP.steps[i].maneuver.location[1], MAP.steps[i].maneuver.location[0]]) < 18) i++;
+    MAP.stepIdx = i;
+    const st = MAP.steps[i], loc = [st.maneuver.location[1], st.maneuver.location[0]], d = hav(MAP.pos, loc);
+    banner.innerHTML = '';
+    const ar = el('div', 'ar'); ar.innerHTML = arrowSvg(st);
+    const tx = el('div', 'tx'); tx.append(el('b', '', fmtDist(d)), el('span', '', instr(st)));
+    banner.append(ar, tx);
+    const total = MAP.steps.slice(i).reduce((a, s) => a + s.distance, 0) + d;
+    status.textContent = fmtDist(total) + ' restants';
+    const key = i + ':';
+    if (d < 400 && d > 150 && !MAP.spoken[key + 'far']) { MAP.spoken[key + 'far'] = 1; say('Dans ' + fmtDist(d) + ', ' + instr(st).toLowerCase()); }
+    if (d <= 60 && !MAP.spoken[key + 'near']) { MAP.spoken[key + 'near'] = 1; say(instr(st)); }
+    if (st.maneuver.type === 'arrive' && d < 25) { say('Vous êtes arrivé à destination'); stopNav(); alert6('Arrivée', 'Vous êtes arrivé à destination.'); return; }
+    // hors trajet : on recalcule
+    if (MAP.pts && distToLine(MAP.pos, MAP.pts) > 60 && Date.now() - MAP.recalcAt > 15000) { MAP.recalcAt = Date.now(); say('Recalcul de l’itinéraire'); routeTo(MAP.dest.ll, MAP.dest.name, true); }
+  };
+}
+function navTick() { if (window.navTick) window.navTick(); }
+
+// ================= Musique (iOS 6) reliée à Spotify =================
+const SP = {
+  get cid() { return store.get('spotify.cid', ''); },
+  redirect: location.origin + location.pathname,
+  scopes: 'user-read-private playlist-read-private playlist-read-collaborative user-library-read user-follow-read user-read-playback-state user-modify-playback-state user-read-currently-playing',
+  tok: store.get('spotify.tok', null), poll: null, state: null
+};
+const b64url = buf => btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+async function spLogin() {
+  const v = b64url(crypto.getRandomValues(new Uint8Array(48)));
+  const ch = b64url(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(v)));
+  const st = b64url(crypto.getRandomValues(new Uint8Array(12)));
+  store.set('spotify.pkce', {v, st});
+  location.href = 'https://accounts.spotify.com/authorize?' + new URLSearchParams({response_type: 'code', client_id: SP.cid, scope: SP.scopes, redirect_uri: SP.redirect, code_challenge_method: 'S256', code_challenge: ch, state: st});
+}
+async function spToken(params) {
+  const r = await fetch('https://accounts.spotify.com/api/token', {method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, body: new URLSearchParams(Object.assign({client_id: SP.cid}, params))});
+  const j = await r.json(); if (!r.ok) throw new Error(j.error_description || j.error || 'token');
+  SP.tok = {a: j.access_token, r: j.refresh_token || (SP.tok && SP.tok.r), e: Date.now() + (j.expires_in - 60) * 1000};
+  store.set('spotify.tok', SP.tok); return SP.tok;
+}
+// retour de la page de connexion Spotify
+(async function spCallback() {
+  const u = new URL(location.href), code = u.searchParams.get('code'), st = u.searchParams.get('state');
+  if (!code && !u.searchParams.get('error')) return;
+  const pk = store.get('spotify.pkce', null);
+  history.replaceState(null, '', SP.redirect);
+  if (!code || !pk || pk.st !== st) { setTimeout(() => alert6('Spotify', 'La connexion n’a pas abouti. Réessaie depuis Musique.'), 800); return; }
+  try { await spToken({grant_type: 'authorization_code', code, redirect_uri: SP.redirect, code_verifier: pk.v}); store.set('spotify.pkce', null); setTimeout(() => { $('lock').classList.add('away'); openGen('musique'); }, 400); }
+  catch (e) { setTimeout(() => alert6('Spotify', 'Connexion refusée : ' + e.message), 800); }
+})();
+async function sp(path, opts) {
+  opts = opts || {};
+  if (!SP.tok) throw Object.assign(new Error('login'), {status: 401});
+  if (Date.now() > SP.tok.e) await spToken({grant_type: 'refresh_token', refresh_token: SP.tok.r});
+  const r = await fetch('https://api.spotify.com/v1' + path, {method: opts.method || 'GET', headers: Object.assign({Authorization: 'Bearer ' + SP.tok.a}, opts.body ? {'Content-Type': 'application/json'} : {}), body: opts.body ? JSON.stringify(opts.body) : undefined});
+  if (r.status === 401 && !opts.retried) { await spToken({grant_type: 'refresh_token', refresh_token: SP.tok.r}); return sp(path, Object.assign({}, opts, {retried: true})); }
+  if (r.status === 204 || r.status === 202) return null;
+  const txt = await r.text(); let j = null; try { j = txt ? JSON.parse(txt) : null; } catch (e) {}
+  if (!r.ok) throw Object.assign(new Error((j && j.error && (j.error.reason || j.error.message)) || r.status), {status: r.status, reason: j && j.error && j.error.reason});
+  return j;
+}
+const img = (arr, small) => { if (!arr || !arr.length) return ''; const s = small ? arr[arr.length - 1] : arr[0]; return s.url; };
+function art(url) { const i = el('span', 'mart'); if (url) i.style.backgroundImage = 'url("' + url.replace(/"/g, '') + '")'; return i; }
+function mrow(title, sub, artUrl, onClick, right) {
+  const r = el('div', 'row mrow' + (onClick ? ' chev' : '')); if (artUrl !== false) r.appendChild(art(artUrl));
+  const g = el('div', 'grow'); g.append(title); if (sub) g.appendChild(el('small', '', sub)); r.appendChild(g);
+  if (right) r.appendChild(el('span', 'r', right)); if (onClick) r.onclick = onClick; return r;
+}
+const MTABS = [['list', 'Listes'], ['person', 'Artistes'], ['note', 'Morceaux'], ['disc', 'Albums'], ['more', 'Autre']];
+let mTab = 0;
+function musicChrome(title, opts) {
+  opts = opts || {};
+  genChrome(title, Object.assign({right: SP.state && SP.state.item ? 'En lecture' : null, onRight: nowPlaying}, opts));
+  if (SP.state && SP.state.item && !opts.right) $('genRight').classList.add('np');
+}
+function musicApp(tab) {
+  if (tab != null) mTab = tab;
+  clearInterval(SP.poll); SP.poll = null;
+  genTabs(MTABS, mTab, i => musicApp(i));
+  if (!SP.cid) return spSetup();
+  if (!SP.tok) return spConnect();
+  musicChrome(MTABS[mTab][1]);
+  const list = el('div', 'plist'); body(el('div', 'empty6', 'Chargement…'));
+  sp('/me/player').then(s => { SP.state = s; if (s && s.item && current === 'gen') { $('genRight').hidden = false; $('genRight').textContent = 'En lecture'; $('genRight').onclick = nowPlaying; } }).catch(() => {});
+  const fail = e => { if (e.status === 401) { SP.tok = null; store.set('spotify.tok', null); return spConnect(); } body(el('div', 'empty6', 'Spotify ne répond pas')); };
+  if (mTab === 0) sp('/me/playlists?limit=50').then(d => { (d.items || []).filter(Boolean).forEach(p => list.appendChild(mrow(p.name, (p.tracks && p.tracks.total != null ? p.tracks.total + ' morceaux' : (p.owner && p.owner.display_name) || ''), img(p.images, true), () => showPlaylist(p)))); body(list.childElementCount ? list : el('div', 'empty6', 'Aucune liste')); }).catch(fail);
+  else if (mTab === 1) sp('/me/following?type=artist&limit=50').then(d => { (d.artists.items || []).forEach(a => list.appendChild(mrow(a.name, '', img(a.images, true), () => showArtist(a)))); body(list.childElementCount ? list : el('div', 'empty6', 'Aucun artiste suivi')); }).catch(fail);
+  else if (mTab === 2) sp('/me/tracks?limit=50').then(d => { const tr = (d.items || []).map(x => x.track).filter(Boolean); trackList(list, tr, null); body(tr.length ? list : el('div', 'empty6', 'Aucun morceau')); }).catch(fail);
+  else if (mTab === 3) sp('/me/albums?limit=50').then(d => { (d.items || []).forEach(x => { const a = x.album; list.appendChild(mrow(a.name, a.artists.map(z => z.name).join(', '), img(a.images, true), () => showAlbum(a))); }); body(list.childElementCount ? list : el('div', 'empty6', 'Aucun album')); }).catch(fail);
+  else {
+    list.append(mrow('En lecture', 'Contrôler la musique en cours', false, nowPlaying), mrow('Appareils', 'Choisir où jouer la musique', false, showDevices), mrow('Ouvrir Spotify', '', false, () => { location.href = 'spotify:'; }), mrow('Se déconnecter', '', false, () => { SP.tok = null; store.set('spotify.tok', null); musicApp(); }));
+    body(list);
+  }
+}
+function trackList(list, tracks, ctx) {
+  tracks.forEach((t, i) => list.appendChild(mrow(t.name, t.artists.map(a => a.name).join(', ') + (t.album ? ' — ' + t.album.name : ''), t.album ? img(t.album.images, true) : false, () => playIt(ctx ? {context_uri: ctx, offset: {uri: t.uri}} : {uris: tracks.slice(i, i + 50).map(x => x.uri)}), fmtMs(t.duration_ms))));
+}
+const fmtMs = ms => Math.floor(ms / 60000) + ':' + pad(Math.floor(ms / 1000) % 60);
+async function showPlaylist(p) {
+  musicChrome(p.name, {back: 'Listes', onBack: () => musicApp(0)});
+  const list = el('div', 'plist'); body(el('div', 'empty6', 'Chargement…'));
+  let d; try { d = await sp('/playlists/' + p.id + '/tracks?limit=100'); } catch (e) { try { d = await sp('/playlists/' + p.id + '/items?limit=100'); } catch (e2) { body(el('div', 'empty6', 'Liste indisponible')); return; } }
+  const tr = (d.items || []).map(x => x.track || x.item).filter(t => t && t.uri && t.type === 'track');
+  const shuffle = mrow('Aléatoire', '', false, async () => { try { await sp('/me/player/shuffle?state=true', {method: 'PUT'}); } catch (e) {} playIt({context_uri: p.uri}); });
+  shuffle.classList.add('shuf'); list.appendChild(shuffle);
+  trackList(list, tr, p.uri); body(list);
+}
+async function showAlbum(a) {
+  musicChrome(a.name, {back: 'Albums', onBack: () => musicApp(3)});
+  const list = el('div', 'plist'); const head = el('div', 'ahead'); head.append(art(img(a.images)), (() => { const g = el('div'); g.append(el('b', '', a.artists.map(z => z.name).join(', ')), el('div', '', a.name), el('small', '', (a.release_date || '').slice(0, 4))); return g; })());
+  list.appendChild(head);
+  const tr = (a.tracks && a.tracks.items) || []; tr.forEach(t => list.appendChild(mrow(t.name, '', false, () => playIt({context_uri: a.uri, offset: {uri: t.uri}}), fmtMs(t.duration_ms))));
+  body(list);
+}
+async function showArtist(a) {
+  musicChrome(a.name, {back: 'Artistes', onBack: () => musicApp(1)});
+  const list = el('div', 'plist'); body(el('div', 'empty6', 'Chargement…'));
+  try { const d = await sp('/artists/' + a.id + '/top-tracks?market=FR'); trackList(list, d.tracks || [], null); body(list); }
+  catch (e) { list.appendChild(mrow('Lire l’artiste', '', false, () => playIt({context_uri: a.uri}))); body(list); }
+}
+async function showDevices() {
+  musicChrome('Appareils', {back: 'Autre', onBack: () => musicApp(4)});
+  const list = el('div', 'plist');
+  try { const d = await sp('/me/player/devices'); (d.devices || []).forEach(dv => list.appendChild(mrow(dv.name, dv.type + (dv.is_active ? ' · actif' : ''), false, async () => { try { await sp('/me/player', {method: 'PUT', body: {device_ids: [dv.id], play: true}}); nowPlaying(); } catch (e) { spErr(e); } }))); }
+  catch (e) {}
+  body(list.childElementCount ? list : (() => { const e = el('div', 'empty6', 'Aucun appareil'); e.appendChild(el('small', '', 'Ouvre l’app Spotify sur ton iPhone, puis reviens ici.')); return e; })());
+}
+function spErr(e) {
+  if (e.status === 404 || e.reason === 'NO_ACTIVE_DEVICE') alert6('Spotify', 'Ouvre l’app Spotify sur ton iPhone (lance un son puis mets pause), puis reviens : la musique se contrôlera d’ici.');
+  else if (e.status === 403) alert6('Spotify', 'Spotify Premium est nécessaire pour lancer la musique depuis une autre app.');
+  else alert6('Spotify', 'Spotify ne répond pas (' + e.message + ').');
+}
+async function playIt(bodyObj) {
+  try { await sp('/me/player/play', {method: 'PUT', body: bodyObj}); setTimeout(nowPlaying, 500); }
+  catch (e) {
+    if (e.status === 404) {
+      try { const d = await sp('/me/player/devices'); const dv = (d.devices || []).find(x => x.type === 'Smartphone') || (d.devices || [])[0]; if (dv) { await sp('/me/player/play?device_id=' + encodeURIComponent(dv.id), {method: 'PUT', body: bodyObj}); setTimeout(nowPlaying, 500); return; } } catch (e2) {}
+    }
+    spErr(e);
+  }
+}
+function nowPlaying() {
+  clearInterval(SP.poll);
+  genTabs(null);
+  genChrome('', {noNav: true, cls: 'np6'});
+  const w = el('div', 'npw');
+  const top = el('div', 'nptop'); const back = el('button', 'nb back', 'Musique'); back.type = 'button'; back.onclick = () => { clearInterval(SP.poll); musicApp(); };
+  const meta = el('div', 'npmeta'); const mA = el('div', ''), mT = el('b', ''), mL = el('div', ''); meta.append(mA, mT, mL);
+  top.append(back, meta, el('span', ''));
+  const cover = el('div', 'npart');
+  const prog = el('div', 'npprog'); const tL = el('span', '', '0:00'), bar = document.createElement('input'), tR = el('span', '', '0:00'); bar.type = 'range'; bar.min = 0; bar.max = 1000; bar.value = 0; bar.className = 'r6'; bar.setAttribute('aria-label', 'Position'); prog.append(tL, bar, tR);
+  const ctr = el('div', 'npctl');
+  const prev = el('button', 'npb', ''), play = el('button', 'npb big', ''), next = el('button', 'npb', '');
+  prev.innerHTML = '<svg viewBox="0 0 40 30" width="40" height="30"><path d="M18 15L36 4v22zM2 15L20 4v22z" fill="#fff"/></svg>'; next.innerHTML = '<svg viewBox="0 0 40 30" width="40" height="30"><path d="M22 15L4 4v22zM38 15L20 4v22z" fill="#fff"/></svg>';
+  [prev, play, next].forEach(b => { b.type = 'button'; }); prev.setAttribute('aria-label', 'Précédent'); next.setAttribute('aria-label', 'Suivant'); play.setAttribute('aria-label', 'Lecture/Pause');
+  const vol = document.createElement('input'); vol.type = 'range'; vol.min = 0; vol.max = 100; vol.className = 'vol6'; vol.setAttribute('aria-label', 'Volume');
+  ctr.append(prev, play, next); const bottom = el('div', 'npbot'); bottom.append(ctr, vol);
+  w.append(top, cover, prog, bottom); body(w);
+  let st = null, dragging = false;
+  const paint = () => {
+    const it = st && st.item;
+    mA.textContent = it ? (it.artists || []).map(a => a.name).join(', ') : 'Spotify'; mT.textContent = it ? it.name : 'Rien en lecture'; mL.textContent = it && it.album ? it.album.name : 'Ouvre Spotify sur ton iPhone';
+    cover.style.backgroundImage = it && it.album && it.album.images[0] ? 'url("' + it.album.images[0].url + '")' : '';
+    play.innerHTML = st && st.is_playing ? '<svg viewBox="0 0 30 30" width="34" height="34"><rect x="6" y="4" width="6" height="22" fill="#fff"/><rect x="18" y="4" width="6" height="22" fill="#fff"/></svg>' : '<svg viewBox="0 0 30 30" width="34" height="34"><path d="M7 3l20 12L7 27z" fill="#fff"/></svg>';
+    if (it && !dragging) { tL.textContent = fmtMs(st.progress_ms || 0); tR.textContent = '-' + fmtMs(Math.max(0, it.duration_ms - (st.progress_ms || 0))); bar.value = Math.round((st.progress_ms || 0) / it.duration_ms * 1000); }
+    if (st && st.device && document.activeElement !== vol) vol.value = st.device.volume_percent != null ? st.device.volume_percent : 50;
+    vol.style.setProperty('--p', vol.value + '%');
+  };
+  const refresh = async () => { try { st = await sp('/me/player'); SP.state = st; paint(); } catch (e) { if (e.status === 401) { clearInterval(SP.poll); spConnect(); } } };
+  const act = async (fn) => { try { await fn(); } catch (e) { spErr(e); } setTimeout(refresh, 350); };
+  play.onclick = () => act(() => st && st.is_playing ? sp('/me/player/pause', {method: 'PUT'}) : sp('/me/player/play', {method: 'PUT'}));
+  next.onclick = () => act(() => sp('/me/player/next', {method: 'POST'}));
+  prev.onclick = () => act(() => sp('/me/player/previous', {method: 'POST'}));
+  bar.addEventListener('input', () => { dragging = true; });
+  bar.addEventListener('change', () => { dragging = false; if (st && st.item) act(() => sp('/me/player/seek?position_ms=' + Math.round(bar.value / 1000 * st.item.duration_ms), {method: 'PUT'})); });
+  vol.addEventListener('input', () => vol.style.setProperty('--p', vol.value + '%'));
+  vol.addEventListener('change', () => act(() => sp('/me/player/volume?volume_percent=' + vol.value, {method: 'PUT'})));
+  paint(); refresh();
+  SP.poll = setInterval(() => { if (current !== 'gen' || !w.isConnected) { clearInterval(SP.poll); return; } if (st && st.is_playing && st.item) { st.progress_ms = Math.min(st.item.duration_ms, (st.progress_ms || 0) + 1000); paint(); } }, 1000);
+  SP.poll2 && clearInterval(SP.poll2); SP.poll2 = setInterval(() => { if (current !== 'gen' || !w.isConnected) { clearInterval(SP.poll2); return; } refresh(); }, 4000);
+}
+function spConnect() {
+  genTabs(MTABS, mTab, i => musicApp(i)); genChrome('Musique');
+  const w = el('div', 'empty6', 'Musique'); w.style.paddingTop = '90px';
+  w.appendChild(el('small', '', 'Connecte ton compte Spotify pour retrouver tes listes, artistes, morceaux et albums, et contrôler la lecture.'));
+  const b = el('button', 'nb blue', 'Se connecter avec Spotify'); b.type = 'button'; b.style.cssText = 'margin-top:22px;height:42px;padding:0 18px;font-size:15px'; b.onclick = spLogin; w.appendChild(b);
+  const ch = el('button', 'nb', 'Changer l’identifiant'); ch.type = 'button'; ch.style.cssText = 'margin-top:12px;height:32px;padding:0 12px'; ch.onclick = () => { store.set('spotify.cid', ''); spSetup(); }; w.appendChild(ch);
+  body(w);
+}
+function spSetup() {
+  genTabs(MTABS, mTab, i => musicApp(i)); genChrome('Musique');
+  const w = el('div', 'empty6', 'Relier Spotify'); w.style.paddingTop = '60px';
+  w.appendChild(el('small', '', 'Colle ici le « Client ID » de ton app Spotify (developer.spotify.com). Adresse de redirection à déclarer : ' + SP.redirect));
+  const inp = document.createElement('input'); inp.placeholder = 'Client ID'; inp.setAttribute('aria-label', 'Client ID Spotify'); inp.autocapitalize = 'off'; inp.spellcheck = false;
+  inp.style.cssText = 'margin-top:16px;width:90%;height:36px;border-radius:8px;border:1px solid #aab;padding:0 10px;font-size:14px';
+  const ok = el('button', 'nb blue', 'Enregistrer'); ok.type = 'button'; ok.style.cssText = 'margin-top:12px;height:40px;padding:0 18px';
+  ok.onclick = () => { const v = inp.value.trim(); if (!/^[0-9a-f]{32}$/i.test(v)) { alert6('Spotify', 'Le Client ID fait 32 caractères (chiffres et lettres a à f).'); return; } store.set('spotify.cid', v); musicApp(); };
+  w.append(inp, ok); body(w);
+}
 })();
 </script>
 </body></html>
