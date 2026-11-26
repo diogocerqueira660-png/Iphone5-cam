@@ -29,7 +29,7 @@ html,body{touch-action:manipulation;-webkit-text-size-adjust:100%}
 .zoom6 .zt{flex:1;height:6px;border-radius:3px;background:linear-gradient(#2b2b2b,#5a5a5a);box-shadow:inset 0 1px 2px rgba(0,0,0,.8),0 1px 0 rgba(255,255,255,.25);position:relative}
 .zoom6 .zk{position:absolute;top:50%;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;background:radial-gradient(circle at 50% 35%,#fff,#c9cbce 70%,#9ea1a5);box-shadow:0 1px 3px rgba(0,0,0,.7)}
 #viewer .stage{overflow:hidden}
-#viewer .stage img{transform-origin:0 0;will-change:transform}
+#viewer .stage img{transform-origin:0 0;will-change:transform;-webkit-user-drag:none;-webkit-touch-callout:none}
 .nativebar .status{background:#000!important}.nativebar .status>*{visibility:hidden}
 .phone{position:absolute;left:0;top:0;width:320px;display:flex;flex-direction:column;zoom:var(--s,1)}
 .screen{position:relative;width:320px;height:var(--sh,568px);flex:none;overflow:hidden;background:var(--screen)}
@@ -277,7 +277,7 @@ html,body{touch-action:manipulation;-webkit-text-size-adjust:100%}
 @keyframes blink{50%{opacity:.25}}
 .toast{position:absolute;left:50%;bottom:108px;transform:translateX(-50%);max-width:86%;background:rgba(0,0,0,.75);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:8px 12px;font-size:13px;text-align:center;z-index:6}
 .toast.err{border-color:#e3261c}
-.cam-bar{position:absolute;inset:auto 0 0;height:96px;background:linear-gradient(var(--bar-1),var(--bar-2));border-top:1px solid #3c3e42;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 14px}
+.cam-bar{position:absolute;inset:auto 0 0;height:96px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,rgba(0,0,0,.03) 1px 2px),linear-gradient(#d3d6da,#a9adb3 48%,#9a9ea5 52%,#878b92);border-top:1px solid #5d6168;box-shadow:inset 0 1px 0 rgba(255,255,255,.7);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 14px}
 .thumb{width:46px;height:46px;border-radius:5px;border:2px solid #d8d8d8;background:#222 center/cover;cursor:pointer;padding:0;box-shadow:0 1px 3px #000}
 .shutter{width:104px;height:54px;border-radius:27px;border:0;cursor:pointer;background:linear-gradient(var(--alu-1),var(--alu-2));box-shadow:inset 0 1px 0 #fff,0 0 0 1px #000,0 2px 4px rgba(0,0,0,.8);display:grid;place-items:center}
 .shutter svg{width:34px;height:26px;color:#3a3d42}
@@ -286,12 +286,23 @@ html,body{touch-action:manipulation;-webkit-text-size-adjust:100%}
 .shutter.busy::after{border-radius:4px}
 .shutter:active{filter:brightness(.85)}
 .shutter:disabled{opacity:.5}
-.mode{justify-self:end;display:flex;align-items:center;gap:6px;color:#bfc3c8;cursor:pointer;background:none;border:0;padding:4px}
+.mode{justify-self:end;display:flex;align-items:center;gap:6px;color:#4a4e55;filter:drop-shadow(0 1px 0 rgba(255,255,255,.6));cursor:pointer;background:none;border:0;padding:4px}
 .mode svg{width:18px;height:14px}
 .mode .sw{width:34px;height:16px;border-radius:8px;background:linear-gradient(#0d0e10,#2a2c30);box-shadow:inset 0 1px 2px #000;position:relative}
 .mode .sw i{position:absolute;top:1px;left:1px;width:18px;height:14px;border-radius:7px;background:linear-gradient(#f2f2f3,#9da2a9);transition:left .2s}
 .mode.v .sw i{left:15px}
-.sheet{position:absolute;inset:auto 0 96px;background:rgba(15,15,16,.92);border-top:1px solid #333;padding:12px 16px 14px;z-index:6;display:flex;flex-direction:column;gap:12px}
+.sheet{position:absolute;top:68px;left:10px;right:10px;background:rgba(20,20,22,.88);border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:12px 14px 14px;z-index:6;display:flex;flex-direction:column;gap:11px;box-shadow:0 6px 18px rgba(0,0,0,.6);max-height:calc(100% - 180px);overflow-y:auto}
+.sheet .sep{font-size:12px;color:#9a9ea4;text-transform:uppercase;letter-spacing:.5px;margin-top:4px;border-top:1px solid rgba(255,255,255,.12);padding-top:10px}
+.sheet .wide.imp{display:flex;align-items:center;justify-content:center;height:38px;border-radius:8px;border:1px solid #555;background:linear-gradient(#5a5c60,#2c2d30);font-weight:700;font-size:14px;cursor:pointer}
+.pill.flip svg{width:24px;height:17px}
+.focus6{position:absolute;width:74px;height:74px;margin:-37px 0 0 -37px;border:1.5px solid rgba(110,170,255,.95);box-shadow:0 0 0 1px rgba(0,0,0,.25),inset 0 0 0 1px rgba(0,0,0,.2);pointer-events:none;z-index:2}
+.focus6::before,.focus6::after{content:"";position:absolute;background:rgba(110,170,255,.95)}
+.focus6::before{left:50%;top:0;width:1.5px;height:6px}.focus6::after{left:0;top:50%;width:6px;height:1.5px}
+.focus6.go{animation:af6 1.1s ease-out forwards}
+@keyframes af6{0%{transform:scale(1.6);opacity:0}15%{transform:scale(1);opacity:1}35%{opacity:.4}50%{opacity:1}65%{opacity:.4}80%{opacity:1}100%{opacity:0}}
+.hdrtag{position:absolute;left:8px;top:8px;padding:2px 7px;border-radius:4px;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.5);font-size:11px;font-weight:700;z-index:2}
+.thumb.pop{animation:pop6 .45s ease-out}
+@keyframes pop6{0%{transform:scale(.3);opacity:.2}70%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
 .sheet .r{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px}
 .sheet button.wide{height:38px;border-radius:8px;border:1px solid #555;background:linear-gradient(#5a5c60,#2c2d30);color:#fff;font-weight:700;font-size:14px;cursor:pointer}
 
@@ -309,14 +320,24 @@ input[type=range].r6::-moz-range-thumb{width:24px;height:24px;border:0;border-ra
 /* Photos */
 #photos{background:#fff}
 .scroll{position:absolute;inset:64px 0 0;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;padding:4px 3px 60px}
+.pgrid{display:grid;grid-template-columns:repeat(4,75px);gap:4px;padding:4px 4px 10px}
 .pgrid button{aspect-ratio:1;border:0;padding:0;background:#ddd center/cover;cursor:pointer;position:relative}
 .pgrid button .vb{position:absolute;inset:auto 0 0;height:16px;background:linear-gradient(transparent,rgba(0,0,0,.75));color:#fff;font-size:10px;font-weight:700;display:flex;justify-content:space-between;align-items:center;padding:0 4px}
 .pcount{text-align:center;color:#555;font-size:15px;padding:10px 0 30px}
 .pempty{color:#666;text-align:center;padding:80px 30px;line-height:1.5}
 .pempty b{display:block;color:#222;font-size:17px;margin-bottom:6px}
 #viewer{background:#000;z-index:8}
-#viewer .stage{position:absolute;inset:90px 0 48px;display:grid;place-items:center}
+#viewer .stage{position:absolute;inset:20px 0 0;display:grid;place-items:center}
+#viewer .vnav{position:absolute;top:20px;left:0;right:0;z-index:3;background:linear-gradient(rgba(40,40,42,.72),rgba(0,0,0,.72));transition:opacity .3s}
+#viewer .tool{background:linear-gradient(rgba(40,40,42,.72),rgba(0,0,0,.72));z-index:3;transition:opacity .3s}
+#viewer.bare .vnav,#viewer.bare .tool{opacity:0;pointer-events:none}
+#viewer .stage .big{position:absolute;left:50%;top:50%;width:60px;height:60px;margin:-30px;border-radius:50%;background:rgba(0,0,0,.45);border:2px solid #fff;display:grid;place-items:center;pointer-events:none;z-index:2}
+#viewer .stage .big::after{content:"";border-left:20px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:6px}
+.palb .arow{display:flex;align-items:center;gap:10px;padding:6px 10px;border-bottom:1px solid #e0e0e0;background:#fff;cursor:pointer;color:#000}
+.palb .arow i{width:57px;height:57px;background:#ddd center/cover;flex:none;border:1px solid #fff;box-shadow:2px -2px 0 #ddd,4px -4px 0 #ccc}
+.palb .arow b{font-size:17px}.palb .arow small{color:#888;font-size:17px;font-weight:400;margin-left:4px}
+.palb .arow::after{content:"";margin-left:auto;width:8px;height:8px;border-right:3px solid #8d8d8d;border-top:3px solid #8d8d8d;transform:rotate(45deg)}
+#photos .scroll{bottom:49px}
 #viewer img,#viewer video{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:contain;display:block}
 .tool{position:absolute;inset:auto 0 0;height:44px;background:linear-gradient(rgba(60,60,62,.9),rgba(10,10,10,.9));border-top:1px solid #000;display:flex;align-items:center;justify-content:space-between;padding:0 14px}
 .tool button{background:none;border:0;color:#fff;cursor:pointer;padding:6px;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700}
@@ -366,20 +387,25 @@ input[type=range].r6::-moz-range-thumb{width:24px;height:24px;border:0;border-ra
       <div class="cam-top">
         <button class="pill" id="flashBtn" aria-label="Flash"><svg viewBox="0 0 13 16"><path d="M8 0 1 9h4l-1 7 7-10H7z" fill="currentColor"/></svg><span id="flashTxt">Oui</span></button>
         <button class="pill" id="optBtn">Options</button>
-        <label class="pill" aria-label="Importer depuis la photothèque"><svg viewBox="0 0 18 16" style="width:18px"><rect x="1" y="2" width="16" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="6" cy="7" r="1.5" fill="currentColor"/><path d="M17 12l-5-5-7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><input id="importInput" class="hidefile" type="file" accept="image/*,video/*"></label>
+        <button class="pill flip" id="flipBtn" aria-label="Changer de caméra"><svg viewBox="0 0 26 18"><path d="M8 3h10l1.5 2H23a1.5 1.5 0 0 1 1.5 1.5v9A1.5 1.5 0 0 1 23 17H3a1.5 1.5 0 0 1-1.5-1.5v-9A1.5 1.5 0 0 1 3 5h3.5z" fill="currentColor"/><path d="M9 11a4 4 0 0 1 6.8-2.8M17 10a4 4 0 0 1-6.8 2.8" fill="none" stroke="#222" stroke-width="1.5"/><path d="M16.8 6.6v2.3h-2.3M9.2 14.4v-2.3h2.3" fill="none" stroke="#222" stroke-width="1.5"/></svg></button>
       </div>
       <div class="vf" id="vf">
         <div class="hint" id="vfHint"><b>Appuie sur le déclencheur</b>La caméra de ton iPhone s'ouvre. Ta photo revient ici avec le rendu iPhone 5 et va dans Photos.</div>
         <canvas id="out" hidden></canvas>
         <div class="gridlines" id="gridlines" hidden></div>
+        <div class="focus6" id="focus6" hidden></div><div class="hdrtag" id="hdrTag" hidden>HDR</div>
         <div class="zoom6" id="zoom6"><span>−</span><div class="zt"><i class="zk" id="zoomK"></i></div><span>+</span></div>
       </div>
       <div class="iris" id="iris" style="--r:150%"></div>
       <div class="rec" id="rec" hidden><i></i><span id="recTime">00:00</span></div>
       <div class="sheet" id="sheet" hidden>
+        <div class="r"><span>Grille</span><input id="gridSw" class="sw6" type="checkbox"></div>
+        <div class="r"><span>HDR</span><input id="hdrSw" class="sw6" type="checkbox"></div>
+        <button class="wide" id="panoBtn" type="button">Panorama</button>
+        <div class="sep">Rendu iPhone 5</div>
         <div class="r"><span>Force du filtre</span><input id="strength" class="r6" type="range" min="0.5" max="1.5" step="0.05" value="1"><span id="strengthVal" style="min-width:2.6em;text-align:right">1,00</span></div>
         <div class="r"><span>Tremblement (vidéo)</span><input id="shake" class="sw6" type="checkbox" checked></div>
-        <div class="r"><span>Grille</span><input id="gridSw" class="sw6" type="checkbox"></div>
+        <label class="wide imp">Importer une photo ou une vidéo<input id="importInput" class="hidefile" type="file" accept="image/*,video/*"></label>
       </div>
       <div class="toast" id="toast" hidden></div>
       <div class="cam-bar">
@@ -393,15 +419,18 @@ input[type=range].r6::-moz-range-thumb{width:24px;height:24px;border:0;border-ra
 
     <!-- Photos -->
     <div class="view app" id="photos">
-      <div class="nav"><span></span><h2>Pellicule</h2><button class="nb r" id="selectAllSave" hidden>Tout</button></div>
-      <div class="scroll"><div class="pgrid" id="pgrid"></div><div class="pempty" id="pempty"><b>Aucune photo ni vidéo</b>Prends une photo avec Appareil photo, elle apparaîtra ici avec le rendu iPhone 5.</div><div class="pcount" id="pcount"></div></div>
+      <div class="nav"><button class="nb back" id="pBack" hidden>Albums</button><h2 id="pTitle">Albums</h2><span></span></div>
+      <div class="scroll palb" id="pAlbums"></div>
+      <div class="scroll" id="pRoll" hidden><div class="pgrid" id="pgrid"></div><div class="pempty" id="pempty"><b>Aucune photo ni vidéo</b>Prends une photo avec Appareil photo, elle apparaîtra ici avec le rendu iPhone 5.</div><div class="pcount" id="pcount"></div></div>
+      <div class="tabbar" id="pTabs"></div>
     </div>
     <div class="view app" id="viewer">
-      <div class="nav dark"><button class="nb back" id="vBack">Pellicule</button><h2 id="vTitle">1 sur 1</h2><span></span></div>
-      <div class="vdate" id="vDate"></div>
       <div class="stage" id="vStage"></div>
+      <div class="nav dark vnav"><button class="nb back" id="vBack">Pellicule</button><h2 id="vTitle">1 sur 1</h2><span></span></div>
+      <div class="vdate" id="vDate" hidden></div>
       <div class="tool">
-        <button id="vSave" aria-label="Enregistrer dans l'iPhone"><svg viewBox="0 0 24 22"><path d="M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9M12 2v12M7 7l5-5 5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Enregistrer</button>
+        <button id="vSave" aria-label="Partager ou enregistrer"><svg viewBox="0 0 26 22"><path d="M3 8v12h20V8" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 15c0-5 4-8 10-8V3l6 5.5-6 5.5V10c-5 0-8 1.5-10 5z" fill="currentColor"/></svg></button>
+        <button id="vPlay" aria-label="Diaporama"><svg viewBox="0 0 22 22"><path d="M5 3l14 8-14 8z" fill="currentColor"/></svg></button>
         <button id="vDel" aria-label="Supprimer"><svg viewBox="0 0 24 22"><path d="M5 5h14M10 5V2h4v3M6 5l1 15h10l1-15" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></button>
       </div>
     </div>
@@ -448,7 +477,7 @@ input[type=range].r6::-moz-range-thumb{width:24px;height:24px;border:0;border-ra
           <div class="cellr"><span>Opérateur</span><span class="v">Carrier 14.0</span></div>
           <div class="cellr"><span>Modèle</span><span class="v">MD297F/A</span></div>
         </div>
-        <div class="gfoot" id="buildTag">iPhone 5 Cam · version 24</div>
+        <div class="gfoot" id="buildTag">iPhone 5 Cam · version 25</div>
         <div style="height:30px"></div>
       </div>
       <div class="scroll" id="setStub" hidden></div>
@@ -503,7 +532,7 @@ c+=(texture2D(t,uv+d*1.385).rgb+texture2D(t,uv-d*1.385).rgb)*.3162;
 c+=(texture2D(t,uv+d*3.231).rgb+texture2D(t,uv-d*3.231).rgb)*.0703;
 gl_FragColor=vec4(c,1.);}`;
 const FS_COMP = PREC + `
-uniform sampler2D low,bloom,base;uniform vec2 lt;uniform vec3 scast;uniform float k,time,aspect,gain,sceneL,refL,wp,bp,satS,flash;
+uniform sampler2D low,bloom,base;uniform vec2 lt;uniform vec3 scast;uniform float k,time,aspect,gain,sceneL,refL,wp,bp,satS,flash,hdr;
 float hash(vec2 p){p=fract(p*vec2(443.897,441.423));p+=dot(p,p.yx+19.19);return fract((p.x+p.y)*p.x);}
 float vnoise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
   return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),f.x),f.y);}
@@ -518,10 +547,13 @@ void main(){
   vec2 cuv=uv-.5; vec3 c=vec3(texture2D(low,.5+cuv*(1.+.0018*k)).r,texture2D(low,uv).g,texture2D(low,.5+cuv*(1.-.0018*k)).b);
   vec3 b=(texture2D(low,uv+vec2(lt.x,0.)).rgb+texture2D(low,uv-vec2(lt.x,0.)).rgb+texture2D(low,uv+vec2(0.,lt.y)).rgb+texture2D(low,uv-vec2(0.,lt.y)).rgb)*.25;
   vec3 W=vec3(.299,.587,.114);
-  c+=vec3(dot(c-b,W))*.55*k;
+  // réduction de bruit du capteur : les zones peu contrastées deviennent un peu « cireuses »
+  { float dd=length(c-b); c=mix(c,b,(1.-smoothstep(.015,.07,dd))*.45*k); }
+  // accentuation forte de l'iPhone 5 (halos autour des contours)
+  c+=vec3(dot(c-b,W))*.95*k;
   // pas de HDR sur l'iPhone 5 : on ré-écarte les grandes zones claires et sombres (ciel qui brûle, ombres qui bouchent), surtout de jour
   { float bL=max(dot(texture2D(base,uv).rgb,W),.01); float dayw=smoothstep(.15,.4,sceneL);
-    float alpha=k*mix(.08,.15,dayw); c*=pow(bL/max(refL,.05),alpha); }
+    float alpha=k*mix(.08,.15,dayw)*(1.-hdr*1.4); c*=pow(bL/max(refL,.05),alpha); }
   c*=gain; c=(c-vec3(bp))/max(wp-bp,.2); c=max(c,0.); { float mx=max(c.r,max(c.g,c.b)); if(mx>1.) c=mix(c/mx,vec3(1.),clamp((mx-1.)*2.,0.,1.)); }
   float l=dot(c,W);
   c+=(scast-vec3(dot(scast,W)))*.3*k*smoothstep(.02,.35,l)*mix(1.,0.,smoothstep(.25,.45,sceneL));
@@ -549,15 +581,15 @@ void main(){
   vec3 bl=texture2D(bloom,uv).rgb; c=1.-(1.-c)*(1.-clamp(bl,0.,1.)*.7*k*mix(1.,.3,smoothstep(.2,.5,sceneL)));
   vec2 q=(uv-.5)*vec2(aspect,1.)/length(vec2(aspect,1.)*.5); float v=cos(.2*length(q)); c*=v*v*v*v;
   // bruit de capteur : grain fin + taches de couleur, plus fort dans les ombres et quand le gain monte
-  l=dot(c,W); float amt=k*sqrt(gain)*(1.2-.75*l)*smoothstep(.0,.08,l)*mix(1.5,.75,smoothstep(.08,.5,sceneL));
+  l=dot(c,W); float amt=k*sqrt(gain)*(1.2-.75*l)*smoothstep(.0,.08,l)*mix(1.9,1.05,smoothstep(.08,.5,sceneL));
   vec2 fc=gl_FragCoord.xy; float tt=fract(time*.0137)*400.;
   float g1=hash(fc+tt*1.31), g2=hash(fc*1.13+tt*2.77+7.);
-  float n=(g1+g2-1.)*(16./255.)*amt;
+  float n=(g1+g2-1.)*(24./255.)*amt;
   float cs=1.8+gain*.4;
   vec2 bp=fc/cs+vec2(tt*3.1,tt*1.7);
   float cr=vnoise(bp)-.5, cb=vnoise(bp+vec2(41.3,17.9))-.5;
-  vec3 cn=vec3(cr,-(cr+cb)*.45,cb)*(26./255.)*amt;
-  float sn=(hash(floor(fc/2.)+tt)-.5)*(6./255.)*amt;
+  vec3 cn=vec3(cr,-(cr+cb)*.45,cb)*(38./255.)*amt;
+  float sn=(hash(floor(fc/2.)+tt)-.5)*(11./255.)*amt;
   gl_FragColor=vec4(clamp(c+n+sn+cn,0.,1.),1.);
 }`;
 
@@ -578,7 +610,7 @@ let srcW = 1, srcH = 1;
 function setup(outW, outH, sw, sh_) {
   canvas.width = outW; canvas.height = outH; srcW = sw; srcH = sh_;
   if (F) { ['lowA','lowB','b1','b2','avg','base'].forEach(k => free(F[k])); }
-  const lw = Math.max(2, Math.round(outW * .72)), lh = Math.max(2, Math.round(outH * .72));
+  const lw = Math.max(2, Math.round(outW * .6)), lh = Math.max(2, Math.round(outH * .6));
   const bw = Math.max(2, Math.round(outW / 12)), bh = Math.max(2, Math.round(outH / 12));
   F = {lowA: fbo(lw, lh), lowB: fbo(lw, lh), b1: fbo(bw, bh), b2: fbo(bw, bh), avg: fbo(64, 64), base: fbo(bw, bh), outW, outH, first: true, cast: null, gain: 0, L: 0, Lc: 0};
 }
@@ -675,7 +707,7 @@ function draw(source, opts) {
   gl.uniform1f(P.comp.u.sceneL, F.L);
   gl.uniform1f(P.comp.u.refL, F.Lc);
   { const kk = k; gl.uniform1f(P.comp.u.wp, 1 + (F.wp - 1) * Math.min(kk, 1.3)); gl.uniform1f(P.comp.u.bp, F.bp * Math.min(kk, 1.3)); gl.uniform1f(P.comp.u.satS, F.sat); }
-  gl.uniform1f(P.comp.u.flash, opts.flash || 0);
+  gl.uniform1f(P.comp.u.flash, opts.flash || 0); gl.uniform1f(P.comp.u.hdr, opts.hdr ? 1 : 0);
   gl.uniform1f(P.comp.u.k, k); gl.uniform1f(P.comp.u.time, (t * 30) % 1000); gl.uniform1f(P.comp.u.aspect, F.outW / F.outH);
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
   F.lowA = prev; F.lowB = cur;
@@ -780,7 +812,7 @@ const store = {
   get(k, d) { try { const v = localStorage.getItem('i5.' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
   set(k, v) { try { localStorage.setItem('i5.' + k, JSON.stringify(v)); } catch (e) {} }
 };
-const settings = Object.assign({strength: 1, flash: true, shake: true, date2014: true, grid: false, wall: 'ondes'}, store.get('settings', {}));
+const settings = Object.assign({strength: 1, flash: true, shake: true, date2014: true, grid: false, hdr: false, wall: 'ondes'}, store.get('settings', {}));
 const saveSettings = () => store.set('settings', settings);
 
 // ---- horloge / barre d'état ----
@@ -936,7 +968,7 @@ function openApp(id) {
   if (current) $(current).classList.remove('open');
   current = id; $(id).classList.add('open');
   $('statusbar').classList.toggle('solid', id === 'cam' || id === 'viewer');
-  if (id === 'photos') renderGallery();
+  if (id === 'photos') { renderGallery(); photosPage(photosStay ? 'roll' : 'albums'); photosStay = false; }
   if (id === 'settings') { paintPerms(); setPage('setMain', 'Réglages'); }
   if (id === 'cam') camEnter(); else camLeave();
 }
@@ -975,27 +1007,46 @@ async function renderGallery() {
   $('aboutCount').textContent = String(np); $('aboutVid').textContent = String(nv);
   const last = items[items.length - 1]; $('lastThumb').style.backgroundImage = last ? 'url(' + last.thumb + ')' : '';
   const sc = g.parentElement; requestAnimationFrame(() => { sc.scrollTop = sc.scrollHeight; });
+  paintAlbums();
 }
+// ---- Photos iOS 6 : Albums > Pellicule, barre d'onglets ----
+function paintAlbums() {
+  const a = $('pAlbums'); a.textContent = '';
+  const row = (name, n, th, cb) => { const r = document.createElement('div'); r.className = 'arow'; const i = document.createElement('i'); if (th) i.style.backgroundImage = 'url(' + th + ')'; const b = document.createElement('b'); b.textContent = name; const sm = document.createElement('small'); sm.textContent = '(' + n + ')'; b.appendChild(sm); r.append(i, b); r.onclick = cb; a.appendChild(r); };
+  const last = items[items.length - 1];
+  row('Pellicule', items.length, last && last.thumb, () => photosPage('roll'));
+  row('Flux de photos', 0, null, () => alert6('Flux de photos', 'Active Flux de photos dans Réglages > iCloud pour retrouver ici les photos de tous tes appareils.'));
+}
+function photosPage(pg) {
+  const roll = pg === 'roll';
+  $('pAlbums').hidden = roll; $('pRoll').hidden = !roll; $('pBack').hidden = !roll; $('pTitle').textContent = roll ? 'Pellicule' : 'Albums';
+  if (roll) { const sc = $('pRoll'); requestAnimationFrame(() => { sc.scrollTop = sc.scrollHeight; }); }
+}
+$('pBack').onclick = () => photosPage('albums');
+(function () {
+  const t = $('pTabs'), tabs = [['Albums', '<rect x="4" y="7" width="20" height="15" rx="1.5" fill="currentColor"/><rect x="6" y="4" width="16" height="2" fill="currentColor" opacity=".7"/><rect x="8" y="1.5" width="12" height="1.6" fill="currentColor" opacity=".5"/>'], ['Flux de photos', '<path d="M8 21a6 6 0 0 1-.6-12A8 8 0 0 1 22 10a5.5 5.5 0 0 1-.5 11z" fill="currentColor"/>'], ['Lieux', '<path d="M14 2a7 7 0 0 1 7 7c0 5-7 15-7 15S7 14 7 9a7 7 0 0 1 7-7z" fill="currentColor"/><circle cx="14" cy="9" r="2.6" fill="#222"/>']];
+  tabs.forEach(([l, svg], i) => { const b = document.createElement('button'); b.type = 'button'; if (!i) b.className = 'on'; b.insertAdjacentHTML('beforeend', '<svg viewBox="0 0 28 26" aria-hidden="true">' + svg + '</svg>'); b.append(l); b.onclick = () => { if (i === 0) photosPage('albums'); else alert6(l, i === 1 ? 'Flux de photos est désactivé.' : 'Aucune photo avec un lieu.'); }; t.appendChild(b); });
+})();
 const fmtDur = s => Math.floor(s / 60) + ':' + pad(Math.round(s % 60));
-let vIndex = 0, vUrl = null;
+let vIndex = 0, vUrl = null, photosStay = false, slideT = 0;
 function openViewer(i) {
   vIndex = i; const it = items[i]; if (!it) return;
   if (vUrl) URL.revokeObjectURL(vUrl); vUrl = URL.createObjectURL(it.blob);
   const st = $('vStage'); st.textContent = '';
   const el = document.createElement(it.kind === 'video' ? 'video' : 'img'); el.src = vUrl;
-  if (it.kind === 'video') { el.controls = true; el.playsInline = true; } else el.alt = '';
-  st.appendChild(el); vz = {s: 1, x: 0, y: 0};
+  if (it.kind === 'video') { el.controls = true; el.playsInline = true; } else { el.alt = ''; el.draggable = false; }
+  st.appendChild(el); $('viewer').classList.remove('bare'); $('vPlay').hidden = it.kind === 'video'; vz = {s: 1, x: 0, y: 0};
   $('vTitle').textContent = (i + 1) + ' sur ' + items.length;
   const d = new Date(it.date); $('vDate').textContent = d.toLocaleDateString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'}) + ' · ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
   $(current).classList.remove('open'); current = 'viewer'; $('viewer').classList.add('open'); $('statusbar').classList.add('solid');
 }
-$('vBack').onclick = () => { $('vStage').textContent = ''; openApp('photos'); };
+$('vBack').onclick = () => { stopSlide(); $('vStage').textContent = ''; photosStay = true; openApp('photos'); };
 $('vSave').onclick = () => { const it = items[vIndex]; if (it) offer(it.blob, it.name); };
 $('vDel').onclick = async () => {
   const b = $('vDel');
   if (!b.dataset.confirm) { b.dataset.confirm = '1'; b.lastChild && (b.style.color = '#ff5a4f'); toast('Appuie encore pour supprimer'); setTimeout(() => { delete b.dataset.confirm; b.style.color = ''; }, 2500); return; }
   delete b.dataset.confirm; b.style.color = '';
-  const it = items[vIndex]; if (it) await delItem(it.id); $('vStage').textContent = ''; openApp('photos');
+  const it = items[vIndex]; if (it) await delItem(it.id); stopSlide(); $('vStage').textContent = ''; photosStay = true; openApp('photos');
 };
 // petit message
 let toastT = null;
@@ -1007,7 +1058,7 @@ function syncSettingsUI() {
   for (const id of ['strength', 'strength2']) { $(id).value = settings.strength; $(id).style.setProperty('--p', ((settings.strength - .5) * 100) + '%'); }
   $('strengthVal').textContent = Number(settings.strength).toFixed(2).replace('.', ',');
   $('shake').checked = $('shake2').checked = settings.shake;
-  $('flashDef').checked = settings.flash; $('date2014').checked = settings.date2014; $('gridSw').checked = settings.grid;
+  $('flashDef').checked = settings.flash; $('date2014').checked = settings.date2014; $('gridSw').checked = settings.grid; $('hdrSw').checked = settings.hdr; $('hdrTag').hidden = !settings.hdr;
   $('gridlines').hidden = !settings.grid;
 }
 syncSettingsUI();
@@ -1016,6 +1067,8 @@ syncSettingsUI();
 $('flashDef').addEventListener('change', e => { settings.flash = e.target.checked; flashMode = settings.flash ? 'on' : 'off'; saveSettings(); paintFlash(); });
 $('date2014').addEventListener('change', e => { settings.date2014 = e.target.checked; saveSettings(); });
 $('gridSw').addEventListener('change', e => { settings.grid = e.target.checked; saveSettings(); syncSettingsUI(); });
+$('hdrSw').addEventListener('change', e => { settings.hdr = e.target.checked; saveSettings(); syncSettingsUI(); refreshPreview(); });
+$('panoBtn').onclick = () => alert6('Panorama', 'Le mode Panorama n\u2019est pas disponible dans le rendu iPhone 5.');
 $('setBack').onclick = () => { const back = setBackTo; if (back) setPage(back[0], back[1]); else setPage('setMain', 'Réglages'); };
 
 // ---- appareil photo ----
@@ -1025,14 +1078,14 @@ function paintFlash() { $('flashTxt').textContent = FLASH_TXT[flashMode]; }
 paintFlash();
 $('flashBtn').onclick = () => { flashMode = flashMode === 'on' ? 'auto' : flashMode === 'auto' ? 'off' : 'on'; paintFlash(); refreshPreview(); if (liveRec && torchOK()) torch(flashMode === 'on'); };
 const flashValue = () => flashMode === 'on' ? 1 : flashMode === 'auto' ? ((F && F.L || .3) < .25 ? 1 : 0) : 0;
-$('optBtn').onclick = () => { $('sheet').hidden = !$('sheet').hidden; };
+$('optBtn').onclick = () => { $('sheet').hidden = !$('sheet').hidden; $('optBtn').textContent = $('sheet').hidden ? 'Options' : 'Terminé'; };
 let videoMode = false;
 $('modeBtn').onclick = () => { if (busy) return; videoMode = !videoMode; $('modeBtn').classList.toggle('v', videoMode); $('shutter').classList.toggle('vid', videoMode); $('shutter').setAttribute('aria-label', videoMode ? 'Filmer' : 'Prendre une photo'); };
-$('lastThumb').onclick = () => openApp('photos');
+$('lastThumb').onclick = () => { if (busy || liveRec) return; if (items.length) { camLeave(); renderGallery().then(() => openViewer(items.length - 1)); } else { photosStay = true; openApp('photos'); } };
 
 const strength = () => settings.strength;
 const maxTex = gl.getParameter(gl.MAX_TEXTURE_SIZE);
-const MAX_PIX = 16.7e6;
+const MAX_PIX = 3264 * 2448; // capteur 8 Mpx de l'iPhone 5
 function photoSource(img) {
   let w = img.naturalWidth || img.videoWidth || img.width, h = img.naturalHeight || img.videoHeight || img.height, s = 1;
   if (w * h > MAX_PIX) s = Math.sqrt(MAX_PIX / (w * h));
@@ -1052,7 +1105,7 @@ let lastPreview = null;
 function refreshPreview() { if (lastPreview && !busy && !live) lastPreview(); }
 
 // ---- caméra en direct (si le navigateur l'autorise ici) ----
-let live = null, liveRaf = 0;
+let live = null, liveRaf = 0, camFacing = 'environment';
 const SITE_URL = 'https://diogocerqueira660-png.github.io/Iphone5-cam/';
 const onSite = /github\.io$/.test(location.hostname);
 function safariLink() {
@@ -1084,13 +1137,13 @@ async function camEnter(fromTap) {
   }
   camHint('Ouverture de la caméra…', "Accepte la demande de l'iPhone si elle apparaît.", false);
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: 'environment', width: {ideal: 1920}, height: {ideal: 1080}}, audio: false});
+    const stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: camFacing, width: {ideal: 1920}, height: {ideal: 1080}}, audio: false});
     if (current !== 'cam') { stream.getTracks().forEach(t => t.stop()); return; }
     const v = document.createElement('video'); v.playsInline = true; v.setAttribute('playsinline', ''); v.muted = true; v.srcObject = stream; await v.play();
     live = {v, stream}; store.set('perm_camera', 'granted');
     const {W, H} = videoSize(v); setup(Math.round(W * .66 / 2) * 2, Math.round(H * .66 / 2) * 2, v.videoWidth, v.videoHeight); showCanvas(true);
     liveLoop();
-    $('vfHint').hidden = true;
+    $('vfHint').hidden = true; iris(); focusAt(null);
   } catch (e) {
     live = null;
     if (current !== 'cam') return;
@@ -1101,7 +1154,7 @@ async function camEnter(fromTap) {
 }
 function liveLoop() {
   cancelAnimationFrame(liveRaf);
-  const loop = () => { if (!live) return; const v = live.v; if (v.readyState >= 2) draw(zsrc(v), {k: strength(), t: performance.now() / 1000, shake: videoMode && settings.shake, trail: true, flash: flashValue() * (torchOn ? .2 : .6)}); liveRaf = requestAnimationFrame(loop); };
+  const loop = () => { if (!live) return; const v = live.v; if (v.readyState >= 2) draw(zsrc(v), {k: strength(), t: performance.now() / 1000, shake: videoMode && settings.shake, trail: true, flash: flashValue() * (torchOn ? .2 : .6), hdr: settings.hdr && !videoMode}); liveRaf = requestAnimationFrame(loop); };
   loop();
 }
 let liveRec = null;
@@ -1168,7 +1221,7 @@ async function liveRecord() {
   renderGallery(); toast('Vidéo ajoutée à Photos');
   if (live) { const s2 = videoSize(live.v); setup(Math.round(s2.W * .66 / 2) * 2, Math.round(s2.H * .66 / 2) * 2, live.v.videoWidth, live.v.videoHeight); }
 }
-function camLeave() { torchOn = false; setZoom(1); if (live) { cancelAnimationFrame(liveRaf); live.stream.getTracks().forEach(t => t.stop()); live = null; showCanvas(false); } $('sheet').hidden = true; }
+function camLeave() { torchOn = false; setZoom(1); if (live) { cancelAnimationFrame(liveRaf); live.stream.getTracks().forEach(t => t.stop()); live = null; showCanvas(false); } $('sheet').hidden = true; $('optBtn').textContent = 'Options'; }
 
 // ---- zoom au pincement (appareil photo), comme iOS 6 : 1x à 5x ----
 let camZoom = 1, zcv = null, zcx = null, zHide = 0, hwZoom = null;
@@ -1211,19 +1264,52 @@ function vClamp() {
   vz.x = Math.min(0, Math.max(w - w * vz.s, vz.x)); vz.y = Math.min(0, Math.max(h - h * vz.s, vz.y));
 }
 const vImg = () => $('vStage').querySelector('img');
+let swipeDx = 0, barT = 0;
+function swipeEnd() {
+  const dx = swipeDx; swipeDx = 0; const im = $('vStage').firstChild; if (!im || Math.abs(dx) < 5) return false;
+  const go = dx < -60 && vIndex < items.length - 1 ? 1 : dx > 60 && vIndex > 0 ? -1 : 0;
+  im.style.transition = 'transform .22s ease-out';
+  if (!go) { im.style.transform = ''; return true; }
+  im.style.transform = 'translateX(' + (go > 0 ? -340 : 340) + 'px)';
+  setTimeout(() => { openViewer(vIndex + go); const n = $('vStage').firstChild; n.style.transition = 'none'; n.style.transform = 'translateX(' + (go > 0 ? 340 : -340) + 'px)'; requestAnimationFrame(() => requestAnimationFrame(() => { n.style.transition = 'transform .22s ease-out'; n.style.transform = ''; })); }, 200);
+  return true;
+}
+function stopSlide() { clearInterval(slideT); slideT = 0; $('viewer').classList.remove('bare'); }
+$('vPlay').onclick = () => {
+  if (slideT) return stopSlide();
+  $('viewer').classList.add('bare');
+  slideT = setInterval(() => { const n = (vIndex + 1) % items.length; const st = $('vStage'); st.style.transition = 'opacity .5s'; st.style.opacity = 0; setTimeout(() => { openViewer(n); $('viewer').classList.add('bare'); st.style.opacity = 1; }, 500); }, 3000);
+};
 pinch($('vStage'), {
   start: (m) => { const im = vImg(); if (!im) return null; const r = im.getBoundingClientRect(); const L = r.left - vz.x * SCALE, T = r.top - vz.y * SCALE;
     return {s: vz.s, x: vz.x, y: vz.y, m, L, T, lx: ((m.x - L) / SCALE - vz.x) / vz.s, ly: ((m.y - T) / SCALE - vz.y) / vz.s}; },
   move: (r, m, st) => { if (!st) return; const s2 = Math.max(1, Math.min(4, st.s * r));
     vz.s = s2; vz.x = (m.x - st.L) / SCALE - st.lx * s2; vz.y = (m.y - st.T) / SCALE - st.ly * s2; vClamp(); vApply(); },
-  pan: (m, st) => { if (!st || vz.s === 1) return; vz.x = st.x + (m.x - st.m.x) / SCALE; vz.y = st.y + (m.y - st.m.y) / SCALE; vClamp(); vApply(); },
-  end: () => { const now = Date.now(); const im = vImg(); if (im && now - vLastTap < 300) { vz = vz.s > 1 ? {s: 1, x: 0, y: 0} : {s: 2.5, x: -im.offsetWidth * .75, y: -im.offsetHeight * .75}; vClamp(); vApply(); vLastTap = 0; } else vLastTap = now; }
+  pan: (m, st) => { if (st && vz.s === 1) { swipeDx = (m.x - st.m.x) / SCALE; const im = $('vStage').firstChild; if (im && Math.abs(swipeDx) > 4) { im.style.transition = 'none'; im.style.transform = 'translateX(' + swipeDx + 'px)'; } return; } if (!st || vz.s === 1) return; vz.x = st.x + (m.x - st.m.x) / SCALE; vz.y = st.y + (m.y - st.m.y) / SCALE; vClamp(); vApply(); },
+  end: () => { if (swipeEnd()) return; const now = Date.now(); const im = vImg(); if (im && now - vLastTap < 300) { clearTimeout(barT); vz = vz.s > 1 ? {s: 1, x: 0, y: 0} : {s: 2.5, x: -im.offsetWidth * .75, y: -im.offsetHeight * .75}; vClamp(); vApply(); vLastTap = 0; } else { vLastTap = now; clearTimeout(barT); barT = setTimeout(() => { if (slideT) stopSlide(); else $('viewer').classList.toggle('bare'); }, 310); } }
 });
 
 // ---- empêcher le zoom de toute la page (iOS ignore user-scalable=no) ----
 for (const ev of ['gesturestart', 'gesturechange', 'gestureend']) document.addEventListener(ev, e => e.preventDefault(), {passive: false});
 document.addEventListener('touchmove', e => { if (e.touches.length > 1 || (e.scale && e.scale !== 1)) e.preventDefault(); }, {passive: false});
 document.addEventListener('dblclick', e => e.preventDefault(), {passive: false});
+
+// ---- mise au point (carré bleu iOS 6) et caméra avant/arrière ----
+function focusAt(e) {
+  const vf = $('vf'), f = $('focus6'), r = vf.getBoundingClientRect();
+  const x = e ? (e.clientX - r.left) / SCALE : vf.offsetWidth / 2, y = e ? (e.clientY - r.top) / SCALE : vf.offsetHeight / 2;
+  f.style.left = x + 'px'; f.style.top = y + 'px'; f.hidden = false; f.classList.remove('go'); void f.offsetWidth; f.classList.add('go');
+  const t = torchTrack(); if (e && t) { try { t.applyConstraints({advanced: [{pointsOfInterest: [{x: x / vf.offsetWidth, y: y / vf.offsetHeight}], focusMode: 'single-shot'}]}).catch(() => {}); } catch (er) {} }
+}
+$('vf').addEventListener('click', e => { if (live && !e.target.closest('button,a,.hint')) focusAt(e); });
+$('flipBtn').onclick = async () => {
+  if (busy || liveRec) return;
+  camFacing = camFacing === 'environment' ? 'user' : 'environment';
+  if (live) { torchOn = false; cancelAnimationFrame(liveRaf); live.stream.getTracks().forEach(t => t.stop()); live = null; setZoom(1); }
+  const fl = $('vf'); fl.style.transition = 'transform .5s'; fl.style.transform = 'rotateY(90deg)';
+  await new Promise(r => setTimeout(r, 250)); fl.style.transform = ''; setTimeout(() => fl.style.transition = '', 500);
+  camEnter(true);
+};
 
 // ---- déclencheur ----
 $('shutter').onclick = () => {
@@ -1251,7 +1337,7 @@ async function liveShot() {
   const ps = photoSource(zsrc(v));
   cancelAnimationFrame(liveRaf);
   const fl = real ? flashValue() * .35 : flashValue();
-  setup(ps.W, ps.H, ps.W, ps.H); draw(ps.src, {k: strength(), t: Math.random() * 100, flash: 0}); draw(ps.src, {k: strength(), t: Math.random() * 100, flash: fl});
+  setup(ps.W, ps.H, ps.W, ps.H); draw(ps.src, {k: strength(), t: Math.random() * 100, flash: 0, hdr: settings.hdr}); draw(ps.src, {k: strength(), t: Math.random() * 100, flash: fl, hdr: settings.hdr});
   if (real) torch(false);
   await finishPhoto(new Date());
   const {W, H} = videoSize(v); setup(Math.round(W * .66 / 2) * 2, Math.round(H * .66 / 2) * 2, v.videoWidth, v.videoHeight);
@@ -1259,12 +1345,12 @@ async function liveShot() {
 }
 
 async function finishPhoto(orig) {
-  const blob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', .86));
+  const blob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', .74));
   if (!blob) { toast("La photo n'a pas pu être créée.", true); return; }
   const d = outDate(orig);
   const data = new Blob([exifJpeg(await blob.arrayBuffer(), d)], {type: 'image/jpeg'});
   await putItem({id: Date.now() + '' + Math.random(), kind: 'image', blob: data, thumb: makeThumb(), date: d.getTime(), created: Date.now(), name: baseName() + '.jpg'});
-  renderGallery();
+  renderGallery(); const th = $('lastThumb'); th.classList.remove('pop'); void th.offsetWidth; th.classList.add('pop');
 }
 
 async function handleFile(f) {
@@ -1278,7 +1364,7 @@ async function handleFile(f) {
     const img = new Image();
     img.onload = async () => {
       const ps = photoSource(img);
-      const run = () => { setup(ps.W, ps.H, ps.W, ps.H); draw(ps.src, {k: strength(), t: 7, flash: 0}); if (flashValue()) draw(ps.src, {k: strength(), t: 7, flash: flashValue()}); showCanvas(true); };
+      const run = () => { setup(ps.W, ps.H, ps.W, ps.H); draw(ps.src, {k: strength(), t: 7, flash: 0, hdr: settings.hdr}); if (flashValue()) draw(ps.src, {k: strength(), t: 7, flash: flashValue(), hdr: settings.hdr}); showCanvas(true); };
       run(); lastPreview = run; iris();
       await finishPhoto(orig); busy = false; URL.revokeObjectURL(url);
       toast('Ajoutée à Photos · ' + (F.L < .15 ? 'nuit' : F.L < .4 ? 'intérieur / soir' : 'jour') + (flashValue() ? ' · flash' : ''));
