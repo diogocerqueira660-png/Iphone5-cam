@@ -1,0 +1,1025 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="iPhone 5">
+<link rel="apple-touch-icon" href="icon-180.png"><meta name="theme-color" content="#000">
+<style>html,body{margin:0;padding:0;height:100%;background:#000;overscroll-behavior:none;-webkit-user-select:none;user-select:none}</style>
+</head><body>
+<title>iPhone 5 Cam</title>
+<style>
+/* Layout : un iPhone 5 en plein écran. Écran (verrouillage, accueil, apps) au-dessus, menton noir avec le bouton principal en dessous */
+:root{
+  --bezel:#0a0a0b; --chin:#111214; --screen:#000;
+  --ios-blue:#2f6fd6; --nav-1:#b0bccd; --nav-2:#6d84a2; --nav-line:#2d3642;
+  --cell:#ffffff; --cell-line:#d9d9d9; --label:#000; --sub:#7f7f7f; --pin:#c5ccd4; --pin-2:#cbd2d8;
+  --bar-1:#2a2c30; --bar-2:#0c0d0f; --alu-1:#f4f4f5; --alu-2:#a6abb2; --rec:#e3261c; --ok:#4cd964;
+  --f:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  color-scheme:dark;
+}
+[hidden]{display:none!important}
+html,body{height:100%;background:var(--bezel);color:#fff}
+body{font-family:var(--f);font-size:15px;-webkit-font-smoothing:antialiased;-webkit-user-select:none;user-select:none;overflow:hidden}
+button{font-family:inherit}
+.device{height:100%;max-width:460px;margin:0 auto;display:flex;flex-direction:column;background:var(--bezel);padding-left:max(0px,env(safe-area-inset-left,0px));padding-right:max(0px,env(safe-area-inset-right,0px))}
+.screen{position:relative;flex:1;min-height:0;overflow:hidden;background:var(--screen)}
+.chin{height:76px;flex:none;display:grid;place-items:center;background:var(--chin)}
+.home{width:52px;height:52px;border-radius:50%;border:0;padding:0;cursor:pointer;background:radial-gradient(circle at 50% 40%,#1d1e21,#050506 70%);box-shadow:inset 0 1px 2px rgba(255,255,255,.08),inset 0 -1px 1px rgba(0,0,0,.6),0 0 0 2px #1b1c1f;display:grid;place-items:center}
+.home i{width:16px;height:16px;border:1.5px solid #6b6f76;border-radius:4px}
+.home:active{background:radial-gradient(circle at 50% 40%,#2a2b2f,#0b0b0c 70%)}
+
+/* barre d'état iOS 6 */
+.status{position:absolute;inset:0 0 auto;height:20px;display:flex;align-items:center;justify-content:space-between;padding:0 6px;font-size:12px;font-weight:700;z-index:30;color:#fff;background:rgba(0,0,0,.55);text-shadow:0 -1px 0 rgba(0,0,0,.6)}
+.status.solid{background:#000}
+.status .sig{display:flex;align-items:center;gap:4px}
+.dots{display:flex;gap:1.5px;align-items:flex-end}
+.dots b{width:4px;border-radius:1px;background:#fff}
+.batt{display:flex;align-items:center;gap:1px}
+.batt span{width:22px;height:10px;border:1px solid #fff;border-radius:2px;padding:1px}
+.batt span i{display:block;height:100%;width:80%;background:#fff;border-radius:1px}
+.batt em{width:2px;height:4px;background:#fff;border-radius:0 1px 1px 0}
+
+.view{position:absolute;inset:0;transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s}
+.app{transform:scale(.2);opacity:0;pointer-events:none;z-index:5}
+.nav .nb[hidden]{display:inline-block;visibility:hidden}
+.app.open{transform:none;opacity:1;pointer-events:auto}
+@media (prefers-reduced-motion:reduce){.view{transition:none}}
+
+/* fond d'écran */
+.wall{position:absolute;inset:0;background-size:cover;background-position:center}
+/* verrouillage */
+#lock{z-index:20;transition:transform .4s ease}
+#lock.away{transform:translateY(-100%)}
+.lock-top{position:absolute;inset:20px 0 auto;height:96px;background:linear-gradient(rgba(70,70,72,.75),rgba(15,15,16,.8));border-bottom:1px solid rgba(255,255,255,.12);text-align:center;padding-top:6px}
+.lock-time{font-size:58px;font-weight:200;line-height:1.05;letter-spacing:-1px}
+.lock-date{font-size:14px;font-weight:600;color:#e8e8e8}
+.lock-bottom{position:absolute;inset:auto 0 0;height:96px;background:linear-gradient(rgba(15,15,16,.8),rgba(55,55,58,.75));border-top:1px solid rgba(255,255,255,.12);display:grid;place-items:center}
+.track{position:relative;width:min(280px,82%);height:48px;border-radius:12px;background:linear-gradient(#0b0b0c,#232426);box-shadow:inset 0 1px 3px rgba(0,0,0,.9),0 1px 0 rgba(255,255,255,.15);overflow:hidden}
+.track .txt{position:absolute;inset:0;display:grid;place-items:center;padding-left:52px;font-size:19px;color:transparent;background:linear-gradient(90deg,#666 0,#666 40%,#fff 50%,#666 60%,#666 100%) 0 0/300% 100%;-webkit-background-clip:text;background-clip:text;animation:shine 2.6s linear infinite}
+@keyframes shine{from{background-position:100% 0}to{background-position:-50% 0}}
+@media (prefers-reduced-motion:reduce){.track .txt{animation:none;color:#bbb}}
+.knob{position:absolute;left:3px;top:3px;width:58px;height:42px;border-radius:9px;background:linear-gradient(#fdfdfd,#c3c6ca);box-shadow:0 1px 2px rgba(0,0,0,.6);display:grid;place-items:center;touch-action:none;cursor:grab}
+.knob svg{width:26px;height:26px;color:#8a8e94}
+
+/* accueil */
+#homeView{z-index:1}
+.grid{position:absolute;inset:34px 16px auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px 0;justify-items:center}
+.icon{display:flex;flex-direction:column;align-items:center;gap:5px;background:none;border:0;padding:0;cursor:pointer;color:#fff;width:76px}
+.icon .tile{width:60px;height:60px;border-radius:13px;position:relative;overflow:hidden;box-shadow:0 2px 3px rgba(0,0,0,.55)}
+.icon .tile::after{content:"";position:absolute;left:-20%;right:-20%;top:-60%;height:105%;border-radius:0 0 50% 50%;background:linear-gradient(rgba(255,255,255,.55),rgba(255,255,255,.08))}
+.icon span{font-size:11.5px;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,.9);white-space:nowrap}
+.icon:active .tile{filter:brightness(.6)}
+.t-photos{background:radial-gradient(circle at 50% 50%,#fff 0 12%,transparent 13%),conic-gradient(#f9d03c 0 45deg,#f28c2b 45deg 90deg,#e9445d 90deg 135deg,#a85fd3 135deg 180deg,#4d8be8 180deg 225deg,#3fc3e0 225deg 270deg,#5ec95a 270deg 315deg,#b5dc4a 315deg),#fff}
+.t-photos::before{content:"";position:absolute;inset:6px;border-radius:50%;background:radial-gradient(circle,#fff 0 30%,transparent 31%)}
+.t-cam{background:linear-gradient(#dfe2e6,#8e949c)}
+.t-cam::before{content:"";position:absolute;left:9px;right:9px;top:16px;bottom:14px;border-radius:6px;background:linear-gradient(#3b3e44,#15171a)}
+.t-cam b{position:absolute;left:50%;top:50%;width:22px;height:22px;margin:-10px 0 0 -11px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#6f8cb3 0 15%,#0b0d12 17% 55%,#454a52 57%);z-index:1;box-shadow:0 0 0 2px #2a2d31}
+.t-set{background:linear-gradient(#a7adb5,#5f656d)}
+.t-set::before{content:"";position:absolute;inset:9px;border-radius:50%;background:repeating-conic-gradient(#3c4047 0 12deg,#8e949c 12deg 30deg);-webkit-mask:radial-gradient(circle,transparent 0 30%,#000 31% 70%,transparent 71%);mask:radial-gradient(circle,transparent 0 30%,#000 31% 70%,transparent 71%)}
+.t-set b{position:absolute;inset:22px;border-radius:50%;background:radial-gradient(#d9dce0,#7a8088);z-index:1}
+.pager{position:absolute;left:0;right:0;bottom:104px;display:flex;justify-content:center;gap:8px}
+.pager i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35)}.pager i:first-child{background:#fff}
+.dock{position:absolute;left:0;right:0;bottom:0;height:92px}
+.dock::before{content:"";position:absolute;left:4%;right:4%;bottom:10px;height:58px;background:linear-gradient(rgba(255,255,255,.28),rgba(255,255,255,.08));transform:perspective(220px) rotateX(38deg);transform-origin:bottom;border-top:1px solid rgba(255,255,255,.55);box-shadow:0 8px 14px rgba(0,0,0,.4)}
+.dock .row{position:absolute;inset:2px 0 auto;display:flex;justify-content:center;gap:6px}
+
+/* barres iOS 6 */
+.nav{position:absolute;inset:20px 0 auto;height:44px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 6px;background:linear-gradient(var(--nav-1),var(--nav-2));border-bottom:1px solid var(--nav-line);box-shadow:inset 0 1px 0 rgba(255,255,255,.5);z-index:5}
+.nav.dark{background:linear-gradient(rgba(60,60,62,.85),rgba(10,10,10,.85));border-bottom-color:#000}
+.nav h2{margin:0;font-size:19px;font-weight:700;color:#fff;text-shadow:0 -1px 0 rgba(0,0,0,.45)}
+.nb{justify-self:start;height:30px;padding:0 10px;border-radius:5px;border:1px solid rgba(0,0,0,.45);background:linear-gradient(#90a4c0,#4e6a92);color:#fff;font-size:12px;font-weight:700;text-shadow:0 -1px 0 rgba(0,0,0,.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 1px 0 rgba(255,255,255,.3);cursor:pointer}
+.nb.r{justify-self:end}
+.nb.blue{background:linear-gradient(#5b93ea,#2560d0)}
+.nav.dark .nb{background:linear-gradient(#5e5f63,#26272a)}
+.nb.back{clip-path:polygon(12px 0,100% 0,100% 100%,12px 100%,0 50%);padding-left:16px;border-radius:0 5px 5px 0}
+
+/* appareil photo */
+#cam{background:#000}
+.cam-top{position:absolute;inset:20px 0 auto;height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 8px;z-index:4}
+.pill{height:30px;padding:0 11px;border-radius:15px;border:1px solid rgba(255,255,255,.35);background:linear-gradient(rgba(70,70,72,.85),rgba(25,25,27,.85));color:#fff;font-size:12.5px;font-weight:700;display:flex;align-items:center;gap:6px;cursor:pointer}
+.pill svg{width:13px;height:16px}
+.vf{position:absolute;inset:66px 0 96px;display:grid;place-items:center;overflow:hidden;background:#000}
+.vf canvas{max-width:100%;max-height:100%;display:block}
+.vf .hint{text-align:center;color:#c9c9c9;font-size:14px;line-height:1.5;padding:0 30px;max-width:300px}
+.vf .hint .allow{display:block;margin:14px auto 0;padding:9px 18px;border-radius:8px;border:1px solid #000;background:linear-gradient(#5b93ea,#2560d0);color:#fff;font-family:inherit;font-weight:700;font-size:15px;text-shadow:0 -1px 0 rgba(0,0,0,.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.35);cursor:pointer}
+.hint .safari,#permSafari{background:linear-gradient(#fdfdfd,#d9dde2);color:#1f3f7a;text-shadow:0 1px 0 #fff;text-decoration:none;text-align:center;width:max-content}
+#permSafari{display:block;margin:4px auto 14px;padding:9px 18px;border-radius:8px;border:1px solid #8e96a0;font-weight:700;font-size:15px}
+.vf .hint b{display:block;color:#fff;font-size:16px;margin-bottom:6px}
+.gridlines{position:absolute;inset:0;pointer-events:none;background:linear-gradient(rgba(255,255,255,.18),rgba(255,255,255,.18)) 33.33% 0/1px 100% no-repeat,linear-gradient(rgba(255,255,255,.18),rgba(255,255,255,.18)) 66.66% 0/1px 100% no-repeat,linear-gradient(rgba(255,255,255,.18),rgba(255,255,255,.18)) 0 33.33%/100% 1px no-repeat,linear-gradient(rgba(255,255,255,.18),rgba(255,255,255,.18)) 0 66.66%/100% 1px no-repeat}
+.iris{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle,transparent 0 var(--r,150%),#000 calc(var(--r,150%) + 1%));z-index:3}
+.rec{position:absolute;top:74px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.55);border-radius:6px;padding:3px 10px;font-size:13px;font-weight:700;display:flex;gap:7px;align-items:center;z-index:4;font-variant-numeric:tabular-nums}
+.rec i{width:9px;height:9px;border-radius:50%;background:var(--rec);animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.25}}
+.toast{position:absolute;left:50%;bottom:108px;transform:translateX(-50%);max-width:86%;background:rgba(0,0,0,.75);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:8px 12px;font-size:13px;text-align:center;z-index:6}
+.toast.err{border-color:#e3261c}
+.cam-bar{position:absolute;inset:auto 0 0;height:96px;background:linear-gradient(var(--bar-1),var(--bar-2));border-top:1px solid #3c3e42;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 14px}
+.thumb{width:46px;height:46px;border-radius:5px;border:2px solid #d8d8d8;background:#222 center/cover;cursor:pointer;padding:0;box-shadow:0 1px 3px #000}
+.shutter{width:104px;height:54px;border-radius:27px;border:0;cursor:pointer;background:linear-gradient(var(--alu-1),var(--alu-2));box-shadow:inset 0 1px 0 #fff,0 0 0 1px #000,0 2px 4px rgba(0,0,0,.8);display:grid;place-items:center}
+.shutter svg{width:34px;height:26px;color:#3a3d42}
+.shutter.vid.recording::after{border-radius:4px;width:18px;height:18px}
+.shutter.vid svg{display:none}.shutter.vid::after{content:"";width:22px;height:22px;border-radius:50%;background:var(--rec);box-shadow:inset 0 -2px 3px rgba(0,0,0,.35)}
+.shutter.busy::after{border-radius:4px}
+.shutter:active{filter:brightness(.85)}
+.shutter:disabled{opacity:.5}
+.mode{justify-self:end;display:flex;align-items:center;gap:6px;color:#bfc3c8;cursor:pointer;background:none;border:0;padding:4px}
+.mode svg{width:18px;height:14px}
+.mode .sw{width:34px;height:16px;border-radius:8px;background:linear-gradient(#0d0e10,#2a2c30);box-shadow:inset 0 1px 2px #000;position:relative}
+.mode .sw i{position:absolute;top:1px;left:1px;width:18px;height:14px;border-radius:7px;background:linear-gradient(#f2f2f3,#9da2a9);transition:left .2s}
+.mode.v .sw i{left:15px}
+.sheet{position:absolute;inset:auto 0 96px;background:rgba(15,15,16,.92);border-top:1px solid #333;padding:12px 16px 14px;z-index:6;display:flex;flex-direction:column;gap:12px}
+.sheet .r{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px}
+.sheet button.wide{height:38px;border-radius:8px;border:1px solid #555;background:linear-gradient(#5a5c60,#2c2d30);color:#fff;font-weight:700;font-size:14px;cursor:pointer}
+
+/* interrupteur iOS 6 */
+.sw6{appearance:none;-webkit-appearance:none;width:79px;height:27px;border-radius:14px;position:relative;cursor:pointer;background:linear-gradient(#ececec,#fafafa);box-shadow:inset 0 1px 3px rgba(0,0,0,.45);flex:none}
+.sw6::before{content:"NON";position:absolute;right:11px;top:6px;font:700 13px var(--f);color:#808080}
+.sw6:checked{background:linear-gradient(#1a63d8,#55a1f8)}
+.sw6:checked::before{content:"OUI";left:12px;right:auto;color:#fff;text-shadow:0 -1px 0 rgba(0,0,0,.3)}
+.sw6::after{content:"";position:absolute;top:0;left:0;width:27px;height:27px;border-radius:50%;background:linear-gradient(#cfcfcf,#fdfdfd);box-shadow:0 0 0 1px rgba(0,0,0,.3),0 1px 2px rgba(0,0,0,.4);transition:left .2s}
+.sw6:checked::after{left:52px}
+input[type=range].r6{-webkit-appearance:none;appearance:none;flex:1;height:9px;border-radius:5px;background:linear-gradient(90deg,#3a7de6 var(--p,50%),#d9d9d9 var(--p,50%));box-shadow:inset 0 1px 2px rgba(0,0,0,.45)}
+input[type=range].r6::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:linear-gradient(#cfcfcf,#fdfdfd);box-shadow:0 0 0 1px rgba(0,0,0,.3),0 1px 3px rgba(0,0,0,.5)}
+input[type=range].r6::-moz-range-thumb{width:24px;height:24px;border:0;border-radius:50%;background:#eee}
+
+/* Photos */
+#photos{background:#fff}
+.scroll{position:absolute;inset:64px 0 0;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;padding:4px 3px 60px}
+.pgrid button{aspect-ratio:1;border:0;padding:0;background:#ddd center/cover;cursor:pointer;position:relative}
+.pgrid button .vb{position:absolute;inset:auto 0 0;height:16px;background:linear-gradient(transparent,rgba(0,0,0,.75));color:#fff;font-size:10px;font-weight:700;display:flex;justify-content:space-between;align-items:center;padding:0 4px}
+.pcount{text-align:center;color:#555;font-size:15px;padding:10px 0 30px}
+.pempty{color:#666;text-align:center;padding:80px 30px;line-height:1.5}
+.pempty b{display:block;color:#222;font-size:17px;margin-bottom:6px}
+#viewer{background:#000;z-index:8}
+#viewer .stage{position:absolute;inset:64px 0 44px;display:grid;place-items:center}
+#viewer img,#viewer video{max-width:100%;max-height:100%}
+.tool{position:absolute;inset:auto 0 0;height:44px;background:linear-gradient(rgba(60,60,62,.9),rgba(10,10,10,.9));border-top:1px solid #000;display:flex;align-items:center;justify-content:space-between;padding:0 14px}
+.tool button{background:none;border:0;color:#fff;cursor:pointer;padding:6px;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700}
+.tool svg{width:24px;height:22px}
+.vdate{position:absolute;top:70px;left:0;right:0;text-align:center;font-size:12px;color:#ccc;z-index:2}
+
+/* Réglages */
+#settings{background:repeating-linear-gradient(90deg,var(--pin) 0 5px,var(--pin-2) 5px 7px)}
+.group{margin:18px 9px 0;background:var(--cell);border:1px solid #abb0b6;border-radius:9px;overflow:hidden;color:var(--label)}
+.ghead{margin:18px 20px -10px;font-size:15px;font-weight:700;color:#4c566c;text-shadow:0 1px 0 #fff}
+.gfoot{margin:6px 20px 0;font-size:13px;color:#4c566c;text-align:center;text-shadow:0 1px 0 #fff;line-height:1.35}
+.cellr{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;padding:6px 10px;font-weight:700;font-size:16px}
+.cellr+.cellr{border-top:1px solid var(--cell-line)}
+.cellr .v{color:#385487;font-weight:400}
+.cellr button.chev{all:unset;flex:1;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.cellr button.chev span:first-child{flex:1}
+.cellr button.chev::after{content:"›";color:#999;font-size:24px;font-weight:400;margin-left:8px}
+.walls{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:10px}
+.walls button{aspect-ratio:9/16;border-radius:4px;border:2px solid transparent;padding:0;background:center/cover;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.4)}
+.walls button.on{border-color:#2f6fd6}
+.walls label{aspect-ratio:9/16;border-radius:4px;border:2px dashed #aab;display:grid;place-items:center;color:#556;font-size:12px;text-align:center;cursor:pointer;position:relative;padding:4px}
+.walls input{position:absolute;inset:0;opacity:0}
+.about{font-weight:400}
+.hidefile{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+:focus-visible{outline:2px solid #5aa0ff;outline-offset:2px}
+</style>
+
+<div class="device">
+  <div class="screen" id="screen">
+    <div class="status" id="statusbar"><span class="sig"><span class="dots"><b style="height:4px"></b><b style="height:6px"></b><b style="height:8px"></b><b style="height:10px"></b><b style="height:12px;opacity:.35"></b></span>Carrier 3G</span><span id="clock">14:12</span><span class="batt">80 %<span><i></i></span><em></em></span></div>
+
+    <!-- accueil -->
+    <div class="view" id="homeView">
+      <div class="wall" id="wallHome"></div>
+      <div class="grid">
+        <button class="icon" data-open="cam"><div class="tile t-cam"><b></b></div><span>Appareil photo</span></button>
+        <button class="icon" data-open="photos"><div class="tile t-photos"></div><span>Photos</span></button>
+        <button class="icon" data-open="settings"><div class="tile t-set"><b></b></div><span>Réglages</span></button>
+      </div>
+      <div class="pager"><i></i><i></i></div>
+      <div class="dock"><div class="row">
+        <button class="icon" data-open="cam" aria-label="Appareil photo"><div class="tile t-cam"><b></b></div><span>Appareil photo</span></button>
+        <button class="icon" data-open="photos" aria-label="Photos"><div class="tile t-photos"></div><span>Photos</span></button>
+      </div></div>
+    </div>
+
+    <!-- appareil photo -->
+    <div class="view app" id="cam">
+      <div class="cam-top">
+        <button class="pill" id="flashBtn" aria-label="Flash"><svg viewBox="0 0 13 16"><path d="M8 0 1 9h4l-1 7 7-10H7z" fill="currentColor"/></svg><span id="flashTxt">Oui</span></button>
+        <button class="pill" id="optBtn">Options</button>
+        <label class="pill" aria-label="Importer depuis la photothèque"><svg viewBox="0 0 18 16" style="width:18px"><rect x="1" y="2" width="16" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="6" cy="7" r="1.5" fill="currentColor"/><path d="M17 12l-5-5-7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><input id="importInput" class="hidefile" type="file" accept="image/*,video/*"></label>
+      </div>
+      <div class="vf" id="vf">
+        <div class="hint" id="vfHint"><b>Appuie sur le déclencheur</b>La caméra de ton iPhone s'ouvre. Ta photo revient ici avec le rendu iPhone 5 et va dans Photos.</div>
+        <canvas id="out" hidden></canvas>
+        <div class="gridlines" id="gridlines" hidden></div>
+      </div>
+      <div class="iris" id="iris" style="--r:150%"></div>
+      <div class="rec" id="rec" hidden><i></i><span id="recTime">00:00</span></div>
+      <div class="sheet" id="sheet" hidden>
+        <div class="r"><span>Force du filtre</span><input id="strength" class="r6" type="range" min="0.5" max="1.5" step="0.05" value="1"><span id="strengthVal" style="min-width:2.6em;text-align:right">1,00</span></div>
+        <div class="r"><span>Tremblement (vidéo)</span><input id="shake" class="sw6" type="checkbox" checked></div>
+        <div class="r"><span>Grille</span><input id="gridSw" class="sw6" type="checkbox"></div>
+      </div>
+      <div class="toast" id="toast" hidden></div>
+      <div class="cam-bar">
+        <button class="thumb" id="lastThumb" aria-label="Ouvrir Photos"></button>
+        <button class="shutter" id="shutter" aria-label="Prendre une photo"><svg viewBox="0 0 34 26"><path d="M11 2h12l2 4h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6z" fill="currentColor"/><circle cx="17" cy="15" r="6.5" fill="#d6d8db"/><circle cx="17" cy="15" r="4" fill="currentColor"/></svg></button>
+        <button class="mode" id="modeBtn" aria-label="Photo ou vidéo"><svg viewBox="0 0 18 14"><path d="M6 1h6l1.5 2H16a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.5z" fill="currentColor"/></svg><span class="sw"><i></i></span><svg viewBox="0 0 18 14"><rect x="1" y="3" width="11" height="9" rx="1.5" fill="currentColor"/><path d="M12 6l5-3v9l-5-3z" fill="currentColor"/></svg></button>
+      </div>
+      <input id="capPhoto" class="hidefile" type="file" accept="image/*" capture="environment">
+      <input id="capVideo" class="hidefile" type="file" accept="video/*" capture="environment">
+    </div>
+
+    <!-- Photos -->
+    <div class="view app" id="photos">
+      <div class="nav"><span></span><h2>Pellicule</h2><button class="nb r" id="selectAllSave" hidden>Tout</button></div>
+      <div class="scroll"><div class="pgrid" id="pgrid"></div><div class="pempty" id="pempty"><b>Aucune photo ni vidéo</b>Prends une photo avec Appareil photo, elle apparaîtra ici avec le rendu iPhone 5.</div><div class="pcount" id="pcount"></div></div>
+    </div>
+    <div class="view app" id="viewer">
+      <div class="nav dark"><button class="nb back" id="vBack">Pellicule</button><h2 id="vTitle">1 sur 1</h2><span></span></div>
+      <div class="vdate" id="vDate"></div>
+      <div class="stage" id="vStage"></div>
+      <div class="tool">
+        <button id="vSave" aria-label="Enregistrer dans l'iPhone"><svg viewBox="0 0 24 22"><path d="M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9M12 2v12M7 7l5-5 5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Enregistrer</button>
+        <button id="vDel" aria-label="Supprimer"><svg viewBox="0 0 24 22"><path d="M5 5h14M10 5V2h4v3M6 5l1 15h10l1-15" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <!-- Réglages -->
+    <div class="view app" id="settings">
+      <div class="nav"><button class="nb back" id="setBack" hidden>Réglages</button><h2 id="setTitle">Réglages</h2><span></span></div>
+      <div class="scroll" id="setMain">
+        <div class="group">
+          <div class="cellr"><button class="chev" id="goWall"><span>Fond d'écran</span></button></div>
+          <div class="cellr"><span>Mode Avion</span><input class="sw6" type="checkbox" id="plane"></div>
+        </div>
+        <div class="ghead">Confidentialité</div>
+        <div class="group">
+          <div class="cellr"><button class="chev" id="permCam"><span>Appareil photo</span><span class="v" id="permCamVal">Non autorisé</span></button></div>
+          <div class="cellr"><button class="chev" id="permMic"><span>Micro</span><span class="v" id="permMicVal">Non autorisé</span></button></div>
+        </div>
+        <div class="gfoot" id="permFoot">Touche une ligne pour que l'iPhone te demande l'autorisation. La caméra sert au rendu iPhone 5 en direct, le micro au son des vidéos.</div>
+        <div class="ghead">Appareil photo</div>
+        <div class="group">
+          <div class="cellr"><span>Force du filtre</span><input id="strength2" class="r6" type="range" min="0.5" max="1.5" step="0.05" value="1" style="max-width:45%"></div>
+          <div class="cellr"><span>Flash par défaut</span><input class="sw6" type="checkbox" id="flashDef" checked></div>
+          <div class="cellr"><span>Tremblement vidéo</span><input class="sw6" type="checkbox" id="shake2" checked></div>
+          <div class="cellr"><span>Dater en 2014</span><input class="sw6" type="checkbox" id="date2014" checked></div>
+        </div>
+        <div class="gfoot">Les photos et vidéos gardent le jour et l'heure de l'original, avec l'année 2014.</div>
+        <div class="ghead">Informations</div>
+        <div class="group about">
+          <div class="cellr"><span>Modèle</span><span class="v">iPhone 5</span></div>
+          <div class="cellr"><span>Version</span><span class="v">6.1.4 (10B350)</span></div>
+          <div class="cellr"><span>Photos</span><span class="v" id="aboutCount">0</span></div>
+        </div>
+        <div style="height:40px"></div>
+      </div>
+      <div class="scroll" id="setWall" hidden>
+        <div class="ghead">Choisis un fond d'écran</div>
+        <div class="group"><div class="walls" id="walls"></div></div>
+        <div class="gfoot">Il s'affiche sur l'écran verrouillé et l'écran d'accueil.</div>
+      </div>
+    </div>
+
+    <!-- verrouillage -->
+    <div class="view" id="lock">
+      <div class="wall" id="wallLock"></div>
+      <div class="lock-top"><div class="lock-time" id="lockTime">14:12</div><div class="lock-date" id="lockDate">jeudi 26 novembre</div></div>
+      <div class="lock-bottom"><div class="track" id="track"><div class="txt">glisser pour déverrouiller</div><div class="knob" id="knob"><svg viewBox="0 0 24 24"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div></div>
+    </div>
+  </div>
+  <div class="chin"><button class="home" id="homeBtn" aria-label="Bouton principal"><i></i></button></div>
+</div>
+<script>
+(() => {
+const $ = id => document.getElementById(id);
+const canvas = $('out');
+const gl = canvas.getContext('webgl', {preserveDrawingBuffer: true, premultipliedAlpha: false, antialias: false});
+if (!gl) { const t = document.getElementById('toast'); if (t) { t.textContent = "Ton navigateur ne gère pas WebGL, le filtre ne peut pas tourner ici."; t.hidden = false; } return; }
+const VS = 'attribute vec2 p;varying vec2 uv;void main(){uv=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
+const PREC = 'precision highp float;varying vec2 uv;';
+const FS_LOW = PREC + `
+uniform sampler2D src,prev;uniform vec2 off,fp;uniform float zoom,trail,streak;
+void main(){
+  vec2 s=.5+(uv-.5)/zoom+off; vec3 c=vec3(0.);
+  for(int i=-1;i<=1;i++)for(int j=-1;j<=1;j++) c+=texture2D(src,s+vec2(float(i),float(j))*fp/3.).rgb;
+  c/=9.; vec3 pr=texture2D(prev,uv).rgb;
+  vec3 m=mix(c,pr,trail);
+  // traînées de lumière : les points lumineux restent imprimés (obturation lente en basse lumière)
+  float br=smoothstep(.7,.95,dot(pr,vec3(.299,.587,.114)));
+  m=mix(m,max(m,pr*.88),br*streak);
+  gl_FragColor=vec4(m,1.);
+}`;
+const FS_BRIGHT = PREC + `uniform sampler2D t;uniform float gain;void main(){vec3 c=texture2D(t,uv).rgb*gain;gl_FragColor=vec4(max((c-.7)/.3,0.),1.);}`;
+const FS_BLUR = PREC + `uniform sampler2D t;uniform vec2 d;
+void main(){vec3 c=texture2D(t,uv).rgb*.2270;
+c+=(texture2D(t,uv+d*1.385).rgb+texture2D(t,uv-d*1.385).rgb)*.3162;
+c+=(texture2D(t,uv+d*3.231).rgb+texture2D(t,uv-d*3.231).rgb)*.0703;
+gl_FragColor=vec4(c,1.);}`;
+const FS_COMP = PREC + `
+uniform sampler2D low,bloom,base;uniform vec2 lt;uniform vec3 scast;uniform float k,time,aspect,gain,sceneL,refL,wp,bp,satS,flash;
+float hash(vec2 p){p=fract(p*vec2(443.897,441.423));p+=dot(p,p.yx+19.19);return fract((p.x+p.y)*p.x);}
+float vnoise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+  return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),f.x),f.y);}
+float curve(float x){
+  if(x<.05) return x/.05*.04;
+  if(x<.5) return .04+(x-.05)/.45*.48;
+  if(x<.82) return .52+(x-.5)/.32*.41;
+  return .93+(x-.82)/.18*.07;
+}
+void main(){
+  // aberration chromatique latérale (frange violette sur les contrastes forts)
+  vec2 cuv=uv-.5; vec3 c=vec3(texture2D(low,.5+cuv*(1.+.0018*k)).r,texture2D(low,uv).g,texture2D(low,.5+cuv*(1.-.0018*k)).b);
+  vec3 b=(texture2D(low,uv+vec2(lt.x,0.)).rgb+texture2D(low,uv-vec2(lt.x,0.)).rgb+texture2D(low,uv+vec2(0.,lt.y)).rgb+texture2D(low,uv-vec2(0.,lt.y)).rgb)*.25;
+  vec3 W=vec3(.299,.587,.114);
+  c+=vec3(dot(c-b,W))*.55*k;
+  // pas de HDR sur l'iPhone 5 : on ré-écarte les grandes zones claires et sombres (ciel qui brûle, ombres qui bouchent), surtout de jour
+  { float bL=max(dot(texture2D(base,uv).rgb,W),.01); float dayw=smoothstep(.15,.4,sceneL);
+    float alpha=k*mix(.08,.15,dayw); c*=pow(bL/max(refL,.05),alpha); }
+  c*=gain; c=(c-vec3(bp))/max(wp-bp,.2); c=max(c,0.); { float mx=max(c.r,max(c.g,c.b)); if(mx>1.) c=mix(c/mx,vec3(1.),clamp((mx-1.)*2.,0.,1.)); }
+  float l=dot(c,W);
+  c+=(scast-vec3(dot(scast,W)))*.3*k*smoothstep(.02,.35,l)*mix(1.,0.,smoothstep(.25,.45,sceneL));
+  l=dot(c,W);
+  float warm=clamp((c.r-c.b)*2.5,0.,1.)*smoothstep(.05,.3,max(c.r,max(c.g,c.b)));
+  float nd=1.-smoothstep(.2,.45,sceneL); c=mix(vec3(l),c,mix(1.,satS,k)*(1.+(.06+.1*nd)*k*warm)); c=(c-.5)*(1.+(.02+.06*nd)*k)+.5; c=clamp(c,0.,1.);
+  // noirs plus écrasés la nuit (le capteur coupait les ombres)
+  
+  { float lc=max(dot(c,W),1e-4); vec3 cl=clamp(c*curve(lc)/lc,0.,1.); c=mix(cl,vec3(curve(c.r),curve(c.g),curve(c.b)),.2); }
+  l=dot(c,W); float ws=(1.-l)*(1.-l), wh=l*l, wm=max(1.-ws-wh,0.);
+  c+=k*mix(1.,.45,smoothstep(.2,.45,sceneL))*(ws*vec3(.01,0.,.025)+wm*vec3(.03,0.,-.02)+wh*vec3(.03,0.,-.04));
+  c=clamp(c,0.,1.);
+  // flash : éclaire le centre, assombrit le fond, et fait claquer les surfaces réfléchissantes (plaques, chromes, panneaux)
+  if(flash>0.){
+    vec2 fq=(uv-.5)*vec2(aspect,1.); float r2=dot(fq,fq); float fall=exp(-r2*2.2);
+    float fd=flash*(1.-.55*smoothstep(.2,.5,sceneL));
+    float bL2=dot(texture2D(base,uv).rgb,W); l=dot(c,W);
+    float near=1.-smoothstep(.22,.55,bL2);
+    c=c+fd*.6*fall*near*c*(1.-.85*l)-fd*.12*(1.-fall)*c;
+    c=mix(c,c*vec3(.96,1.,1.05),fd*.7);
+    float spec=smoothstep(.42,.78,l)*smoothstep(.04,.22,l-bL2*.9)*near;
+    c=mix(c,vec3(1.,1.,1.03),clamp(spec*flash*.9,0.,1.));
+    c=clamp(c,0.,1.);
+  }
+  vec3 bl=texture2D(bloom,uv).rgb; c=1.-(1.-c)*(1.-clamp(bl,0.,1.)*.7*k*mix(1.,.3,smoothstep(.2,.5,sceneL)));
+  vec2 q=(uv-.5)*vec2(aspect,1.)/length(vec2(aspect,1.)*.5); float v=cos(.2*length(q)); c*=v*v*v*v;
+  // bruit de capteur : grain fin + taches de couleur, plus fort dans les ombres et quand le gain monte
+  l=dot(c,W); float amt=k*sqrt(gain)*(1.2-.75*l)*smoothstep(.0,.08,l)*mix(1.5,.75,smoothstep(.08,.5,sceneL));
+  vec2 fc=gl_FragCoord.xy; float tt=fract(time*.0137)*400.;
+  float g1=hash(fc+tt*1.31), g2=hash(fc*1.13+tt*2.77+7.);
+  float n=(g1+g2-1.)*(16./255.)*amt;
+  float cs=1.8+gain*.4;
+  vec2 bp=fc/cs+vec2(tt*3.1,tt*1.7);
+  float cr=vnoise(bp)-.5, cb=vnoise(bp+vec2(41.3,17.9))-.5;
+  vec3 cn=vec3(cr,-(cr+cb)*.45,cb)*(26./255.)*amt;
+  float sn=(hash(floor(fc/2.)+tt)-.5)*(6./255.)*amt;
+  gl_FragColor=vec4(clamp(c+n+sn+cn,0.,1.),1.);
+}`;
+
+function sh(type, src) { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; }
+function prog(fs) { const p = gl.createProgram(); gl.attachShader(p, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(p, sh(gl.FRAGMENT_SHADER, fs)); gl.bindAttribLocation(p, 0, 'p'); gl.linkProgram(p); const u = {}; const n = gl.getProgramParameter(p, gl.ACTIVE_UNIFORMS); for (let i = 0; i < n; i++) { const a = gl.getActiveUniform(p, i); u[a.name] = gl.getUniformLocation(p, a.name); } return {p, u}; }
+const P = {low: prog(FS_LOW), bright: prog(FS_BRIGHT), blur: prog(FS_BLUR), comp: prog(FS_COMP)};
+const quad = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, quad);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+
+function tex() { const t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE); return t; }
+function fbo(w, h) { const t = tex(); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, null); const f = gl.createFramebuffer(); gl.bindFramebuffer(gl.FRAMEBUFFER, f); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, t, 0); return {t, f, w, h}; }
+function free(o) { if (o) { gl.deleteTexture(o.t); gl.deleteFramebuffer(o.f); } }
+const srcTex = tex();
+let F = null; // framebuffers
+let srcW = 1, srcH = 1;
+
+function setup(outW, outH, sw, sh_) {
+  canvas.width = outW; canvas.height = outH; srcW = sw; srcH = sh_;
+  if (F) { ['lowA','lowB','b1','b2','avg','base'].forEach(k => free(F[k])); }
+  const lw = Math.max(2, Math.round(outW * .72)), lh = Math.max(2, Math.round(outH * .72));
+  const bw = Math.max(2, Math.round(outW / 12)), bh = Math.max(2, Math.round(outH / 12));
+  F = {lowA: fbo(lw, lh), lowB: fbo(lw, lh), b1: fbo(bw, bh), b2: fbo(bw, bh), avg: fbo(64, 64), base: fbo(bw, bh), outW, outH, first: true, cast: null, gain: 0, L: 0, Lc: 0};
+}
+
+function draw(source, opts) {
+  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+  gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, srcTex);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, source);
+  const k = opts.k, t = opts.t;
+  // passe 1 : réduction + tremblement + traînée
+  const cur = F.lowA, prev = F.lowB;
+  gl.bindFramebuffer(gl.FRAMEBUFFER, cur.f); gl.viewport(0, 0, cur.w, cur.h);
+  gl.useProgram(P.low.p);
+  gl.uniform1i(P.low.u.src, 0);
+  gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, prev.t); gl.uniform1i(P.low.u.prev, 1);
+  let zoom = 1, ox = 0, oy = 0;
+  if (opts.shake) {
+    zoom = 1.06; const m = (1 - 1 / zoom) / 2 * Math.min(.85 * k, 1);
+    ox = m * (.55 * Math.sin(t * 1.9) + .3 * Math.sin(t * 4.7 + 1.3) + .15 * Math.sin(t * 9.1 + 2.2));
+    oy = m * (.55 * Math.sin(t * 1.6 + .7) + .3 * Math.sin(t * 5.2 + 2.9) + .15 * Math.sin(t * 10.3 + .4));
+  }
+  gl.uniform1f(P.low.u.zoom, zoom); gl.uniform2f(P.low.u.off, ox, oy);
+  gl.uniform2f(P.low.u.fp, (srcW / cur.w) / srcW / zoom, (srcH / cur.h) / srcH / zoom);
+  { // plus la scène est sombre, plus l'obturation est lente : plus de flou de bougé et de traînées
+    const L0 = F.L || .3, night = Math.min(Math.max((.35 - L0) / .25, 0), 1);
+    const on = opts.trail && !F.first;
+    gl.uniform1f(P.low.u.trail, on ? (.12 + .33 * night) * Math.min(opts.k, 1.3) : 0);
+    gl.uniform1f(P.low.u.streak, on ? night : 0);
+  }
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  F.first = false;
+  // ---- analyse de toute l'image (64×64 points) : lumière, ombres, hautes lumières, couleurs ----
+  const AN = 64;
+  gl.bindFramebuffer(gl.FRAMEBUFFER, F.avg.f); gl.viewport(0, 0, AN, AN);
+  gl.useProgram(P.blur.p); gl.bindTexture(gl.TEXTURE_2D, cur.t); gl.uniform2f(P.blur.u.d, .5 / cur.w, .5 / cur.h); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  const px = new Uint8Array(AN * AN * 4); gl.readPixels(0, 0, AN, AN, gl.RGBA, gl.UNSIGNED_BYTE, px);
+  const N = AN * AN, lum = new Float32Array(N); let r = 0, g = 0, bb = 0, sat = 0, cw = 0, cl = 0;
+  for (let i = 0; i < N; i++) {
+    const R = px[i * 4] / 255, G = px[i * 4 + 1] / 255, B = px[i * 4 + 2] / 255;
+    r += R; g += G; bb += B; const l = .299 * R + .587 * G + .114 * B; lum[i] = l;
+    sat += Math.max(R, G, B) - Math.min(R, G, B);
+    const x = (i % AN) / AN - .5, y = Math.floor(i / AN) / AN - .5, w = Math.exp(-(x * x + y * y) / .08); cl += w * l; cw += w;
+  }
+  const m = [r / N, g / N, bb / N], sum = m[0] + m[1] + m[2] + 1e-3;
+  const sorted = Array.from(lum).sort((a, b) => a - b), pct = q => sorted[Math.min(N - 1, Math.floor(q * N))];
+  const p02 = pct(.02), p50 = pct(.5), p97 = pct(.97);
+  const L = Math.max(.02, .299 * m[0] + .587 * m[1] + .114 * m[2]);
+  const Lc = Math.max(.02, cl / cw), S = sat / N;
+  const lerp = (a, b, x) => a + (b - a) * Math.min(Math.max(x, 0), 1);
+  const dayw = Math.min(Math.max((L - .15) / .3, 0), 1);           // 0 = nuit, 1 = plein jour
+  // exposition : vise un niveau selon la scène, mesuré à moitié sur toute l'image et à moitié au centre (le sujet)
+  const ref = Math.max(.02, .5 * p50 + .5 * Lc);
+  const target = lerp(.22, .43, dayw);
+  let ng = Math.min(Math.max(target / ref, .6), lerp(1.6, 1.3, dayw));
+  // plage dynamique de l'iPhone 5 : les ~4 % les plus clairs brûlent, les ~3 % les plus sombres bouchent
+  const wp = Math.min(1, Math.max(lerp(.92, .7, dayw), p97 * ng * lerp(1.1, 1., dayw)));
+  const bp = Math.min(.15, Math.max(0, p02 * ng * lerp(.9, .7, dayw)) + lerp(.03, .015, dayw));
+  // couleurs : l'iPhone 5 ne sature pas autant qu'un téléphone récent ; on ramène vers une saturation moyenne
+  const satScale = Math.min(Math.max(lerp(.24, .2, dayw) / Math.max(S, .02), .75), 1.18);
+  const nc = m.map(x => x / sum * 3 * 0.5);
+  const sm = (old, v) => (old == null ? v : old * .9 + v * .1);
+  F.cast = F.cast ? F.cast.map((x, i) => x * .9 + nc[i] * .1) : nc;
+  F.gain = sm(F.gainSet ? F.gain : null, ng); F.gainSet = true;
+  F.L = sm(F.Lset ? F.L : null, L); F.Lset = true;
+  F.Lc = sm(F.Lcset ? F.Lc : null, Lc); F.Lcset = true;
+  F.wp = sm(F.wp, wp); F.bp = sm(F.bp, bp); F.sat = sm(F.sat, satScale);
+  F.stats = {L, Lc, p02, p50, p97, S, gain: ng, wp, bp, satScale};
+  // passe 2 : halo des hautes lumières
+  gl.activeTexture(gl.TEXTURE0);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, F.b1.f); gl.viewport(0, 0, F.b1.w, F.b1.h);
+  gl.useProgram(P.bright.p); gl.bindTexture(gl.TEXTURE_2D, cur.t); gl.uniform1i(P.bright.u.t, 0); gl.uniform1f(P.bright.u.gain, F.gain * (1 + .15 * (opts.k - 1)) * (1 + .04 * (opts.flash || 0)));
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  gl.useProgram(P.blur.p); gl.uniform1i(P.blur.u.t, 0);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, F.b2.f); gl.bindTexture(gl.TEXTURE_2D, F.b1.t); gl.uniform2f(P.blur.u.d, 1 / F.b1.w, 0); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, F.b1.f); gl.bindTexture(gl.TEXTURE_2D, F.b2.t); gl.uniform2f(P.blur.u.d, 0, 1 / F.b1.h); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, F.b2.f); gl.bindTexture(gl.TEXTURE_2D, F.b1.t); gl.uniform2f(P.blur.u.d, 2 / F.b1.w, 0); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, F.b1.f); gl.bindTexture(gl.TEXTURE_2D, F.b2.t); gl.uniform2f(P.blur.u.d, 0, 2 / F.b1.h); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  // base lumineuse à grande échelle (pour défaire le HDR des téléphones récents)
+  gl.useProgram(P.blur.p); gl.uniform1i(P.blur.u.t, 0); gl.viewport(0, 0, F.base.w, F.base.h);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, F.base.f); gl.bindTexture(gl.TEXTURE_2D, cur.t); gl.uniform2f(P.blur.u.d, 0, 0); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  for (const st of [2, 4]) {
+    gl.bindFramebuffer(gl.FRAMEBUFFER, F.b2.f); gl.bindTexture(gl.TEXTURE_2D, F.base.t); gl.uniform2f(P.blur.u.d, st / F.base.w, 0); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, F.base.f); gl.bindTexture(gl.TEXTURE_2D, F.b2.t); gl.uniform2f(P.blur.u.d, 0, st / F.base.h); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  }
+  // passe 3 : rendu final
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, F.outW, F.outH);
+  gl.useProgram(P.comp.p);
+  gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, cur.t); gl.uniform1i(P.comp.u.low, 0);
+  gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, F.b1.t); gl.uniform1i(P.comp.u.bloom, 1);
+  gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, F.base.t); gl.uniform1i(P.comp.u.base, 2); gl.activeTexture(gl.TEXTURE0);
+  gl.uniform2f(P.comp.u.lt, 1 / cur.w, 1 / cur.h);
+  gl.uniform3f(P.comp.u.scast, F.cast[0], F.cast[1], F.cast[2]);
+  gl.uniform1f(P.comp.u.gain, F.gain * (1 + .15 * (k - 1)));
+  gl.uniform1f(P.comp.u.sceneL, F.L);
+  gl.uniform1f(P.comp.u.refL, F.Lc);
+  { const kk = k; gl.uniform1f(P.comp.u.wp, 1 + (F.wp - 1) * Math.min(kk, 1.3)); gl.uniform1f(P.comp.u.bp, F.bp * Math.min(kk, 1.3)); gl.uniform1f(P.comp.u.satS, F.sat); }
+  gl.uniform1f(P.comp.u.flash, opts.flash || 0);
+  gl.uniform1f(P.comp.u.k, k); gl.uniform1f(P.comp.u.time, (t * 30) % 1000); gl.uniform1f(P.comp.u.aspect, F.outW / F.outH);
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  F.lowA = prev; F.lowB = cur;
+}// ---------- dates & métadonnées ----------
+const pad = n => String(n).padStart(2, '0');
+function toLocalInput(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) + 'T' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds()); }
+function to2014(d) { const m = d.getMonth(), day = (m === 1 && d.getDate() === 29) ? 28 : d.getDate(); return new Date(2014, m, day, d.getHours(), d.getMinutes(), d.getSeconds()); }
+async function readBytes(blob, start, len) { return new Uint8Array(await blob.slice(start, start + len).arrayBuffer()); }
+const MAC_EPOCH = 2082844800;
+async function originalDate(file) {
+  try {
+    const head = await readBytes(file, 0, 16);
+    if (head[0] === 0xFF && head[1] === 0xD8) { // JPEG : EXIF DateTimeOriginal
+      const b = await readBytes(file, 0, Math.min(file.size, 256 * 1024));
+      const txt = new TextDecoder('latin1').decode(b);
+      const m = txt.match(/(\d{4}):(\d\d):(\d\d) (\d\d):(\d\d):(\d\d)/);
+      if (m) return new Date(+m[1], m[2] - 1, +m[3], +m[4], +m[5], +m[6]);
+    } else if (String.fromCharCode(head[4], head[5], head[6], head[7]) === 'ftyp') { // MOV/MP4/HEIC
+      let off = 0;
+      while (off < file.size) {
+        const h = await readBytes(file, off, 16); const dv = new DataView(h.buffer);
+        let size = dv.getUint32(0); const type = String.fromCharCode(h[4], h[5], h[6], h[7]);
+        if (size === 1) size = Number(dv.getBigUint64(8)); if (size === 0) size = file.size - off; if (size < 8) break;
+        if (type === 'moov' && size < 64e6) {
+          const mv = await readBytes(file, off, size); const t = new TextDecoder('latin1').decode(mv);
+          const iso = t.match(/(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d):(\d\d)([+-]\d\d(?::?\d\d)?|Z)?/);
+          if (iso) { const d = new Date(iso[0].replace(/([+-]\d\d)(\d\d)$/, '$1:$2')); if (!isNaN(d)) return d; }
+          const i = t.indexOf('mvhd'); if (i > 0) { const d2 = new DataView(mv.buffer, i + 4); const ver = d2.getUint8(0); const sec = ver === 1 ? Number(d2.getBigUint64(4)) : d2.getUint32(4); if (sec > MAC_EPOCH) return new Date((sec - MAC_EPOCH) * 1000); }
+          break;
+        }
+        off += size;
+      }
+    } else {
+      const b = await readBytes(file, 0, Math.min(file.size, 256 * 1024));
+      const m = new TextDecoder('latin1').decode(b).match(/(\d{4}):(\d\d):(\d\d) (\d\d):(\d\d):(\d\d)/);
+      if (m) return new Date(+m[1], m[2] - 1, +m[3], +m[4], +m[5], +m[6]);
+    }
+  } catch (e) {}
+  return file.lastModified ? new Date(file.lastModified) : new Date();
+}
+// JPEG : ajoute un bloc EXIF (Apple, iPhone 5, dates)
+function exifJpeg(jpegBuf, d) {
+  const ds = d.getFullYear() + ':' + pad(d.getMonth() + 1) + ':' + pad(d.getDate()) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+  const ifd0 = [[0x010F, 'Apple'], [0x0110, 'iPhone 5'], [0x0131, '7.1.2'], [0x0132, ds]];
+  const exif = [[0x9003, ds], [0x9004, ds]];
+  const enc = s => new TextEncoder().encode(s + '\0');
+  const bytes = []; const out = new DataView(new ArrayBuffer(1024)); let p = 0;
+  const w16 = v => { out.setUint16(p, v, true); p += 2; }, w32 = v => { out.setUint32(p, v, true); p += 4; };
+  // en-tête TIFF
+  out.setUint8(0, 0x49); out.setUint8(1, 0x49); p = 2; w16(42); w32(8);
+  const ifd0Size = 2 + (ifd0.length + 1) * 12 + 4, exifSize = 2 + exif.length * 12 + 4;
+  let dataOff = 8 + ifd0Size + exifSize; const pending = [];
+  const writeIfd = (entries, extra) => {
+    w16(entries.length + (extra ? 1 : 0));
+    for (const [tag, val] of entries) { const b = enc(val); w16(tag); w16(2); w32(b.length); if (b.length <= 4) { const s = p; b.forEach((x, i) => out.setUint8(s + i, x)); p += 4; } else { w32(dataOff); pending.push([dataOff, b]); dataOff += b.length + (b.length & 1); } }
+    if (extra) { w16(0x8769); w16(4); w32(1); w32(8 + ifd0Size); }
+    w32(0);
+  };
+  writeIfd(ifd0, true); writeIfd(exif, false);
+  for (const [o, b] of pending) b.forEach((x, i) => out.setUint8(o + i, x));
+  const tiff = new Uint8Array(out.buffer, 0, dataOff);
+  const app1Len = 2 + 6 + tiff.length;
+  const app1 = new Uint8Array(2 + app1Len);
+  app1.set([0xFF, 0xE1, app1Len >> 8, app1Len & 255, 0x45, 0x78, 0x69, 0x66, 0, 0]); app1.set(tiff, 10);
+  const src = new Uint8Array(jpegBuf);
+  let cut = 2; if (src[2] === 0xFF && src[3] === 0xE0) cut = 4 + ((src[4] << 8) | src[5]); // garde le JFIF
+  const res = new Uint8Array(src.length + app1.length);
+  res.set(src.subarray(0, cut), 0); res.set(app1, cut); res.set(src.subarray(cut), cut + app1.length);
+  return res;
+}
+// MP4 : réécrit les dates de création (mvhd, tkhd, mdhd)
+async function dateMp4(blob, d) {
+  const buf = new Uint8Array(await blob.arrayBuffer()); const dv = new DataView(buf.buffer);
+  const sec = Math.floor(d.getTime() / 1000) + MAC_EPOCH;
+  const walk = (start, end) => {
+    let o = start;
+    while (o + 8 <= end) {
+      let size = dv.getUint32(o); const type = String.fromCharCode(buf[o + 4], buf[o + 5], buf[o + 6], buf[o + 7]);
+      let hdr = 8; if (size === 1) { size = Number(dv.getBigUint64(o + 8)); hdr = 16; } if (size === 0) size = end - o; if (size < 8) break;
+      if (type === 'moov' || type === 'trak' || type === 'mdia') walk(o + hdr, o + size);
+      else if (type === 'mvhd' || type === 'tkhd' || type === 'mdhd') {
+        const v = buf[o + hdr];
+        if (v === 1) { dv.setBigUint64(o + hdr + 4, BigInt(sec)); dv.setBigUint64(o + hdr + 12, BigInt(sec)); }
+        else { dv.setUint32(o + hdr + 4, sec >>> 0); dv.setUint32(o + hdr + 8, sec >>> 0); }
+      }
+      o += size;
+    }
+  };
+  walk(0, buf.length);
+  return new Blob([buf], {type: blob.type});
+}
+
+function pickMime() {
+  const list = ['video/mp4;codecs=avc1.640028,mp4a.40.2', 'video/mp4;codecs=avc1,mp4a', 'video/mp4', 'video/webm;codecs=vp9,opus', 'video/webm'];
+  if (!window.MediaRecorder) return null;
+  for (const m of list) if (MediaRecorder.isTypeSupported(m)) return m;
+  return '';
+}
+
+// ================= interface « iPhone 5 » =================
+const store = {
+  get(k, d) { try { const v = localStorage.getItem('i5.' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem('i5.' + k, JSON.stringify(v)); } catch (e) {} }
+};
+const settings = Object.assign({strength: 1, flash: true, shake: true, date2014: true, grid: false, wall: 'ondes'}, store.get('settings', {}));
+const saveSettings = () => store.set('settings', settings);
+
+// ---- horloge / barre d'état ----
+function tick() {
+  const d = new Date(), hm = pad(d.getHours()) + ':' + pad(d.getMinutes());
+  $('clock').textContent = hm; $('lockTime').textContent = hm;
+  const s = d.toLocaleDateString('fr-FR', {weekday: 'long', day: 'numeric', month: 'long'}); $('lockDate').textContent = s;
+}
+tick(); setInterval(tick, 10000);
+
+// ---- fonds d'écran ----
+const WALLS = {
+  ondes: 'radial-gradient(120% 60% at 30% 110%,#0d5fb0 0,transparent 60%),radial-gradient(90% 50% at 80% -10%,#0a2f6b 0,transparent 70%),repeating-radial-gradient(circle at 50% 120%,rgba(255,255,255,.05) 0 2px,transparent 3px 14px),linear-gradient(#06152e,#0b3f7d)',
+  galaxie: 'radial-gradient(1px 1px at 20% 30%,#fff,transparent),radial-gradient(1px 1px at 70% 20%,#fff,transparent),radial-gradient(1.5px 1.5px at 40% 70%,#fff,transparent),radial-gradient(1px 1px at 85% 60%,#fff,transparent),radial-gradient(1px 1px at 10% 85%,#fff,transparent),radial-gradient(60% 40% at 60% 40%,rgba(140,80,200,.55),transparent),radial-gradient(50% 35% at 30% 60%,rgba(40,90,200,.5),transparent),#05040c',
+  gouttes: 'radial-gradient(circle at 20% 30%,rgba(255,255,255,.35) 0 3%,transparent 3.5%),radial-gradient(circle at 65% 22%,rgba(255,255,255,.3) 0 2%,transparent 2.5%),radial-gradient(circle at 45% 60%,rgba(255,255,255,.3) 0 4%,transparent 4.5%),radial-gradient(circle at 80% 75%,rgba(255,255,255,.3) 0 2.5%,transparent 3%),radial-gradient(circle at 30% 85%,rgba(255,255,255,.25) 0 1.5%,transparent 2%),linear-gradient(160deg,#2a7f62,#0d3b4f 60%,#081d2b)',
+  lin: 'repeating-linear-gradient(45deg,rgba(255,255,255,.03) 0 1px,transparent 1px 3px),repeating-linear-gradient(-45deg,rgba(0,0,0,.08) 0 1px,transparent 1px 3px),linear-gradient(#3c4048,#2a2d33)',
+  aube: 'radial-gradient(80% 50% at 50% 100%,#ff9a3c 0,transparent 70%),linear-gradient(#1b2a55,#6a4a8c 55%,#e46c52)',
+  noir: 'radial-gradient(70% 50% at 50% 30%,#2a2a2e,#000)'
+};
+function applyWall() {
+  const w = settings.wall, custom = w === 'perso' ? store.get('wallImg', null) : null;
+  const bg = custom ? 'url(' + custom + ') center/cover' : (WALLS[w] || WALLS.ondes);
+  $('wallHome').style.background = bg; $('wallLock').style.background = bg;
+}
+function renderWalls() {
+  const box = $('walls'); box.textContent = '';
+  Object.keys(WALLS).forEach(k => { const b = document.createElement('button'); b.style.background = WALLS[k]; b.setAttribute('aria-label', 'Fond ' + k); if (settings.wall === k) b.className = 'on'; b.onclick = () => { settings.wall = k; saveSettings(); applyWall(); renderWalls(); }; box.appendChild(b); });
+  const custom = store.get('wallImg', null);
+  if (custom) { const b = document.createElement('button'); b.style.background = 'url(' + custom + ') center/cover'; if (settings.wall === 'perso') b.className = 'on'; b.onclick = () => { settings.wall = 'perso'; saveSettings(); applyWall(); renderWalls(); }; box.appendChild(b); }
+  const l = document.createElement('label'); l.textContent = 'Choisir une photo';
+  const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*'; l.appendChild(inp);
+  inp.onchange = () => { const f = inp.files && inp.files[0]; if (!f) return; const img = new Image(); img.onload = () => { const s = Math.min(1, 900 / Math.max(img.width, img.height)); const c = document.createElement('canvas'); c.width = img.width * s; c.height = img.height * s; c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); store.set('wallImg', c.toDataURL('image/jpeg', .85)); settings.wall = 'perso'; saveSettings(); applyWall(); renderWalls(); }; img.src = URL.createObjectURL(f); };
+  box.appendChild(l);
+}
+applyWall();
+
+// ---- déverrouillage ----
+(() => {
+  const knob = $('knob'), track = $('track'); let sx = null, x = 0;
+  const max = () => track.clientWidth - knob.clientWidth - 6;
+  const unlock = () => { $('lock').classList.add('away'); setTimeout(() => { knob.style.transform = ''; }, 500); };
+  knob.addEventListener('pointerdown', e => { sx = e.clientX - x; knob.setPointerCapture(e.pointerId); });
+  knob.addEventListener('pointermove', e => { if (sx == null) return; x = Math.min(Math.max(e.clientX - sx, 0), max()); knob.style.transform = 'translateX(' + x + 'px)'; });
+  const end = () => { if (sx == null) return; sx = null; if (x > max() * .85) unlock(); else { knob.style.transition = 'transform .25s'; knob.style.transform = ''; setTimeout(() => knob.style.transition = '', 260); } x = 0; };
+  knob.addEventListener('pointerup', end); knob.addEventListener('pointercancel', end);
+  knob.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') unlock(); }); knob.tabIndex = 0;
+})();
+
+// ---- navigation entre apps ----
+let current = null;
+function openApp(id) {
+  if (current) $(current).classList.remove('open');
+  current = id; $(id).classList.add('open');
+  $('statusbar').classList.toggle('solid', id === 'cam' || id === 'viewer');
+  if (id === 'photos') renderGallery();
+  if (id === 'settings') { paintPerms(); $('setMain').hidden = false; $('setWall').hidden = true; $('setBack').hidden = true; $('setTitle').textContent = 'Réglages'; }
+  if (id === 'cam') camEnter(); else camLeave();
+}
+function goHome() {
+  if (!$('lock').classList.contains('away')) return;
+  if (current) { $(current).classList.remove('open'); camLeave(); current = null; $('statusbar').classList.remove('solid'); }
+  else { $('lock').classList.remove('away'); }
+}
+document.querySelectorAll('[data-open]').forEach(b => b.addEventListener('click', () => openApp(b.dataset.open)));
+$('homeBtn').addEventListener('click', goHome);
+
+// ---- galerie (stockée dans ce navigateur) ----
+let db = null, memItems = [];
+const dbReady = new Promise(res => {
+  try { const r = indexedDB.open('iphone5cam', 1); r.onupgradeneeded = () => r.result.createObjectStore('items', {keyPath: 'id'}); r.onsuccess = () => { db = r.result; res(); }; r.onerror = () => res(); } catch (e) { res(); }
+});
+async function allItems() {
+  await dbReady; if (!db) return memItems.slice();
+  return new Promise(res => { try { const q = db.transaction('items').objectStore('items').getAll(); q.onsuccess = () => res(q.result || []); q.onerror = () => res(memItems.slice()); } catch (e) { res(memItems.slice()); } });
+}
+async function putItem(it) { memItems.push(it); await dbReady; if (!db) return; try { db.transaction('items', 'readwrite').objectStore('items').put(it); } catch (e) {} }
+async function delItem(id) { memItems = memItems.filter(x => x.id !== id); await dbReady; if (!db) return; try { db.transaction('items', 'readwrite').objectStore('items').delete(id); } catch (e) {} }
+let items = [];
+async function renderGallery() {
+  items = (await allItems()).sort((a, b) => a.created - b.created);
+  const g = $('pgrid'); g.textContent = '';
+  $('pempty').hidden = items.length > 0;
+  items.forEach((it, i) => {
+    const b = document.createElement('button'); b.style.backgroundImage = 'url(' + it.thumb + ')'; b.setAttribute('aria-label', (it.kind === 'video' ? 'Vidéo ' : 'Photo ') + (i + 1));
+    if (it.kind === 'video') { const v = document.createElement('span'); v.className = 'vb'; const a = document.createElement('span'); a.textContent = '▶'; const d = document.createElement('span'); d.textContent = fmtDur(it.dur || 0); v.append(a, d); b.appendChild(v); }
+    b.onclick = () => openViewer(i); g.appendChild(b);
+  });
+  const np = items.filter(x => x.kind === 'image').length, nv = items.length - np;
+  $('pcount').textContent = items.length ? np + ' photo' + (np > 1 ? 's' : '') + (nv ? ', ' + nv + ' vidéo' + (nv > 1 ? 's' : '') : '') : '';
+  $('aboutCount').textContent = String(items.length);
+  const last = items[items.length - 1]; $('lastThumb').style.backgroundImage = last ? 'url(' + last.thumb + ')' : '';
+  const sc = g.parentElement; requestAnimationFrame(() => { sc.scrollTop = sc.scrollHeight; });
+}
+const fmtDur = s => Math.floor(s / 60) + ':' + pad(Math.round(s % 60));
+let vIndex = 0, vUrl = null;
+function openViewer(i) {
+  vIndex = i; const it = items[i]; if (!it) return;
+  if (vUrl) URL.revokeObjectURL(vUrl); vUrl = URL.createObjectURL(it.blob);
+  const st = $('vStage'); st.textContent = '';
+  const el = document.createElement(it.kind === 'video' ? 'video' : 'img'); el.src = vUrl;
+  if (it.kind === 'video') { el.controls = true; el.playsInline = true; } else el.alt = '';
+  st.appendChild(el);
+  $('vTitle').textContent = (i + 1) + ' sur ' + items.length;
+  const d = new Date(it.date); $('vDate').textContent = d.toLocaleDateString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'}) + ' · ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+  $(current).classList.remove('open'); current = 'viewer'; $('viewer').classList.add('open'); $('statusbar').classList.add('solid');
+}
+$('vBack').onclick = () => { $('vStage').textContent = ''; openApp('photos'); };
+$('vSave').onclick = () => { const it = items[vIndex]; if (it) offer(it.blob, it.name); };
+$('vDel').onclick = async () => {
+  const b = $('vDel');
+  if (!b.dataset.confirm) { b.dataset.confirm = '1'; b.lastChild && (b.style.color = '#ff5a4f'); toast('Appuie encore pour supprimer'); setTimeout(() => { delete b.dataset.confirm; b.style.color = ''; }, 2500); return; }
+  delete b.dataset.confirm; b.style.color = '';
+  const it = items[vIndex]; if (it) await delItem(it.id); $('vStage').textContent = ''; openApp('photos');
+};
+// petit message
+let toastT = null;
+function toast(t, err) { const el = $('toast'); el.textContent = t; el.className = 'toast' + (err ? ' err' : ''); el.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => el.hidden = true, err ? 6000 : 3200); }
+function setStatus(t, err) { toast(t, err); }
+
+// ---- réglages ----
+function syncSettingsUI() {
+  for (const id of ['strength', 'strength2']) { $(id).value = settings.strength; $(id).style.setProperty('--p', ((settings.strength - .5) * 100) + '%'); }
+  $('strengthVal').textContent = Number(settings.strength).toFixed(2).replace('.', ',');
+  $('shake').checked = $('shake2').checked = settings.shake;
+  $('flashDef').checked = settings.flash; $('date2014').checked = settings.date2014; $('gridSw').checked = settings.grid;
+  $('gridlines').hidden = !settings.grid;
+}
+syncSettingsUI();
+['strength', 'strength2'].forEach(id => $(id).addEventListener('input', e => { settings.strength = parseFloat(e.target.value); saveSettings(); syncSettingsUI(); refreshPreview(); }));
+['shake', 'shake2'].forEach(id => $(id).addEventListener('change', e => { settings.shake = e.target.checked; saveSettings(); syncSettingsUI(); }));
+$('flashDef').addEventListener('change', e => { settings.flash = e.target.checked; flashMode = settings.flash ? 'on' : 'off'; saveSettings(); paintFlash(); });
+$('date2014').addEventListener('change', e => { settings.date2014 = e.target.checked; saveSettings(); });
+$('gridSw').addEventListener('change', e => { settings.grid = e.target.checked; saveSettings(); syncSettingsUI(); });
+$('plane').addEventListener('change', e => { document.querySelector('.sig').lastChild.textContent = e.target.checked ? '✈' : 'Carrier 3G'; });
+$('goWall').onclick = () => { $('setMain').hidden = true; $('setWall').hidden = false; $('setBack').hidden = false; $('setTitle').textContent = "Fond d'écran"; renderWalls(); };
+$('setBack').onclick = () => openApp('settings');
+
+// ---- appareil photo ----
+let flashMode = settings.flash ? 'on' : 'off'; // on | auto | off
+const FLASH_TXT = {on: 'Oui', auto: 'Auto', off: 'Non'};
+function paintFlash() { $('flashTxt').textContent = FLASH_TXT[flashMode]; }
+paintFlash();
+$('flashBtn').onclick = () => { flashMode = flashMode === 'on' ? 'auto' : flashMode === 'auto' ? 'off' : 'on'; paintFlash(); refreshPreview(); };
+const flashValue = () => flashMode === 'on' ? 1 : flashMode === 'auto' ? ((F && F.L || .3) < .25 ? 1 : 0) : 0;
+$('optBtn').onclick = () => { $('sheet').hidden = !$('sheet').hidden; };
+let videoMode = false;
+$('modeBtn').onclick = () => { if (busy) return; videoMode = !videoMode; $('modeBtn').classList.toggle('v', videoMode); $('shutter').classList.toggle('vid', videoMode); $('shutter').setAttribute('aria-label', videoMode ? 'Filmer' : 'Prendre une photo'); };
+$('lastThumb').onclick = () => openApp('photos');
+
+const strength = () => settings.strength;
+const maxTex = gl.getParameter(gl.MAX_TEXTURE_SIZE);
+const MAX_PIX = 16.7e6;
+function photoSource(img) {
+  let w = img.naturalWidth || img.videoWidth || img.width, h = img.naturalHeight || img.videoHeight || img.height, s = 1;
+  if (w * h > MAX_PIX) s = Math.sqrt(MAX_PIX / (w * h));
+  s = Math.min(s, maxTex / Math.max(w, h));
+  const W = Math.floor(w * s), H = Math.floor(h * s);
+  if (s === 1 && img.tagName === 'IMG') return {src: img, W, H};
+  const c = document.createElement('canvas'); c.width = W; c.height = H; c.getContext('2d').drawImage(img, 0, 0, W, H);
+  return {src: c, W, H};
+}
+function videoSize(v) { const w = v.videoWidth, h = v.videoHeight, short = Math.min(w, h), target = Math.min(1080, short); const s = target / short; return {W: Math.round(w * s / 2) * 2, H: Math.round(h * s / 2) * 2}; }
+function showCanvas(on) { canvas.hidden = !on; $('vfHint').hidden = on; }
+function iris() { const el = $('iris'); el.style.transition = 'none'; el.style.setProperty('--r', '0%'); requestAnimationFrame(() => { el.style.transition = '--r .4s'; el.style.setProperty('--r', '150%'); }); }
+function makeThumb() { const c = document.createElement('canvas'), s = 220 / Math.min(canvas.width, canvas.height); c.width = Math.round(canvas.width * s); c.height = Math.round(canvas.height * s); c.getContext('2d').drawImage(canvas, 0, 0, c.width, c.height); const sq = document.createElement('canvas'); sq.width = sq.height = 220; sq.getContext('2d').drawImage(c, (220 - c.width) / 2, (220 - c.height) / 2); return sq.toDataURL('image/jpeg', .8); }
+const outDate = d => settings.date2014 ? to2014(d) : d;
+let busy = false;
+let lastPreview = null;
+function refreshPreview() { if (lastPreview && !busy && !live) lastPreview(); }
+
+// ---- caméra en direct (si le navigateur l'autorise ici) ----
+let live = null, liveRaf = 0;
+const SITE_URL = 'https://diogocerqueira660-png.github.io/iphone5-cam/';
+const onSite = /github\.io$/.test(location.hostname);
+function safariLink() {
+  const a = document.createElement('a'); a.className = 'allow safari'; a.href = SITE_URL; a.target = '_blank'; a.rel = 'noopener';
+  a.textContent = 'Ouvrir dans Safari'; return a;
+}
+function camHint(title, text, withBtn) {
+  const h = $('vfHint'); if (!h) return;
+  const b = document.createElement('b'); b.textContent = title;
+  const parts = [b, document.createTextNode(text)];
+  if (withBtn) {
+    const btn = document.createElement('button'); btn.className = 'allow'; btn.type = 'button'; btn.textContent = 'Autoriser la caméra';
+    btn.onclick = () => camEnter(true);
+    parts.push(btn);
+  }
+  if (!onSite) parts.push(safariLink());
+  h.replaceChildren(...parts); h.hidden = false;
+}
+async function camEnter(fromTap) {
+  if (live || busy) return;
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    if (fromTap) camHint('Caméra indisponible', "Ce navigateur ne donne pas accès à la caméra ici. Le déclencheur ouvre l'appareil photo de l'iPhone à la place.", false);
+    else camHint('Caméra en direct', "Le déclencheur ouvre l'appareil photo de l'iPhone. Ta photo revient avec le rendu iPhone 5.", false);
+    return;
+  }
+  if (!fromTap) {
+    let st = null; try { st = (await navigator.permissions.query({name: 'camera'})).state; } catch (e) {}
+    if (st !== 'granted' && store.get('perm_camera', null) !== 'granted') { camHint('Rendu en direct', "Autorise la caméra pour voir le rendu iPhone 5 en temps réel dans le viseur.", true); return; }
+  }
+  camHint('Ouverture de la caméra…', "Accepte la demande de l'iPhone si elle apparaît.", false);
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: 'environment', width: {ideal: 1920}, height: {ideal: 1080}}, audio: false});
+    if (current !== 'cam') { stream.getTracks().forEach(t => t.stop()); return; }
+    const v = document.createElement('video'); v.playsInline = true; v.setAttribute('playsinline', ''); v.muted = true; v.srcObject = stream; await v.play();
+    live = {v, stream}; store.set('perm_camera', 'granted');
+    const {W, H} = videoSize(v); setup(Math.round(W * .66 / 2) * 2, Math.round(H * .66 / 2) * 2, v.videoWidth, v.videoHeight); showCanvas(true);
+    liveLoop();
+    $('vfHint').hidden = true;
+  } catch (e) {
+    live = null;
+    if (current !== 'cam') return;
+    const n = e && e.name;
+    if (n === 'NotAllowedError' || n === 'SecurityError') camHint('Caméra bloquée', "L'accès a été refusé. Si aucune demande ne s'est affichée, c'est la page qui bloque la caméra : ouvre l'app depuis son site dans Safari. Va aussi voir Réglages > Safari > Appareil photo. En attendant, le déclencheur ouvre l'appareil photo de l'iPhone.", true);
+    else camHint('Caméra indisponible', "La caméra n'a pas pu démarrer (" + (n || 'erreur') + "). Le déclencheur ouvre l'appareil photo de l'iPhone à la place.", true);
+  }
+}
+function liveLoop() {
+  cancelAnimationFrame(liveRaf);
+  const loop = () => { if (!live) return; const v = live.v; if (v.readyState >= 2) draw(v, {k: strength(), t: performance.now() / 1000, shake: videoMode && settings.shake, trail: true, flash: flashValue() * .6}); liveRaf = requestAnimationFrame(loop); };
+  loop();
+}
+let liveRec = null;
+// ---- Réglages > Confidentialité ----
+const PERM_TXT = {granted: 'Autorisé', denied: 'Refusé', prompt: 'Non autorisé'};
+async function permState(name) { try { return (await navigator.permissions.query({name})).state; } catch (e) { return null; } }
+async function paintPerms() {
+  for (const [name, id] of [['camera', 'permCamVal'], ['microphone', 'permMicVal']]) { const st = await permState(name), mine = store.get('perm_' + name, null); $(id).textContent = PERM_TXT[st === 'denied' ? 'denied' : (mine || st)] || 'Non autorisé'; }
+}
+async function askPerm(kind) {
+  const id = kind === 'video' ? 'permCamVal' : 'permMicVal';
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { $('permFoot').textContent = "Ce navigateur ne donne pas accès à la caméra ni au micro ici."; return; }
+  $(id).textContent = 'Demande…';
+  try {
+    const st = await navigator.mediaDevices.getUserMedia(kind === 'video' ? {video: {facingMode: 'environment'}} : {audio: true});
+    st.getTracks().forEach(t => t.stop()); store.set('perm_' + (kind === 'video' ? 'camera' : 'microphone'), 'granted');
+    $('permFoot').textContent = kind === 'video' ? "Caméra autorisée : ouvre Appareil photo pour le rendu en direct." : "Micro autorisé : tes vidéos auront le son.";
+  } catch (e) {
+    store.set('perm_' + (kind === 'video' ? 'camera' : 'microphone'), 'denied');
+    $('permFoot').textContent = "Refusé. Si aucune demande ne s'est affichée, c'est la page qui bloque l'accès : ouvre l'app depuis son site dans Safari. Vérifie aussi Réglages de l'iPhone > Safari > Appareil photo et Micro.";
+  }
+  paintPerms();
+}
+$('permCam').onclick = () => askPerm('video');
+if (!onSite) { const a = safariLink(); a.id = 'permSafari'; $('permFoot').after(a); }
+$('permMic').onclick = () => askPerm('audio');
+paintPerms();
+async function liveRecord() {
+  const mime = pickMime();
+  if (mime === null || !canvas.captureStream) { toast("Ce navigateur ne sait pas enregistrer de vidéo.", true); return; }
+  const {W, H} = videoSize(live.v); setup(W, H, live.v.videoWidth, live.v.videoHeight);
+  const stream = canvas.captureStream(30);
+  let mic = null, actx = null;
+  try {
+    mic = await navigator.mediaDevices.getUserMedia({audio: {channelCount: 1, echoCancellation: false, noiseSuppression: false}});
+    actx = new (window.AudioContext || window.webkitAudioContext)(); await actx.resume();
+    const srcN = actx.createMediaStreamSource(mic);
+    const hp = actx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 140;
+    const lp = actx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 11000;
+    const comp = actx.createDynamicsCompressor(); comp.threshold.value = -18; comp.ratio.value = 3;
+    const dest = actx.createMediaStreamDestination(); dest.channelCount = 1;
+    srcN.connect(hp).connect(lp).connect(comp).connect(dest);
+    dest.stream.getAudioTracks().forEach(t => stream.addTrack(t));
+  } catch (e) {}
+  try { wake = await navigator.wakeLock?.request('screen'); } catch (e) {}
+  const rec = new MediaRecorder(stream, Object.assign({videoBitsPerSecond: 17000000, audioBitsPerSecond: 64000}, mime ? {mimeType: mime} : {}));
+  const chunks = []; rec.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
+  const ext = (rec.mimeType || mime || '').includes('webm') ? 'webm' : 'mp4';
+  const t0 = performance.now(), start = new Date(); let thumb = null;
+  $('rec').hidden = false; $('shutter').classList.add('vid', 'recording');
+  const timer = setInterval(() => { const s = Math.floor((performance.now() - t0) / 1000); $('recTime').textContent = pad(Math.floor(s / 60)) + ':' + pad(s % 60); if (!thumb && s >= 1) thumb = makeThumb(); }, 250);
+  const done = new Promise(res => { rec.onstop = res; });
+  liveRec = rec; rec.start(1000);
+  await done; liveRec = null; clearInterval(timer);
+  try { mic && mic.getTracks().forEach(t => t.stop()); actx && actx.close(); } catch (e) {}
+  try { wake && wake.release(); } catch (e) {}
+  $('rec').hidden = true; $('shutter').classList.remove('recording'); if (!videoMode) $('shutter').classList.remove('vid');
+  const d = outDate(start);
+  let blob = new Blob(chunks, {type: rec.mimeType || 'video/mp4'});
+  if (ext === 'mp4') { try { blob = await dateMp4(blob, d); } catch (e) {} }
+  await putItem({id: Date.now() + '' + Math.random(), kind: 'video', blob, thumb: thumb || makeThumb(), date: d.getTime(), created: Date.now(), dur: (performance.now() - t0) / 1000, name: baseName() + '.' + ext});
+  renderGallery(); toast('Vidéo ajoutée à Photos');
+  if (live) { const s2 = videoSize(live.v); setup(Math.round(s2.W * .66 / 2) * 2, Math.round(s2.H * .66 / 2) * 2, live.v.videoWidth, live.v.videoHeight); }
+}
+function camLeave() { if (live) { cancelAnimationFrame(liveRaf); live.stream.getTracks().forEach(t => t.stop()); live = null; showCanvas(false); } $('sheet').hidden = true; }
+
+// ---- déclencheur ----
+$('shutter').onclick = () => {
+  if (busy) return;
+  if (live && liveRec) return liveRec.stop();
+  if (live && videoMode) return liveRecord();
+  if (live) return liveShot();
+  (videoMode ? $('capVideo') : $('capPhoto')).click();
+};
+for (const id of ['capPhoto', 'capVideo', 'importInput']) $(id).addEventListener('change', e => { const f = e.target.files && e.target.files[0]; e.target.value = ''; if (f) handleFile(f); });
+
+async function liveShot() {
+  busy = true; iris();
+  const v = live.v; const ps = photoSource(v);
+  cancelAnimationFrame(liveRaf);
+  setup(ps.W, ps.H, ps.W, ps.H); draw(ps.src, {k: strength(), t: Math.random() * 100, flash: 0}); draw(ps.src, {k: strength(), t: Math.random() * 100, flash: flashValue()});
+  await finishPhoto(new Date());
+  const {W, H} = videoSize(v); setup(Math.round(W * .66 / 2) * 2, Math.round(H * .66 / 2) * 2, v.videoWidth, v.videoHeight);
+  busy = false; liveLoop();
+}
+
+async function finishPhoto(orig) {
+  const blob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', .86));
+  if (!blob) { toast("La photo n'a pas pu être créée.", true); return; }
+  const d = outDate(orig);
+  const data = new Blob([exifJpeg(await blob.arrayBuffer(), d)], {type: 'image/jpeg'});
+  await putItem({id: Date.now() + '' + Math.random(), kind: 'image', blob: data, thumb: makeThumb(), date: d.getTime(), created: Date.now(), name: baseName() + '.jpg'});
+  renderGallery();
+}
+
+async function handleFile(f) {
+  if (busy) return;
+  camLeave();
+  const orig = await originalDate(f);
+  const isVideo = f.type.startsWith('video') || /\.(mov|mp4|m4v|webm)$/i.test(f.name);
+  const url = URL.createObjectURL(f);
+  if (!isVideo) {
+    busy = true; toast('Développement…');
+    const img = new Image();
+    img.onload = async () => {
+      const ps = photoSource(img);
+      const run = () => { setup(ps.W, ps.H, ps.W, ps.H); draw(ps.src, {k: strength(), t: 7, flash: 0}); if (flashValue()) draw(ps.src, {k: strength(), t: 7, flash: flashValue()}); showCanvas(true); };
+      run(); lastPreview = run; iris();
+      await finishPhoto(orig); busy = false; URL.revokeObjectURL(url);
+      toast('Ajoutée à Photos · ' + (F.L < .15 ? 'nuit' : F.L < .4 ? 'intérieur / soir' : 'jour') + (flashValue() ? ' · flash' : ''));
+    };
+    img.onerror = () => { busy = false; toast("Impossible de lire cette photo.", true); };
+    img.src = url;
+  } else {
+    busy = true; toast('Chargement de la vidéo…');
+    const v = document.createElement('video');
+    v.playsInline = true; v.setAttribute('playsinline', ''); v.muted = true; v.preload = 'auto';
+    v.style.cssText = 'position:fixed;left:0;top:0;width:2px;height:2px;opacity:0;pointer-events:none';
+    document.body.appendChild(v);
+    let ready = false;
+    const go = async () => {
+      if (ready) return; ready = true; v.pause();
+      try { await recordVideo(v, orig); } catch (e) { toast("La vidéo n'a pas pu être traitée.", true); }
+      v.remove(); URL.revokeObjectURL(url); busy = false;
+    };
+    v.addEventListener('loadedmetadata', () => { const p = v.play(); if (p && p.catch) p.catch(() => {}); }, {once: true});
+    const onFrame = () => { if (v.videoWidth && v.readyState >= 2) go(); };
+    if (v.requestVideoFrameCallback) v.requestVideoFrameCallback(onFrame);
+    v.addEventListener('timeupdate', onFrame); v.addEventListener('loadeddata', onFrame);
+    v.onerror = () => { busy = false; toast("Impossible de lire cette vidéo.", true); };
+    v.src = url; v.load();
+  }
+}
+
+function baseName() { return 'IMG_' + (1000 + Math.floor(Math.random() * 9000)); }
+let downloads = null;
+if (window.claude && window.claude.use) window.claude.use('downloads').then(d => { downloads = d; }).catch(() => {});
+async function offer(blob, filename) {
+  if (!downloads) {
+    const file = new File([blob], filename, {type: blob.type});
+    if (navigator.canShare && navigator.canShare({files: [file]})) {
+      try { await navigator.share({files: [file]}); } catch (e) { if (e && e.name !== 'AbortError') toast("Le partage n'a pas pu s'ouvrir.", true); }
+      return;
+    }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 60000);
+    return;
+  }
+  try { await downloads.save({filename, data: blob}); toast('Enregistré : choisis « Enregistrer » dans le menu'); }
+  catch (err) {
+    const c = err && err.code;
+    if (c === 'declined') toast('Enregistrement annulé.');
+    else if (c === 'rate_limited') toast('Une demande est déjà ouverte, réessaie dans un instant.');
+    else if (c === 'host_unavailable') toast("Cette app ne peut pas enregistrer de fichier. Ouvre la page dans Safari.", true);
+    else toast("L'enregistrement n'a pas pu se faire (" + (c || 'erreur') + ").", true);
+  }
+}
+
+let wake = null;
+async function recordVideo(v, orig) {
+  const mime = pickMime();
+  if (mime === null || !canvas.captureStream) { toast("Ce navigateur ne sait pas enregistrer de vidéo.", true); return; }
+  try { wake = await navigator.wakeLock?.request('screen'); } catch (e) {}
+  const {W, H} = videoSize(v); setup(W, H, v.videoWidth, v.videoHeight); showCanvas(true);
+  const stream = canvas.captureStream(30);
+  let actx = null;
+  try {
+    actx = new (window.AudioContext || window.webkitAudioContext)(); await actx.resume();
+    const srcN = actx.createMediaElementSource(v);
+    const mono = actx.createGain(); mono.channelCount = 1; mono.channelCountMode = 'explicit'; mono.channelInterpretation = 'speakers';
+    const hp = actx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 140;
+    const lp = actx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 11000;
+    const comp = actx.createDynamicsCompressor(); comp.threshold.value = -18; comp.ratio.value = 3; comp.attack.value = .01; comp.release.value = .2;
+    const dest = actx.createMediaStreamDestination(); dest.channelCount = 1;
+    srcN.connect(mono).connect(hp).connect(lp).connect(comp).connect(dest);
+    dest.stream.getAudioTracks().forEach(t => stream.addTrack(t));
+  } catch (e) {}
+  const rec = new MediaRecorder(stream, Object.assign({videoBitsPerSecond: 17000000, audioBitsPerSecond: 64000}, mime ? {mimeType: mime} : {}));
+  const chunks = []; rec.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
+  const ext = (rec.mimeType || mime || '').includes('webm') ? 'webm' : 'mp4';
+  const shake = settings.shake, k = strength(), fl = flashMode === 'on' ? .6 : 0;
+  $('rec').hidden = false; $('shutter').classList.add('vid', 'busy'); $('shutter').disabled = true;
+  let lastT = -1, stopped = false, thumb = null;
+  const frame = () => {
+    if (stopped) return;
+    if (v.currentTime !== lastT) { lastT = v.currentTime; draw(v, {k, t: v.currentTime, shake, trail: true, flash: fl}); if (!thumb && v.currentTime > .2) thumb = makeThumb(); const s = Math.floor(v.currentTime); $('recTime').textContent = pad(Math.floor(s / 60)) + ':' + pad(s % 60); }
+    if (v.requestVideoFrameCallback) v.requestVideoFrameCallback(frame); else requestAnimationFrame(frame);
+  };
+  const done = new Promise(res => { rec.onstop = res; });
+  v.pause(); v.currentTime = 0; v.muted = false; v.volume = 1;
+  await new Promise(r => v.addEventListener('seeked', r, {once: true}));
+  draw(v, {k, t: 0, shake, trail: false, flash: fl});
+  rec.start(1000);
+  try { await v.play(); } catch (e) { stopped = true; rec.stop(); $('rec').hidden = true; $('shutter').disabled = false; $('shutter').classList.remove('busy'); toast("La lecture n'a pas pu démarrer. Réessaie.", true); return; }
+  frame();
+  await new Promise(r => v.addEventListener('ended', r, {once: true}));
+  stopped = true; rec.stop(); await done;
+  try { actx && actx.close(); } catch (e) {}
+  try { wake && wake.release(); } catch (e) {}
+  $('rec').hidden = true; $('shutter').disabled = false; $('shutter').classList.remove('busy'); if (!videoMode) $('shutter').classList.remove('vid');
+  const d = outDate(orig);
+  let blob = new Blob(chunks, {type: rec.mimeType || 'video/mp4'});
+  if (ext === 'mp4') { try { blob = await dateMp4(blob, d); } catch (e) {} }
+  await putItem({id: Date.now() + '' + Math.random(), kind: 'video', blob, thumb: thumb || makeThumb(), date: d.getTime(), created: Date.now(), dur: v.duration || 0, name: baseName() + '.' + ext});
+  renderGallery(); toast('Vidéo ajoutée à Photos (' + (blob.size / 1e6).toFixed(1) + ' Mo)');
+}
+
+renderGallery();
+})();
+</script>
+</body></html>
