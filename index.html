@@ -20,7 +20,8 @@
 html,body{height:100%;background:var(--bezel);color:#fff}
 body{font-family:var(--f);font-size:15px;-webkit-font-smoothing:antialiased;-webkit-user-select:none;user-select:none;overflow:hidden}
 button{font-family:inherit}
-.device{position:fixed;inset:0;background:var(--bezel);overflow:hidden}
+.device{position:fixed;left:0;top:0;width:100%;height:100%;background:#000;overflow:hidden}
+.nativebar .status{background:#000!important}.nativebar .status>*{visibility:hidden}
 .phone{position:absolute;left:0;top:0;width:320px;display:flex;flex-direction:column;zoom:var(--s,1)}
 .screen{position:relative;width:320px;height:var(--sh,568px);flex:none;overflow:hidden;background:var(--screen)}
 .chin{height:var(--ch,70px);flex:none;display:flex;justify-content:center;padding-top:9px;box-sizing:border-box;background:var(--chin)}
@@ -381,7 +382,7 @@ input[type=range].r6::-moz-range-thumb{width:24px;height:24px;border:0;border-ra
           <div class="cellr"><span>Opérateur</span><span class="v">Carrier 14.0</span></div>
           <div class="cellr"><span>Modèle</span><span class="v">MD297F/A</span></div>
         </div>
-        <div class="gfoot" id="buildTag">iPhone 5 Cam · version 17</div>
+        <div class="gfoot" id="buildTag">iPhone 5 Cam · version 18</div>
         <div style="height:30px"></div>
       </div>
       <div class="scroll" id="setStub" hidden></div>
@@ -755,16 +756,24 @@ applyWall();
 let SCALE = 1;
 function fitPhone() {
   const d = $('device'), ps = getComputedStyle($('safeProbe'));
-  const W = d.clientWidth, H = d.clientHeight, top = parseFloat(ps.paddingTop) || 0, bot = parseFloat(ps.paddingBottom) || 0;
-  // largeur du téléphone = largeur de l'écran (comme au début), sauf sur un grand écran d'ordinateur
+  const standalone = navigator.standalone === true || (window.matchMedia && matchMedia('(display-mode: standalone)').matches);
+  const portrait = innerHeight >= innerWidth;
+  const W = innerWidth;
+  // en app plein écran, iOS donne parfois une hauteur trop courte : on prend la vraie hauteur de l'écran
+  const H = standalone && portrait ? Math.max(innerHeight, screen.height) : innerHeight;
+  d.style.height = H + 'px';
+  const top = parseFloat(ps.paddingTop) || 0, bot = parseFloat(ps.paddingBottom) || 0;
   let s = W / 320;
-  const chinPx = 62 * s + bot;
-  if ((H - top - chinPx) / s < 520) s = Math.max(.3, (H - top - bot) / (568 + 62));
+  // la barre d'état de l'iPhone remplace celle de l'émulateur : on glisse la nôtre dessous
+  const native = top > 0;
+  const topOff = native ? Math.max(0, top - 20 * s) : 0;
+  if ((H - topOff - 62 * s - bot) / s < 500) s = Math.max(.3, (H - topOff - bot) / (568 + 62));
   SCALE = s;
-  const ch = 62 + bot / s, sh = Math.max(400, (H - top) / s - ch);
+  const ch = 62 + bot / s, sh = Math.max(400, (H - topOff) / s - ch);
   const ph = $('phone');
   ph.style.setProperty('--s', s); ph.style.setProperty('--sh', sh + 'px'); ph.style.setProperty('--ch', ch + 'px');
-  ph.style.left = Math.max(0, (W - 320 * s) / 2) / s + 'px'; ph.style.top = top / s + 'px';
+  ph.style.left = Math.max(0, (W - 320 * s) / 2) / s + 'px'; ph.style.top = topOff / s + 'px';
+  $('screen').classList.toggle('nativebar', native);
 }
 fitPhone(); addEventListener('resize', fitPhone); addEventListener('orientationchange', () => setTimeout(fitPhone, 300));
 
